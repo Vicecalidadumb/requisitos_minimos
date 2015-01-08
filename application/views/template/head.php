@@ -25,6 +25,9 @@ License: You must have a valid license purchased only from themeforest(the above
         <meta content="" name="author"/>
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+        
+        <link rel="shortcut icon" href="<?php echo base_url('images/vice/favicon.png'); ?>">
+
 
         <link href="<?php echo base_url('/assets/global/plugins/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url('/assets/global/plugins/simple-line-icons/simple-line-icons.min.css'); ?>" rel="stylesheet" type="text/css"/>
@@ -47,7 +50,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <link href="<?php echo base_url('/assets/global/css/components.css'); ?>" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url('/assets/global/css/plugins.css'); ?>" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url('/assets/admin/layout/css/layout.css'); ?>" rel="stylesheet" type="text/css"/>
-        <link href="<?php echo base_url('/assets/admin/layout/css/themes/light2.css'); ?>" rel="stylesheet" type="text/css" id="style_color"/>
+        <link href="<?php echo base_url('/assets/admin/layout/css/themes/darkblue.css'); ?>" rel="stylesheet" type="text/css" id="style_color"/>
         <link href="<?php echo base_url('/assets/admin/layout/css/custom.css'); ?>" rel="stylesheet" type="text/css"/>
         <!-- END THEME STYLES -->
 
@@ -70,10 +73,10 @@ License: You must have a valid license purchased only from themeforest(the above
         </script>
 
         <?php if ($this->session->userdata('ID_TIPO_USU') != 3) { ?>
-            <style>
+            <style>/*
                 a:visited{
                     color:red !important;
-                }
+                }*/
             </style>
         <?php } ?>
     </head>
