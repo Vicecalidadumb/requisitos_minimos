@@ -14,15 +14,12 @@
             </li>
             <!--            class="start active open"-->
             <br>
-            <li class="<?php echo strstr($content, 'desk') ? 'active open' : ''; ?>">
-                <a href="<?php echo base_url('index.php/desk'); ?>">
-                    <i class="icon-home"></i>
-                    <span class="title">Inicio</span>
+            <li class="<?php echo strstr($content, 'aspirantes') ? 'active open' : ''; ?>">
+                <a href="<?php echo base_url('index.php/aspirantes'); ?>">
+                    <i class="icon-users"></i>
+                    <span class="title">Aspirantes</span>
                 </a>
             </li>
-
-            
-
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>

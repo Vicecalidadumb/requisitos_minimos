@@ -26,6 +26,8 @@ License: You must have a valid license purchased only from themeforest(the above
         <title>Inicio de Sesion</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        
+        <link rel="shortcut icon" href="<?php echo base_url('images/vice/favicon.png'); ?>">
         <meta content="" name="description"/>
         <meta content="" name="author"/>
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
