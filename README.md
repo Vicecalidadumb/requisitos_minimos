@@ -1,0 +1,1 @@
+# requisitos_minimos
