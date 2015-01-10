@@ -174,7 +174,7 @@ class Aspirantes_model extends CI_Model {
             $evalua = ($aRow['EVALUA'] != '') ? explode(',', $aRow['EVALUA']) : array('Sin Calificar', 'Sin Calificar');
             $row[] = get_color_state_folder(trim($evalua[0]));
             $row[] = get_color_state_folder(trim($evalua[1]));
-            $row[] = '<a href="' . base_url('evaluacion?id=' . encrypt_id($aRow['IDINSCRIPCION_INS'])) . '" class="btn btn-xs blue"><i class="fa fa-folder-open"></i> Ver</a>';
+            $row[] = '<a href="' . base_url('index.php/evaluacion?id=' . encrypt_id($aRow['IDINSCRIPCION_INS'])) . '" class="btn btn-xs blue"><i class="fa fa-folder-open"></i> Ver</a>';
             if (!empty($row)) {
                 $output['aaData'][] = $row;
             }
