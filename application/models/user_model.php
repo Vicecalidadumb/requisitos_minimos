@@ -7,10 +7,10 @@ class User_model extends CI_Model {
     
     
     public function get_user($username,$pass){
-        $query = $this->db->select('idusuario_usu,nombre_usu,documento_usu,idrol_usu,estado_usu');
-        $query = $this->db->where('documento_usu',$username);
-        $query = $this->db->where('documento_usu',$pass);
-        $query = $this->db->where('estado_usu','S');
+        $this->db->select('idusuario_usu,nombre_usu,documento_usu,idrol_usu,estado_usu');
+        $this->db->where('documento_usu',$username);
+        $this->db->where('documento_usu',$pass);
+        $this->db->where('estado_usu','S');
         $query = $this->db->get('RMAA_USUARIO');
         return $query->result();
     }

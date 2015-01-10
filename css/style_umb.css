@@ -1,3 +1,12 @@
 .page-header.navbar .page-logo .logo-default {
     margin: 8px 0 0 0 !important;
 }
+
+.dataTables_processing {
+    min-width: 153px !important;
+    padding: 10px !important;
+    color: #FFF !important;
+    font-size: 15px !important;
+    border: 1px solid #3b6a43 !important;
+    background-color: #35aa47 !important;
+}

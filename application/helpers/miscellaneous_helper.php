@@ -80,3 +80,57 @@ function check_in_range($start_date, $end_date, $evaluame) {
 function getUltimoDiaMes($elAnio, $elMes) {
     return date("d", (mktime(0, 0, 0, $elMes + 1, 1, $elAnio) - 1));
 }
+
+function get_state_folder($id) {
+    switch ($id) {
+        case 1: return 'Proceso Aspirante';
+            break;
+        case 2: return 'No asignada';
+            break;
+        case 3: return 'Asignada Analista';
+            break;
+        case 4: return 'Proceso Analista';
+            break;
+        case 5: return 'Calificada';
+            break;
+        case 6: return 'Asignada Supervisor';
+            break;
+        case 7: return 'Proceso Supervisor';
+            break;
+        case 8: return 'Devuelta';
+            break;
+        case 9: return 'Cerrada';
+            break;
+        case 10: return 'Recalificar Analista';
+            break;
+        default: return '';
+            break;
+    }
+}
+
+function get_color_state_folder($state_name){
+    switch ($state_name) {
+        case 'Admitido': return '<span class="badge badge-success">'.$state_name.'</span>';
+            break;
+        case 'No Admitido': return '<span class="badge badge-danger">'.$state_name.'</span>';
+            break;
+        default: return '<span class="badge badge-default">'.$state_name.'</span>';
+            break;
+    }    
+}
+
+function state_folder() {
+    return array(
+        '' => '--Todos los Estados--',
+        '1' => 'Proceso Aspirante',
+        '2' => 'No asignada',
+        '3' => 'Asignada Analista',
+        '4' => 'Proceso Analista',
+        '5' => 'Calificada',
+        '6' => 'Asignada Supervisor',
+        '7' => 'Proceso Supervisor',
+        '8' => 'Devuelta',
+        '9' => 'Cerrada',
+        '10' => 'Recalificar Analista',
+    );
+}

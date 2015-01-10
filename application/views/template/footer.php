@@ -20,7 +20,7 @@
 <script src="../../assets/global/plugins/respond.min.js"></script>
 <script src="../../assets/global/plugins/excanvas.min.js"></script> 
 <![endif]-->
-<script src="<?php echo base_url('/assets/global/plugins/jquery-1.11.0.min.js'); ?>" type="text/javascript"></script>
+
 <script src="<?php echo base_url('/assets/global/plugins/jquery-migrate-1.2.1.min.js'); ?>" type="text/javascript"></script>
 <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 <script src="<?php echo base_url('/assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js'); ?>" type="text/javascript"></script>
@@ -120,28 +120,35 @@
 </script>
 
 <script>
-    /*
-     var ajax_datatable;
-     
-     $(document).ready(function() {
-     ajax_datatable = $('table#datatable_ajax').dataTable({
-     "bServerSide": true,
-     "sAjaxSource": "<?php //echo base_url();  ?>profile/ajax_datatable",
-     "fnServerData": function(sSource,aoData,fnCallback)
-     {
-     aoData.push({name: "field2", value: $('#field2').val() });
-     $.ajax({
-     "dataType": 'json', 
-     "type": "POST", 
-     "url": sSource, 
-     "data": aoData, 
-     "success": fnCallback
-     });
-     }
-     });
-     });*/
+    
 </script> 
 <!-- END JAVASCRIPTS -->
 </body>
+<style>
+    .titulo3 {
+    background: none repeat scroll 0 0 rgba(93, 123, 157, 1);
+    border-radius: 10px;
+    color: White;
+    height: 30px;
+    text-align: center;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+}
+h2 {
+    font-size: 12pt;
+}
+h1, h2, h3 {
+    font-family: Arial;
+    text-align: center;
+}
+.tituloR {
+    background-color: #dcdcdc;
+    height: 15px;
+}
+.Nota {
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+}
+</style>
 <!-- END BODY -->
 </html>
