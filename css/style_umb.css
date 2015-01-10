@@ -10,3 +10,29 @@
     border: 1px solid #3b6a43 !important;
     background-color: #35aa47 !important;
 }
+
+.titulo3 {
+    background: none repeat scroll 0 0 rgba(93, 123, 157, 1);
+    border-radius: 10px;
+    color: White;
+    height: 30px;
+    text-align: center;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+    line-height: 29px;
+}
+h2 {
+    font-size: 12pt;
+}
+h1, h2, h3 {
+    font-family: Arial;
+    text-align: center;
+}
+.tituloR {
+    background-color: #dcdcdc;
+    height: 15px;
+}
+.Nota {
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+}

@@ -33,13 +33,7 @@
 <script src="<?php echo base_url('/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js'); ?>" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<!--<script src="<?php echo base_url('/assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js'); ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js'); ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js'); ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js'); ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js'); ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js'); ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('/assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js'); ?>" type="text/javascript"></script>-->
+
 <script src="<?php echo base_url('/assets/global/plugins/flot/jquery.flot.min.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('/assets/global/plugins/flot/jquery.flot.resize.min.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('/assets/global/plugins/flot/jquery.flot.categories.min.js'); ?>" type="text/javascript"></script>
@@ -88,6 +82,7 @@
 <script type="text/javascript" src="<?php echo base_url('/assets/admin/pages/scripts/table-ajax.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/admin/pages/scripts/table-advanced.js'); ?>"></script>
 
+<script src="<?php echo base_url('/assets/admin/pages/scripts/ui-blockui.js'); ?>"></script>
 
 
 <script type="text/javascript" src="<?php echo base_url('/js/script_umb.js'); ?>"></script>
@@ -99,17 +94,18 @@
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         TableAjax.init();
-        TableAdvanced.init();
+        UIBlockUI.init();
+        //TableAdvanced.init();
         ComponentsPickers.init();
         QuickSidebar.init() // init quick sidebar
         Index.init();
         Index.initDashboardDaterange();
         //Index.initJQVMAP(); // init index page's custom scripts
-        Index.initCalendar(); // init index page's custom scripts
+        //Index.initCalendar(); // init index page's custom scripts
         //Index.initCharts(); // init index page's custom scripts
         //Index.initChat();
         //TableAdvanced.init();
-
+        
         //Index.initMiniCharts();
         Index.initIntro();
         Tasks.initDashboardWidget();
@@ -120,35 +116,9 @@
 </script>
 
 <script>
-    
+
 </script> 
 <!-- END JAVASCRIPTS -->
 </body>
-<style>
-    .titulo3 {
-    background: none repeat scroll 0 0 rgba(93, 123, 157, 1);
-    border-radius: 10px;
-    color: White;
-    height: 30px;
-    text-align: center;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
-}
-h2 {
-    font-size: 12pt;
-}
-h1, h2, h3 {
-    font-family: Arial;
-    text-align: center;
-}
-.tituloR {
-    background-color: #dcdcdc;
-    height: 15px;
-}
-.Nota {
-    color: red;
-    font-size: 12px;
-    font-weight: bold;
-}
-</style>
 <!-- END BODY -->
 </html>

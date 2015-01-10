@@ -39,7 +39,7 @@
                             </a>                            
                         </div>
                     </div>
-                    <div class="portlet-body">
+                    <div class="portlet-body" id="blockui_sample_3_2_element">
                         <div class="portlet-body">
                             <table class="table table-striped table-bordered table-hover" id="datatable_ajax">
                                 <thead>

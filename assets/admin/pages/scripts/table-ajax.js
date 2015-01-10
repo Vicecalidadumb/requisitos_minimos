@@ -20,10 +20,22 @@ var TableAjax = function() {
                 // execute some code on network or other general error  
             },
             dataTable: {
+                "rowCallback": function() {
+                    Metronic.unblockUI('#blockui_sample_3_2_element');
+                },
+                "fnPreDrawCallback": function() {
+                    Metronic.blockUI({
+                    target: '#blockui_sample_3_2_element',
+                    boxed: false,
+                    message:' ',
+                    iconOnly: false,
+                    textOnly: true
+                });
+                },
                 "sPaginationType": "full_numbers",
                 "processing": true,
                 "serverSide": true,
-                "dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>f>r><'table-scrollable't><'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+                "dom": "<'row'<'col-md-12 col-sm-12'pli><'col-md-12 col-sm-12'<'table-group-actions pull-right'>f>r><'table-scrollable't><'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
                 "lengthMenu": [
                     [10, 20, 50, 100],
                     [10, 20, 50, 100] // change per page values here
