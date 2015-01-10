@@ -20,12 +20,11 @@ class Evaluacion extends CI_Controller {
         if($data['get']['id']){
         $data['get']['id']=deencrypt_id($data['get']['id']);
         $data['datos']= $this->evaluacion_model->datos_personales($data['get']['id']);
-//        print_y($data['datos']);
-//        die;
         if(empty($data['datos'])){
             redirect('index.php/login', 'location');
         }
         $data['documentos']= $this->evaluacion_model->documentos($data['get']['id']);
+        $data['educacion_formal']= $this->evaluacion_model->educacion_formal($data['get']['id']);
         $data['content'] = 'evaluacion/educacion_formal';
         $this->load->view('template/template', $data);
 //        $this->load->view('evaluacion/educacion_formal', $data);

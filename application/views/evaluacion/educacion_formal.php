@@ -3,14 +3,20 @@
     <div class="page-content">
         <!-- BEGIN PAGE HEADER-->
         <h2 class="page-title">
-            TITULO
+            VERIFICACION DE REQUISITOS MINIMOS<br> CONVOCATORIA No. 320 de 2014 DPS
         </h2>
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li>
                     <i class="fa fa-home"></i>
-                    <a href="<?php echo base_url('ruta') ?>">
-                        ORDEN 1
+                    <a href="<?php echo base_url('index.php') ?>">
+                        Inicio
+                    </a>
+                </li>
+                <li>
+                    <i class="fa fa-angle-right"></i>
+                    <a href="<?php echo base_url('index.php/evaluacion?id='.$_GET['id']) ?>">
+                        DATOS DEL ASPIRANTE
                     </a>
                 </li>
             </ul>
@@ -31,10 +37,6 @@
         <!-- END FLASHDATA-->
 
         <div class="row">
-
-            <div class="col-md-12 col-sm-12" align='center'>
-                <h1>VERIFICACION DE REQUISITOS MINIMOS<br> CONVOCATORIA No. 320 de 2014 DPS</h1>
-            </div>
             <p>
             <div class="col-md-12 col-sm-12" align='center'>
                 <h2 class="titulo3">DATOS DEL ASPIRANTE</h2>
@@ -108,7 +110,20 @@
                 <h2 class="titulo3">DOCUMENTOS ESPECÍFICOS DE LA CONVOCATORIA </h2>
             </div>
             <div class="col-md-12 col-sm-12">
-                tabla
+                <div class="col-md-2 col-sm-2"></div>
+                <div class="col-md-8 col-sm-8">
+                    <table class="table table-bordered table-striped">
+                        <thead><th>N. Folio</th><th>Documento</th><th>Folio</th></thead>
+                        <?php
+                        $i = 0;
+                        foreach ($documentos as $documentos2) {
+                            $archivo = str_replace('~/', 'http://172.16.210.37/rmdps/', $documentos2->RUTAADJUNTO_DOC);
+                            echo "<tr><td>" . ++$i . "</td><td>" . $documentos2->DETALLEPARAMETRO_PAR . '</td><td><a target="_blank" href="' . $archivo . '">Ver Folio..</a></td></tr>';
+                        }
+                        ?>
+                    </table>
+                </div>
+                <div class="col-md-2 col-sm-2"></div>
             </div>
             <p><br>
             <div class="col-md-12 col-sm-12">
@@ -118,8 +133,20 @@
                 <h2 class="tituloR">EDUCACIÓN FORMAL</h2>
             </div>
             <div class="col-md-12 col-sm-12">
-                tabla <br>
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#opcion" data-accion="editar" data-id="dd">Productos</button>
+                <div class="col-md-2 col-sm-2"></div>
+                <div class="col-md-8 col-sm-8">
+                    <table class="table table-bordered table-striped">
+                        <thead><th>N. Folio</th><th>Documento</th><th>Folio</th><th>Modificar</th></thead>
+                        <?php
+                        $i = 0;
+                        foreach ($educacion_formal as $documentos2) {
+                            $archivo = str_replace('~/', 'http://172.16.210.37/rmdps/', $documentos2->RUTAADJUNTO_CRA);
+                            echo "<tr><td>" . $documentos2->CONSECUTIVO_CRA . "</td><td>" . $documentos2->MODALIDAD_MOD . '</td><td><a target="_blank" href="' . $archivo . '">Ver Folio..</a></td><td align="center"><button type="button" class="btn defaul btn-xs"  data-toggle="modal" data-target="#opcion" data-accion="editar" data-id="'.$documentos2->CONSECUTIVO_CRA.'"><i class="glyphicon glyphicon-pencil"></i></button></td></tr>';
+                        }
+                        ?>
+                    </table>
+                </div>
+                <div class="col-md-2 col-sm-2"></div>
             </div>
             <p><br>
             <div class="col-md-12 col-sm-12">

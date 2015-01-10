@@ -1,65 +1,67 @@
 <div class="row">
     <div class="col-md-12 col-sm-12" >
-        <div class="col-md-3 col-sm-3" >
-            Modalidad
-        </div>
-        <div class="col-md-9 col-sm-9" >
-            <?php echo form_dropdown($data="nelson", array("s"=>"1" ),'' ,$extra='style="width: 100%;"') ?>
-            <?php echo form_dropdown($data="nelson", array("s"=>"sem" ),'', $extra='style="width: 100%;"') ?>
-        </div>
-    </div>
-    <div class="col-md-12 col-sm-12" >
-        <div class="col-md-3 col-sm-3" >
-             Graduado 
-        </div>
-        <div class="col-md-2 col-sm-2" >
-            <?php echo  form_checkbox("graduado", "1", false) ?>
-        </div>
-        <div class="col-md-4 col-sm-4" >
-             Obtenido en el Extranjero 
-        </div>
-        <div class="col-md-1 col-sm-1" >
-            <?php echo  form_checkbox("graduado_ext", "1", false) ?>
-        </div>
-    </div>
-    <div class="col-md-12 col-sm-12" >
-        <div class="col-md-3 col-sm-3" >
-            Universidad o Institución
-        </div>
-        <div class="col-md-9 col-sm-9" >
-            <?php echo form_dropdown($data="universidad", array("-1"=>"" ),'', $extra='style="width: 100%;"') ?>
-        </div>
-    </div>
-    <div class="col-md-12 col-sm-12" >
-        <div class="col-md-3 col-sm-3" >
-            Título
-        </div>
-        <div class="col-md-9 col-sm-9" >
-            <?php echo form_dropdown($data="titulo", array("-1"=>"" ),'', $extra='style="width: 100%;"') ?>
-        </div>
-    </div>
-    <div class="col-md-12 col-sm-12" >
-        <div class="col-md-3 col-sm-3" >
-            Fecha Terminación 	
-        </div>
-        <div class="col-md-9 col-sm-9" >
-            <?php echo form_dropdown($data="fecha_terminacion", array("-1"=>"" ),'',$extra='style="width: 100%;"') ?>
-        </div>
-    </div>
-    <div class="col-md-12 col-sm-12" >
-        <div class="col-md-3 col-sm-3" >
-            Fecha Grado
-        </div>
-        <div class="col-md-9 col-sm-9" >
-            <?php echo form_dropdown('fecha_grado', array("-1"=>"" ), '',$extra='style="width: 100%;"') ?>
-        </div>
-    </div>
-    <div class="col-md-12 col-sm-12" >
-        <div class="col-md-3 col-sm-3" >
-            Observaciones
-        </div>
-        <div class="col-md-9 col-sm-9" >
-            <?php echo form_textarea('observaciones', $value="", $extra='style="width: 100%; height: 75px;"') ?>
-        </div>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>
+                    Modalidad
+                </td>
+                <td>
+                    <?php echo form_dropdown($data = "nelson", array("s" => "1"), '', $extra = 'class="form-control input-sm "') ?>
+                    <?php echo form_dropdown($data = "nelson", array("s" => "sem"), '', $extra = 'class="form-control input-sm "') ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Graduado 
+                    &nbsp;&nbsp;&nbsp;
+                    <?php echo form_checkbox("graduado", "1", false) ?>
+                </td>
+                <td>
+                    Obtenido en el Extranjero 
+                &nbsp;&nbsp;&nbsp;
+                    <?php echo form_checkbox("graduado_ext", "1", false) ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Universidad o Institución
+                </td>
+                <td>
+                    <?php echo form_dropdown($data = "universidad", array("-1" => ""), '', $extra = 'class="form-control input-sm "') ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Título
+                </td>
+                <td>
+                    <?php echo form_dropdown($data = "titulo", array("-1" => ""), '', $extra = 'class="form-control input-sm "') ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Fecha Terminación 	
+                </td>
+                <td>
+                    <?php echo form_input("fecha_terminacion",'' , $extra = 'class="form-control input-sm date-picker"') ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Fecha Grado
+                </td>
+                <td>
+                    <?php echo form_input('fecha_grado', '', $extra = 'class="form-control input-sm date-picker"') ?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Observaciones
+                    </td>
+                        <td>
+                        <?php echo form_textarea('observaciones', $value = "", $extra = 'style="width: 100%; height: 75px;" class="form-control input-sm "') ?>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>

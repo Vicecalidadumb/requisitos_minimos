@@ -50,6 +50,21 @@ class Evaluacion_model extends CI_Model {
         $this->db->where('ESTADO',1);
         $this->db->where('IDINSCRIPCION_INS',$id);
         $datos=$this->db->get('CNSC_PARAMETROS');
+//                echo $this->db->last_query();
+        return $datos->result();
+    }
+    function educacion_formal($id) {
+        $this->db->select('INSC_CALIFICACION_RM_AA.CONSECUTIVO_CRA,MODALIDAD_MOD,RUTAADJUNTO_CRA,REQUISITOMINIMO,IDINSCRIPCION_INS', false);
+
+        $this->db->join('INSC_CALIFICACION_RM_AA','INSC_CALIFICACION_RM_AA.IDTIPOADJUNTO_CRA=CNSC_PARAMETROS.CONSECUTIVOPARAMETRO_PAR');
+        $this->db->join('INSC_INSCRIPCION','INSC_CALIFICACION_RM_AA.IDINSCRIPCION_CRA = INSC_INSCRIPCION.IDINSCRIPCION_INS ');    
+        $this->db->join('INSC_MODALIDAD','INSC_MODALIDAD.IDMODALIDAD_MOD=INSC_CALIFICACION_RM_AA.CONSECUTIVO_CRA');    
+        $this->db->where('NOMBREPARAMETRO_PAR','TIPO_ADJUNTO');
+        $this->db->where('ESTADO',1);
+        $this->db->where('IDINSCRIPCION_INS',$id);
+        $this->db->where('CONSECUTIVOPARAMETRO_PAR',3);
+        $datos=$this->db->get('CNSC_PARAMETROS');
+//                echo $this->db->last_query();
         return $datos->result();
     }
 
