@@ -76,17 +76,13 @@
 <script src="<?php echo base_url('/assets/global/plugins/select2/select2.min.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js'); ?>"></script>
 
-
 <script type="text/javascript" src="<?php echo base_url('/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js'); ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('/assets/global/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js'); ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('/assets/global/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.min.js'); ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('/assets/global/plugins/datatables/extensions/Scroller/js/dataTables.scroller.min.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js'); ?>"></script>
 
 
 <script src="<?php echo base_url('/assets/global/scripts/datatable.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('/assets/admin/pages/scripts/table-ajax.js'); ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('/assets/admin/pages/scripts/table-advanced.js'); ?>"></script>
+<!--<script type="text/javascript" src="<?php echo base_url('/assets/admin/pages/scripts/table-advanced.js'); ?>"></script>-->
 
 
 
@@ -96,10 +92,10 @@
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
     jQuery(document).ready(function() {
-        Metronic.init(); // init metronic core componets
+        //Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         TableAjax.init();
-        TableAdvanced.init();
+        //TableAdvanced.init();
         ComponentsPickers.init();
         QuickSidebar.init() // init quick sidebar
         Index.init();
@@ -109,13 +105,11 @@
         //Index.initCharts(); // init index page's custom scripts
         //Index.initChat();
         //TableAdvanced.init();
-
         //Index.initMiniCharts();
         Index.initIntro();
         Tasks.initDashboardWidget();
         ComponentsDropdowns.init();
         FormValidation.init();
-
     });
 </script>
 

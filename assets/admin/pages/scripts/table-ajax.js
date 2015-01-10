@@ -1,17 +1,16 @@
 var TableAjax = function() {
 
     var initPickers = function() {
-        //init date pickers
+//init date pickers
         $('.date-picker').datepicker({
             rtl: Metronic.isRTL(),
             autoclose: true
         });
     }
-
+//ENVIO DE DATOS VERSIONES ANTERIORES A 1.9 - http://datatables.net/manual/server-side#Legacy
+    $.fn.dataTable.ext.legacy.ajax = true;
     var handleRecords = function() {
-
         var grid = new Datatable();
-
         grid.init({
             src: $("#datatable_ajax"),
             onSuccess: function(grid) {
@@ -20,42 +19,69 @@ var TableAjax = function() {
             onError: function(grid) {
                 // execute some code on network or other general error  
             },
-            loadingMessage: 'Cargando Datos...',
             dataTable: {
                 "sPaginationType": "full_numbers",
                 "processing": true,
+                "serverSide": true,
                 "dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>f>r><'table-scrollable't><'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
                 "lengthMenu": [
-                    [10, 20, 50, 100, 150, -1],
-                    [10, 20, 50, 100, 150, "All"] // change per page values here
+                    [10, 20, 50, 100],
+                    [10, 20, 50, 100] // change per page values here
                 ],
                 "pageLength": 10, // default record count per page
-                "ajax": base_url_js + "index.php/profile/ajax_datatable",
+                "ajax": base_url_js + "index.php/aspirantes/get_datatable",
+                "fnServerParams": function(aoData) {
+                    aoData.push({"name": "bSearchable2_0", "value": $("#bSearchable2_0").val()});
+                    aoData.push({"name": "bSearchable2_1", "value": $("#bSearchable2_1").val()});
+                    aoData.push({"name": "bSearchable2_2", "value": $("#bSearchable2_2").val()});
+                    aoData.push({"name": "bSearchable2_3", "value": $("#bSearchable2_3").val()});
+                    aoData.push({"name": "bSearchable2_4", "value": $("#bSearchable2_4").val()});
+                },
+                "bFilter": false,
                 "order": [
-                    [1, "asc"]
+                    [0, "asc"]
+                ],
+                "aoColumnDefs": [
+                    {"bSortable": true, "aTargets": [0]},
+                    {"bSortable": true, "aTargets": [1]},
+                    {"bSortable": true, "aTargets": [2]},
+                    {"bSortable": true, "aTargets": [3]},
+                    {"bSortable": true, "aTargets": [4]},
+                    {"bSortable": false, "aTargets": [5]},
+                    {"bSortable": false, "aTargets": [6]},
+                    {"bSortable": false, "aTargets": [7]},
+                    {"bSearchable": false, "aTargets": [0]},
+                    {"bSearchable": false, "aTargets": [1]},
+                    {"bSearchable": true, "aTargets": [2]},
+                    {"bSearchable": false, "aTargets": [3]},
+                    {"bSearchable": false, "aTargets": [4]},
+                    {"bSearchable": false, "aTargets": [5]},
+                    {"bSearchable": false, "aTargets": [6]},
                 ],
                 "language": {// language settings
+                    "sProcessing": "Procesando...",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_)",
+                    "sSearch": "Buscar por documento:",
                     // metronic spesific
                     "metronicGroupActions": "_TOTAL_ records selected: ",
-                    "metronicAjaxRequestGeneralError": "Could not complete request. Please check your internet connection",
+                    "metronicAjaxRequestGeneralError": "Error al consultar, por favor verifique la conexion.",
                     // data tables spesific
-                    "lengthMenu": "<span class='seperator'>|</span>View _MENU_ records",
-                    "info": "<span class='seperator'>|</span>Found total _TOTAL_ records",
-                    "infoEmpty": "No records found to show",
-                    "emptyTable": "No data available in table",
-                    "zeroRecords": "No matching records found",
+                    "lengthMenu": "<span class='seperator'>|</span>Mostrando _MENU_ registros",
+                    "info": "<span class='seperator'>|</span>Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+                    "infoEmpty": "<span class='seperator'>|</span>Mostrando registros del 0 al 0 de un total de 0",
+                    "emptyTable": "Ningun dato disponible en esta tabla",
+                    "zeroRecords": "No se encontraron resultados",
                     "paginate": {
-                        "previous": "Prev",
-                        "next": "Next",
-                        "last": "Last",
-                        "first": "First",
-                        "page": "Page",
-                        "pageOf": "of"
+                        "previous": "Anterior",
+                        "next": "Proxima",
+                        "last": "Ultima",
+                        "first": "Primera",
+                        "page": "Pagina",
+                        "pageOf": "de"
                     }
                 }
             }
         });
-
         // handle group actionsubmit button click
         grid.getTableWrapper().on('click', '.table-group-action-submit', function(e) {
             e.preventDefault();
@@ -87,7 +113,7 @@ var TableAjax = function() {
     }
 
     return {
-        //main function to initiate the module
+//main function to initiate the module
         init: function() {
 
             initPickers();
@@ -95,5 +121,4 @@ var TableAjax = function() {
         }
 
     };
-
 }();

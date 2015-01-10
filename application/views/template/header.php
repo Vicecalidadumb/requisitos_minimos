@@ -36,7 +36,7 @@
                             </li>
                             <li>
                                 <ul class="dropdown-menu-list scroller" style="height: 250px;">
-                                    <?php for ($a = 0; $a < 15; $a++) { ?>
+                                    <?php //for ($a = 0; $a < 15; $a++) { ?>
                                         <li>
                                             <a href="#">
                                                 <span class="label label-sm label-icon label-info">
@@ -48,7 +48,7 @@
                                                 </span>
                                             </a>
                                         </li>
-                                    <?php } ?>
+                                    <?php //} ?>
                                 </ul>
                             </li>
                             <li class="external">
@@ -65,14 +65,13 @@
                     <!-- BEGIN USER LOGIN DROPDOWN -->
                     <li class="dropdown dropdown-user">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <img alt="" class="img-circle" src="<?php echo base_url('images/vice/user-29.png') ?>"/>
+                            <img alt="" class="img-circle" src="<?php echo base_url('images/vice/user-29_2.png') ?>"/>
                             <span class="username">
                                 <?php echo $this->session->userdata('USUARIO_NOMBRES') . ' ' . $this->session->userdata('USUARIO_APELLIDOS'); ?> 
                             </span>
                             <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
-
                             <li>
                                 <a href="<?php echo base_url('index.php/login/logout') ?>">
                                     <i class="icon-key"></i> 
