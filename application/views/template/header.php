@@ -21,44 +21,44 @@
             <div class="top-menu">
                 <ul class="nav navbar-nav pull-right">
                     <!-- BEGIN NOTIFICATION DROPDOWN -->
-<!--                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <i class="icon-calendar"></i>
-                            <span class="badge badge-default">
-                                15
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <p>
-                                    Proximas Cuentas por Pagar: 15
-                                </p>
-                            </li>
-                            <li>
-                                <ul class="dropdown-menu-list scroller" style="height: 250px;">
-                                    <?php //for ($a = 0; $a < 15; $a++) { ?>
-                                        <li>
-                                            <a href="#">
-                                                <span class="label label-sm label-icon label-info">
-                                                    <i class="fa fa-bell-o"></i>
-                                                </span>
-                                                Jan David Parra. 
-                                                <span class="time">
-                                                    En 15 dias
+                    <!--                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                                <i class="icon-calendar"></i>
+                                                <span class="badge badge-default">
+                                                    15
                                                 </span>
                                             </a>
-                                        </li>
-                                    <?php //} ?>
-                                </ul>
-                            </li>
-                            <li class="external">
-                                <a href="#">
-                                    Ver Todas
-                                    <i class="m-icon-swapright"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>-->
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <p>
+                                                        Proximas Cuentas por Pagar: 15
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <ul class="dropdown-menu-list scroller" style="height: 250px;">
+                    <?php //for ($a = 0; $a < 15; $a++) { ?>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <span class="label label-sm label-icon label-info">
+                                                                        <i class="fa fa-bell-o"></i>
+                                                                    </span>
+                                                                    Jan David Parra. 
+                                                                    <span class="time">
+                                                                        En 15 dias
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                    <?php //} ?>
+                                                    </ul>
+                                                </li>
+                                                <li class="external">
+                                                    <a href="#">
+                                                        Ver Todas
+                                                        <i class="m-icon-swapright"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>-->
                     <!-- END NOTIFICATION DROPDOWN -->
 
 
@@ -92,3 +92,21 @@
     <div class="clearfix">
     </div>
     <div class="page-container">
+        <div class="modal fade" id="opcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div id="remover" class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">titulo</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="contenido"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" id="guardar">Guardar</button>
+                        <!--<button type="button" class="btn btn-primary">Send message</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
