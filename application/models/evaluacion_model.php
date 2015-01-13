@@ -59,8 +59,22 @@ class Evaluacion_model extends CI_Model {
 //                echo $this->db->last_query();
         return $datos->result();
     }
+    function universidad($universidad) {
+        $this->db->select('IDUNIVERSIDAD_UNIV,UNIVERSIDAD_UNIV', false);
+        $this->db->where('IDMODALIDAD_UNIV', $universidad);
+        $datos=$this->db->get('INSC_UNIVERSIDAD');
+//                        echo $this->db->last_query();
+        return $datos->result();
+    }
+    function titulo($titulo) {
+        $this->db->select('[IDTITULO_TIT],[TITULO_TIT]', false);
+        $this->db->where('[IDUNIVERSIDAD_TIT]', $titulo,false);
+        $datos=$this->db->get('INSC_TITULO');
+//                        echo $this->db->last_query();
+        return $datos->result();
+    }
     function educacion_formal($id) {
-        $this->db->select('INSC_CALIFICACION_RM_AA.CONSECUTIVO_CRA,MODALIDAD_MOD,RUTAADJUNTO_CRA,REQUISITOMINIMO,IDINSCRIPCION_INS', false);
+        $this->db->select('INSC_CALIFICACION_RM_AA.IDCALIFICACION_RM_AA_CRA,INSC_CALIFICACION_RM_AA.CONSECUTIVO_CRA,MODALIDAD_MOD,RUTAADJUNTO_CRA,REQUISITOMINIMO,IDINSCRIPCION_INS', false);
 
         $this->db->join('INSC_CALIFICACION_RM_AA','INSC_CALIFICACION_RM_AA.IDTIPOADJUNTO_CRA=CNSC_PARAMETROS.CONSECUTIVOPARAMETRO_PAR');
         $this->db->join('INSC_INSCRIPCION','INSC_CALIFICACION_RM_AA.IDINSCRIPCION_CRA = INSC_INSCRIPCION.IDINSCRIPCION_INS ');    
