@@ -15,7 +15,7 @@ class Evaluacion extends CI_Controller {
 
     public function index() {
         //FUNCION PRINCIPAL PARA EL LOGIN - CARGA LA VISTA LOGIN/INDEX.PHP           
-        $data['title'] = '';
+        $data['title'] = 'Evaluación de Requisitos Minimos';
         $data['get'] = $this->input->get();
         if ($data['get']['id']) {
             $data['get']['id'] = deencrypt_id($data['get']['id']);
@@ -25,7 +25,7 @@ class Evaluacion extends CI_Controller {
             //DATOS USUARIO
             $datos['documentos'] = $this->evaluacion_model->documentos($data['get']['id']);
             $datos['educacion_formal'] = $this->evaluacion_model->educacion_formal($data['get']['id']);
-            $datos['experiencia'] = $this->evaluacion_model->educacion_formal($data['get']['id']);
+            $datos['experiencia'] = $this->evaluacion_model->experiencia($data['get']['id']);
             //VISTAS DOCUMENTOS
             $data['doc_espeficifos'] = $this->load->view('evaluacion/documentos/especificos', $datos, true);
             $data['doc_educacion'] = $this->load->view('evaluacion/documentos/educacion', $datos, true);

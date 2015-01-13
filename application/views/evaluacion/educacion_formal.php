@@ -9,13 +9,13 @@
             <ul class="page-breadcrumb">
                 <li>
                     <i class="fa fa-home"></i>
-                    <a href="<?php echo base_url('index.php') ?>">
+                    <a href="<?php echo base_url('index.php/aspirantes') ?>">
                         Listado de Aspirantes
                     </a>
                 </li>
                 <li>
                     <i class="fa fa-angle-right"></i>
-                    <a href="<?php echo base_url('index.php/evaluacion?id=' . $_GET['id']) ?>">
+                    <a onclick="cambio_pagina(3, 1)" style="cursor: pointer">
                         Evaluar Educaci&oacute;n
                     </a>
                 </li>
@@ -101,7 +101,7 @@
                 </table>
             </div>
             <div class="col-md-12 col-sm-12" align='center'>
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#opcion" data-accion="consultar_opec" data-id="<?php echo $get['id'] ?>">
+                <button type="button" class="btn btn-success opcion" data-toggle="modal" data-target="#opcion" data-accion="consultar_opec" data-id="<?php echo $get['id'] ?>">
                     Consultar Opec
                 </button>
             </div>
@@ -114,6 +114,7 @@
                 <?php echo $doc_experiencia; ?>
             </div>
             <div id="formulario_3">
+                <?php echo $doc_espeficifos; ?>
                 <?php echo $cumple; ?>
             </div>
 
