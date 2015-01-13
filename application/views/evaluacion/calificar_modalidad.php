@@ -1,5 +1,4 @@
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
 <div class="row">
     <div class="col-md-12 col-sm-12" >
         <table class="table table-bordered table-striped">
@@ -45,7 +44,7 @@
                     Fecha Terminación 	
                 </td>
                 <td>
-                    <?php echo form_input("fecha_terminacion", '', $extra = 'class="form-control input-sm date-picker"') ?>
+                    <?php echo form_input("fecha_terminacion", '', $extra = 'class="form-control input-sm fecha"') ?>
                 </td>
             </tr>
             <tr>
@@ -68,7 +67,12 @@
     </div>
 </div>
 <script>
-    $(".fecha").datepicker();
+    $(".fecha").datepicker({
+        format: 'yyyy/mm/dd',
+        rtl: Metronic.isRTL(),
+        orientation: "left",
+        autoclose: true,
+    });
 
     function activar() {
         var chek = $('#graduado').is(':checked')
@@ -77,27 +81,27 @@
         else
             $('#sem').show();
     }
-    $('#modalidad').change(function () {
+    $('#modalidad').change(function() {
         var universidad = $(this).val();
         if (universidad == 0)
             return false;
         var url = '<?php echo base_url('index.php'); ?>/evaluacion/universidad';
         $.post(url, {universidad: universidad})
-                .done(function (msg) {
+                .done(function(msg) {
                     $('#universidad').html(msg);
-                }).fail(function (msg) {
+                }).fail(function(msg) {
             alert('Error en la Base de Datos');
         });
     });
-    $('#universidad').change(function () {
+    $('#universidad').change(function() {
         var titulo = $(this).val();
         if (titulo == 0)
             return false;
         var url = '<?php echo base_url('index.php'); ?>/evaluacion/titulo';
         $.post(url, {titulo: titulo})
-                .done(function (msg) {
+                .done(function(msg) {
                     $('#titulo').html(msg);
-                }).fail(function (msg) {
+                }).fail(function(msg) {
             alert('Error en la Base de Datos');
         });
     });

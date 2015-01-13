@@ -37,16 +37,16 @@ $("#formulario_2").hide();
 //FIN PAGINACION
 
 
-$('#opcion').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget)
-    var accion = button.data('accion')
-    $('#contenido').html('')
+$('.opcion').click(function() {
+//$(".container").delegate(".activar", "click", function() {
+
+    var accion = $(this).attr('data-accion')
     var titulo = "";
     var url = "";
     var id = "";
     switch (accion) {
         case 'editar':
-            titulo = '<h5><i class="glyphicon glyphicon-pencil"></i> Nuevo</h5>';
+            titulo = '<h5><i class="glyphicon glyphicon-pencil"></i> EDUCACIÓN FORMAL</h5>';
             url = base_url_js + '/index.php/evaluacion/calificar_modalidad';
             $("#remover").removeClass('modal-lg modal-full').addClass('');
             $('#guardar').show();
@@ -58,17 +58,21 @@ $('#opcion').on('show.bs.modal', function(event) {
             $('#guardar').hide();
             break;
     }
+    if (titulo != '') {
+        $('#contenido').html('')
+        id = $(this).attr('data-id')
 
-    id = button.data('id')
+        $.post(url, {id: id})
+                .done(function(msg) {
+                    $('#contenido').html(msg)
+                }).fail(function(msg) {
+            alert('Error al traer la información');
+        })
 
-    $.post(url, {id: id})
-            .done(function(msg) {
-                $('#contenido').html(msg)
-            }).fail(function(msg) {
-        alert('Error al traer la información');
-    })
-    
 //        var recipient = button.data('id') 
-    var modal = $(this)
-    modal.find('.modal-title').html(titulo)
+        var modal = $(this)
+        $('.modal-title').html(titulo)
+    } else {
+        //return false;
+    }
 });

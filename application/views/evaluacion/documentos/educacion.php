@@ -15,7 +15,7 @@
             $i = 0;
             foreach ($educacion_formal as $documentos2) {
                 $archivo = str_replace('~/', 'http://172.16.210.37/rmdps/', $documentos2->RUTAADJUNTO_CRA);
-                echo "<tr><td>" . $documentos2->CONSECUTIVO_CRA . "</td><td>" . $documentos2->MODALIDAD_MOD . '</td><td><a target="_blank" href="' . $archivo . '">Ver Folio..</a></td><td align="center"><button type="button" class="btn defaul btn-xs"  data-toggle="modal" data-target="#opcion" data-accion="editar" data-id="' . $documentos2->CONSECUTIVO_CRA . '"><i class="glyphicon glyphicon-pencil"></i></button></td></tr>';
+                echo "<tr><td>" . $documentos2->CONSECUTIVO_CRA . "</td><td>" . $documentos2->MODALIDAD_MOD . '</td><td><a target="_blank" href="' . $archivo . '">Ver Folio..</a></td><td align="center"><button type="button" class="btn defaul btn-xs opcion"  data-toggle="modal" data-target="#opcion" data-accion="editar" data-id="' . $documentos2->CONSECUTIVO_CRA . '"><i class="glyphicon glyphicon-pencil"></i></button></td></tr>';
             }
             ?>
         </table>
