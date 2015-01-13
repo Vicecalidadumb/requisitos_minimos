@@ -30,6 +30,9 @@ h1, h2, h3 {
 .tituloR {
     background-color: #dcdcdc;
     height: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 18px;
 }
 .Nota {
     color: red;

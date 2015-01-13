@@ -91,7 +91,7 @@
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
     jQuery(document).ready(function() {
-        Metronic.init(); // init metronic core componets
+        //Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         TableAjax.init();
         UIBlockUI.init();
@@ -105,13 +105,11 @@
         //Index.initCharts(); // init index page's custom scripts
         //Index.initChat();
         //TableAdvanced.init();
-        
         //Index.initMiniCharts();
         Index.initIntro();
         Tasks.initDashboardWidget();
         ComponentsDropdowns.init();
         FormValidation.init();
-
     });
 </script>
 
