@@ -20,7 +20,7 @@ var TableAjax = function() {
                 // execute some code on network or other general error  
             },
             dataTable: {
-                "rowCallback": function() {
+                "drawCallback": function() {
                     Metronic.unblockUI('#blockui_sample_3_2_element');
                 },
                 "fnPreDrawCallback": function() {
