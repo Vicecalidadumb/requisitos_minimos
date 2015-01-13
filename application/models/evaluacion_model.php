@@ -53,6 +53,12 @@ class Evaluacion_model extends CI_Model {
 //                echo $this->db->last_query();
         return $datos->result();
     }
+    function modalidad() {
+        $this->db->select('IDMODALIDAD_MOD,MODALIDAD_MOD', false);
+        $datos=$this->db->get('INSC_MODALIDAD');
+//                echo $this->db->last_query();
+        return $datos->result();
+    }
     function educacion_formal($id) {
         $this->db->select('INSC_CALIFICACION_RM_AA.CONSECUTIVO_CRA,MODALIDAD_MOD,RUTAADJUNTO_CRA,REQUISITOMINIMO,IDINSCRIPCION_INS', false);
 

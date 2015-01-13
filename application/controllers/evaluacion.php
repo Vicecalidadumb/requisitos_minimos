@@ -35,6 +35,7 @@ class Evaluacion extends CI_Controller {
 
     public function calificar_modalidad() {
         $data['post'] = $this->input->post();
+        $data['modalidad']= get_dropdown($this->evaluacion_model->modalidad(),'IDMODALIDAD_MOD','MODALIDAD_MOD');
         $this->load->view('evaluacion/calificar_modalidad', $data);
     }
     public function consultar_opec() {

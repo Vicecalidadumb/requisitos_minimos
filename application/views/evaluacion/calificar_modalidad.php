@@ -1,3 +1,6 @@
+<?php 
+print_y($modalidad);
+?>
 <div class="row">
     <div class="col-md-12 col-sm-12" >
         <table class="table table-bordered table-striped">
@@ -6,8 +9,8 @@
                     Modalidad
                 </td>
                 <td>
-                    <?php echo form_dropdown($data = "nelson", array("s" => "1"), '', $extra = 'class="form-control input-sm "') ?>
-                    <?php echo form_dropdown($data = "nelson", array("s" => "sem"), '', $extra = 'class="form-control input-sm "') ?>
+                    <?php echo form_dropdown($data = "modalidad",$modalidad , '', $extra = 'class="form-control input-sm "') ?>
+                    <?php echo form_dropdown($data = "Sem", array("s" => "sem"), '', $extra = 'class="form-control input-sm "') ?>
                 </td>
             </tr>
             <tr>
