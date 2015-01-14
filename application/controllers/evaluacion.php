@@ -39,16 +39,22 @@ class Evaluacion extends CI_Controller {
         }
     }
 
+    public function consultar_opec() {
+        $data['post'] = $this->input->post();
+        $data['datos'] = $this->evaluacion_model->datos_personales($data['post']['id']);
+        $this->load->view('evaluacion/consultar_opec', $data);
+    }
+
     public function calificar_modalidad() {
         $data['post'] = $this->input->post();
-        $data['modalidad'] = get_dropdown($this->evaluacion_model->modalidad(), 'IDMODALIDAD_MOD', 'MODALIDAD_MOD');
+        $data['modalidad'] = get_dropdown_select($this->evaluacion_model->modalidad(), 'IDMODALIDAD_MOD', 'MODALIDAD_MOD', '-1');
         $this->load->view('evaluacion/calificar_modalidad', $data);
     }
 
     public function universidad() {
         $data['post'] = $this->input->post('universidad');
         $dat = $this->evaluacion_model->universidad($data['post']);
-        $valu = "<option value='0'>Seleccione</option>";
+        $valu = "<option value='-1'>Seleccione</option>";
         foreach ($dat as $value) {
             $valu.="<option value='" . $value->IDUNIVERSIDAD_UNIV . "'>" . $value->UNIVERSIDAD_UNIV . "</option>";
         }
@@ -59,7 +65,7 @@ class Evaluacion extends CI_Controller {
     public function titulo() {
         $data['post'] = $this->input->post('titulo');
         $dat = $this->evaluacion_model->titulo($data['post']);
-        $valu = "<option value='0'>Seleccione</option>";
+        $valu = "<option value='-1'>Seleccione</option>";
         foreach ($dat as $value) {
             $valu.="<option value='" . $value->IDTITULO_TIT . "'>" . $value->TITULO_TIT . "</option>";
         }
@@ -67,10 +73,22 @@ class Evaluacion extends CI_Controller {
 //        echo $data['universidad']= $this->evaluacion_model->universidad($data['post']);
     }
 
-    public function consultar_opec() {
+    function guardar_universidad() {
         $data['post'] = $this->input->post();
-        $data['datos'] = $this->evaluacion_model->datos_personales($data['post']['id']);
-        $this->load->view('evaluacion/consultar_opec', $data);
+        print_y($data['post']);
+        $this->evaluacion_model->guardar_universidad($data['post']);
+    }
+
+    function nueva_universidad() {
+        $data['post'] = $this->input->post();
+        $this->evaluacion_model->nueva_universidad($data['post']);
+        $this->universidad();
+    }
+
+    function nuevo_titulo() {
+        $data['post'] = $this->input->post();
+        $this->evaluacion_model->nuevo_titulo($data['post']);
+        $this->titulo();
     }
 
 }

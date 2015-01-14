@@ -127,5 +127,42 @@ class Evaluacion_model extends CI_Model {
         $datos = $this->db->get('CNSC_PARAMETROS');
         return $datos->result();
     }
+    function nueva_universidad($post) {
+        $this->db->set('UNIVERSIDAD_UNIV', strtoupper($post['universidad_otra']));
+        $this->db->set('IDMODALIDAD_UNIV', $post['modalidad']);
+        $this->db->insert('INSC_UNIVERSIDAD');
+        $id = $this->db->insert_id();
+        $this->db->set('IDUNIVERSIDAD_TIT', $id);
+        $this->db->set('TITULO_TIT', 'OTRO');
+        $this->db->insert('INSC_TITULO');
+//                        echo $this->db->last_query();
+    }
+
+    function nuevo_titulo($post) {
+
+        $this->db->set('IDUNIVERSIDAD_TIT', $post['universidad']);
+        $this->db->set('TITULO_TIT', $post['titulo_otra']);
+        $this->db->insert('INSC_TITULO');
+//                        echo $this->db->last_query();
+    }
+
+    function guardar_universidad($post) {
+
+
+//        $this->db->set('IDCALIFICACION_EDF', $post['idcal']);
+//        if (isset($post['graduado']))
+//            if ($post['graduado'] == 1)
+//                $this->db->set('SEMESTRES_EDF', 20);
+//            else
+//                $this->db->set('SEMESTRES_EDF', $post['sem']);
+//
+//        $this->db->set('FECHATERMINACION_EDF', $post['fecha_terminacion']);
+//        
+//        $this->db->set('FECHA_EDF', $post['fecha_grado']);
+//        $this->db->set('GRADUADO_EDF', $post['titulo_otra']);
+//        $this->db->set('IDTITULO_EDF', $post['titulo_otra']);
+//        $this->db->update('INSC_EDUCACIONFORMAL');
+//                        echo $this->db->last_query();
+    }
 
 }
