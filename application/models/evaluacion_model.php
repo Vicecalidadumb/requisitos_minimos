@@ -6,20 +6,38 @@ if (!defined('BASEPATH'))
 class Evaluacion_model extends CI_Model {
 
     function datos_personales($id) {
-        $this->db->select('PRIMERNOMBRE_PER,SEGUNDONOMBRE_PER,PRIMERAPELLIDO_PER,SEGUNDOAPELLIDO_PER,DOCUMENTO_PER as cedula
-            ,PIN,IDGENERO_PER,FECHANACIMIENTO_PER,TELEFONOFIJO_PER,TELEFONOCEL_PER,CORREO_PER,DIRECCION_PER,
-            (SELECT nombre_dep
-            FROM CNSC_DEPARTAMENTO AS CNSC_DEPARTAMENTO_1
-		WHERE        (iddeparta_dep = CNSC_PERSONA.DEPARTRES_PER)) 
-		AS DEPARTAMENTO_RESIDENCIA,
-		(SELECT        nombre_mun
-		FROM            CNSC_MUNICIPIO AS CNSC_MUNICIPIO_1
-		WHERE        (iddeparta_mun = dbo.CNSC_PERSONA.DEPARTRES_PER) 
-		AND (idmunicipio_mun = dbo.CNSC_PERSONA.MUNICIPIORES_PER)) 
-		AS MUNICIPIO_RESIDENCIA,
-                (SELECT nombre_nivel FROM OPEC_PERFIL AS OPEC_PERFIL_1
-                WHERE idperfil_per = INSC_REGISTRO.IDPERFIL_REG) AS NOMBRE_NIVEL,idperfil_emp,
-                contextualizacion_0_req,contextualizacion_1_req,experiencia_req,IDINSCRIPCION_INS', false);
+        //$this->db->select('PRIMERNOMBRE_PER,SEGUNDONOMBRE_PER,PRIMERAPELLIDO_PER,SEGUNDOAPELLIDO_PER,DOCUMENTO_PER as cedula');
+        //$this->db->select('PIN,IDGENERO_PER,FECHANACIMIENTO_PER,TELEFONOFIJO_PER,TELEFONOCEL_PER,CORREO_PER,DIRECCION_PER');
+        $this->db->select('INSC_PIN.*,OPEC_CONVOCATORIA.*,OPEC_PERFIL.*,INSC_REGISTRO.*,OPEC_CODIGO_EMPLEO.*');
+        $this->db->select('OPEC_NIVEL.*,OPEC_EMPLEO.*,INSC_INSCRIPCION.*,CNSC_PERSONA.*,OPEC_REQ_EQUIV.*,OPEC_ENTIDAD.*,OPEC_DEPENDENCIA.*');
+        $this->db->select("(
+                            SELECT DETALLEPARAMETRO_PAR
+                            FROM CNSC_PARAMETROS p2
+                            WHERE p2.NOMBREPARAMETRO_PAR='TIPO_DOCUMENTO'
+                            AND p2.CONSECUTIVOPARAMETRO_PAR = CNSC_PERSONA.IDTIPODOCUMENTO_PER
+                            ) AS TIPO_DOCUMENTO", false);
+        $this->db->select('
+                            (
+                            SELECT nombre_dep
+                            FROM CNSC_DEPARTAMENTO AS CNSC_DEPARTAMENTO_1
+                            WHERE 
+                            (iddeparta_dep = CNSC_PERSONA.DEPARTRES_PER)) 
+                            AS DEPARTAMENTO_RESIDENCIA,
+                                (
+                                SELECT nombre_mun
+                                FROM CNSC_MUNICIPIO AS CNSC_MUNICIPIO_1
+                                WHERE (iddeparta_mun = dbo.CNSC_PERSONA.DEPARTRES_PER) 
+                                AND (idmunicipio_mun = dbo.CNSC_PERSONA.MUNICIPIORES_PER)
+                                ) 
+                                AS MUNICIPIO_RESIDENCIA,
+                                (
+                                SELECT nombre_nivel 
+                                FROM OPEC_PERFIL AS OPEC_PERFIL_1
+                                WHERE idperfil_per = INSC_REGISTRO.IDPERFIL_REG
+                                ) 
+                                AS NOMBRE_NIVEL
+                            ', false);
+        $this->db->select('idperfil_emp,contextualizacion_0_req,contextualizacion_1_req,experiencia_req,IDINSCRIPCION_INS');
 
         $this->db->join('INSC_PIN', 'CNSC_PERSONA.IDPERSONA_PER=INSC_PIN.IDPERSONA_PIN');
         $this->db->join('OPEC_CONVOCATORIA', 'INSC_PIN.IDCONVOCATORIA_PIN = OPEC_CONVOCATORIA.idconvoc_con');
@@ -33,6 +51,8 @@ class Evaluacion_model extends CI_Model {
             AND dbo.OPEC_CONVOCATORIA.idconvoc_con = dbo.INSC_INSCRIPCION.IDCONVOCATORIA_INS 
             AND dbo.INSC_REGISTRO.IDINSCRIPCION_REG = dbo.INSC_INSCRIPCION.IDINSCRIPCION_INS', false);
         $this->db->join('OPEC_REQ_EQUIV', 'OPEC_EMPLEO.idperfil_emp = OPEC_REQ_EQUIV.idperfil_req ');
+        $this->db->join('OPEC_ENTIDAD', 'OPEC_PERFIL.identidad_per = OPEC_ENTIDAD.identidad_ent ');
+        $this->db->join('OPEC_DEPENDENCIA', 'OPEC_EMPLEO.dependencia_emp = OPEC_DEPENDENCIA.iddependencia_dep ');
 //        $this->db->where('PIN',$id);
         $this->db->where('IDINSCRIPCION_INS', $id);
         $datos = $this->db->get('CNSC_PERSONA');
