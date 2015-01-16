@@ -64,12 +64,12 @@ $('.opcion').click(function() {
             $('#guardar').hide();
             break;
     }
+    $('#contenido').html('')
     if (titulo != '') {
-        $('#contenido').html('')
         id = $(this).attr('data-id')
         var idcal = $(this).attr('data-idcal')
-
-        $.post(url, {id: id, idcal: idcal})
+        var requisito = $(this).attr('data-requisito')
+        $.post(url, {id: id,idcal: idcal,requisito:requisito})
                 .done(function(msg) {
                     $('#contenido').html(msg)
                 }).fail(function(msg) {

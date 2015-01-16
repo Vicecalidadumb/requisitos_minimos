@@ -75,8 +75,10 @@ class Evaluacion extends CI_Controller {
 
     function guardar_universidad() {
         $data['post'] = $this->input->post();
-        print_y($data['post']);
+//        print_y($data['post']);
         $this->evaluacion_model->guardar_universidad($data['post']);
+        $datos['educacion_formal']=$this->evaluacion_model->educacion_formal($data['get']['id']);
+        echo $this->load->view('evaluacion/documentos/educacion', $datos);
     }
 
     function nueva_universidad() {

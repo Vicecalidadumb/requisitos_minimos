@@ -157,28 +157,85 @@ class Evaluacion_model extends CI_Model {
     function nuevo_titulo($post) {
 
         $this->db->set('IDUNIVERSIDAD_TIT', $post['universidad']);
-        $this->db->set('TITULO_TIT', $post['titulo_otra']);
+        $this->db->set('TITULO_TIT', strtoupper($post['titulo_otra']));
         $this->db->insert('INSC_TITULO');
 //                        echo $this->db->last_query();
     }
+	
+	function guardar_universidad($post) {
 
-    function guardar_universidad($post) {
+
+        $this->db->select('IDCALIFICACION_EDF');
+        $this->db->where('IDCALIFICACION_EDF', $post['idcal']);
+        $this->db->from('INSC_EDUCACIONFORMAL', false);
+        $datos = $this->db->get();
+        $datos = $datos->result();
+
+        $this->db->set('IDCALIFICACION_EDF', $post['idcal']);
+        if (isset($post['graduado_ext'])) {
+            if ($post['graduado_ext'] == 1)
+                $this->db->set('TITULOEXTRANJERO_EDF', 1);
+            else
+                $this->db->set('TITULOEXTRANJERO_EDF', 0);
+        } else
+            $this->db->set('TITULOEXTRANJERO_EDF', 0);
+
+        
+        if (isset($post['graduado'])) {
+            if ($post['graduado'] == 1) {
+                $this->db->set('SEMESTRES_EDF', 20);
+                $this->db->set('FECHA_EDF', $post['fecha_grado']);
+                $this->db->set('GRADUADO_EDF', 1);
+            } else {
+                $this->db->set('GRADUADO_EDF', 0);
+                $this->db->set('FECHA_EDF', 'NULL', false);
+                $this->db->set('SEMESTRES_EDF', $post['sem']);
+            }
+        } else {
+            $this->db->set('GRADUADO_EDF', 0);
+            $this->db->set('FECHA_EDF', 'NULL', false);
+            $this->db->set('SEMESTRES_EDF', $post['sem']);
+        }
+
+        $this->db->set('FECHATERMINACION_EDF', $post['fecha_terminacion']);
+
+        $this->db->set('IDTITULO_EDF', $post['titulo']);
+        if (count($datos) != 0) {
+            $this->db->where('IDCALIFICACION_EDF', $post['idcal']);
+            $info = $this->db->update('INSC_EDUCACIONFORMAL');
+        } else {
+
+            $info = $this->db->insert('INSC_EDUCACIONFORMAL');
+        }
+        if (isset($post['r_minimo'])) {
+            if ($post['r_minimo'] == 1)
+                $this->db->set('REQUISITOMINIMO', '1');
+        }
+        else {
+            $this->db->set('REQUISITOMINIMO', 'NULL',false);
+        }
+//        echo $this->db->last_query();
+        $this->db->set('OBSERVACION', $post['observaciones']);
+        $this->db->where('IDCALIFICACION_RM_AA_CRA', $post['idcal']);
+        $this->db->update('INSC_CALIFICACION_RM_AA');
 
 
-//        $this->db->set('IDCALIFICACION_EDF', $post['idcal']);
-//        if (isset($post['graduado']))
-//            if ($post['graduado'] == 1)
-//                $this->db->set('SEMESTRES_EDF', 20);
-//            else
-//                $this->db->set('SEMESTRES_EDF', $post['sem']);
-//
-//        $this->db->set('FECHATERMINACION_EDF', $post['fecha_terminacion']);
-//        
-//        $this->db->set('FECHA_EDF', $post['fecha_grado']);
-//        $this->db->set('GRADUADO_EDF', $post['titulo_otra']);
-//        $this->db->set('IDTITULO_EDF', $post['titulo_otra']);
-//        $this->db->update('INSC_EDUCACIONFORMAL');
 //                        echo $this->db->last_query();
+    }
+
+    function obtener_titulo($id) {
+        $this->db->select("INSC_MODALIDAD.IDMODALIDAD_MOD,INSC_MODALIDAD.MODALIDAD_MOD,SEMESTRES_EDF,TITULOEXTRANJERO_EDF,
+INSC_UNIVERSIDAD.IDUNIVERSIDAD_UNIV,INSC_UNIVERSIDAD.UNIVERSIDAD_UNIV,
+INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT,FECHATERMINACION_EDF,TITULOEXTRANJERO_EDF,
+INSC_CALIFICACION_RM_AA.OBSERVACION,FECHA_EDF");
+        $this->db->from("INSC_EDUCACIONFORMAL");
+        $this->db->join("INSC_CALIFICACION_RM_AA", 'INSC_CALIFICACION_RM_AA.IDCALIFICACION_RM_AA_CRA=INSC_EDUCACIONFORMAL.IDCALIFICACION_EDF');
+        $this->db->join("INSC_TITULO", 'INSC_TITULO.IDTITULO_TIT=INSC_EDUCACIONFORMAL.IDTITULO_EDF');
+        $this->db->join("INSC_UNIVERSIDAD", 'INSC_UNIVERSIDAD.IDUNIVERSIDAD_UNIV=INSC_TITULO.IDUNIVERSIDAD_TIT');
+        $this->db->join("INSC_MODALIDAD", 'INSC_MODALIDAD.IDMODALIDAD_MOD=INSC_UNIVERSIDAD.IDMODALIDAD_UNIV');
+        $this->db->where("INSC_CALIFICACION_RM_AA.IDCALIFICACION_RM_AA_CRA", $id);
+        $datos = $this->db->get();
+        return $datos->result();
     }
 
 }
