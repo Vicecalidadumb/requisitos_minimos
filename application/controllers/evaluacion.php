@@ -91,4 +91,16 @@ class Evaluacion extends CI_Controller {
         $this->titulo();
     }
 
+    public function calificar_experiencia() {
+        $data['post'] = $this->input->post();
+        $data['tipoexperiencia'] = array(
+            'Certificacion Experiencia Laboral' => 'Certificacion Experiencia Laboral',
+            'Certificación Experiencia Profesional' => 'Certificación Experiencia Profesional',
+            'Certificación Experiencia Relacionada' => 'Certificación Experiencia Relacionada',
+        );
+
+        $data['experiencia'] = $this->evaluacion_model->experiencia_idcalificacion($data['post']['idcal']);
+        $this->load->view('evaluacion/calificar_experiencia', $data);
+    }
+
 }

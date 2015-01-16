@@ -127,6 +127,22 @@ class Evaluacion_model extends CI_Model {
         $datos = $this->db->get('CNSC_PARAMETROS');
         return $datos->result();
     }
+
+    function experiencia_idcalificacion($id) {
+        $this->db->select('INSC_EXPERIENCIA_LABORAL.*,INSC_CALIFICACION_RM_AA.*,CNSC_PARAMETROS.*');
+        $this->db->join('INSC_CALIFICACION_RM_AA', 'INSC_CALIFICACION_RM_AA.IDTIPOADJUNTO_CRA=CNSC_PARAMETROS.CONSECUTIVOPARAMETRO_PAR');
+        $this->db->join('INSC_INSCRIPCION', 'INSC_CALIFICACION_RM_AA.IDINSCRIPCION_CRA = INSC_INSCRIPCION.IDINSCRIPCION_INS ');
+        $this->db->join('INSC_EXPERIENCIA_LABORAL', 'INSC_EXPERIENCIA_LABORAL.IDCALIFICACION_EXL=INSC_CALIFICACION_RM_AA.IDCALIFICACION_RM_AA_CRA');
+        $this->db->where('NOMBREPARAMETRO_PAR', 'TIPO_ADJUNTO');
+        $this->db->where('ESTADO', 1);
+        $this->db->where('IDCALIFICACION_EXL', $id);
+        //$this->db->where('CONSECUTIVOPARAMETRO_PAR', 8);
+        $this->db->like('DETALLEPARAMETRO_PAR', 'experiencia');
+        $this->db->order_by('CONSECUTIVO_CRA');
+        $datos = $this->db->get('CNSC_PARAMETROS');
+        return $datos->result();
+    }
+
     function nueva_universidad($post) {
         $this->db->set('UNIVERSIDAD_UNIV', strtoupper($post['universidad_otra']));
         $this->db->set('IDMODALIDAD_UNIV', $post['modalidad']);

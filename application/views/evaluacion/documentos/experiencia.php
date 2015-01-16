@@ -41,13 +41,22 @@
                     <a target="_blank" href="<?php echo str_replace('~/', 'http://172.16.210.37/rmdps/', $documentos2->RUTAADJUNTO_CRA); ?>">Ver Folio..</a>
                 </td>
                 <td align="center">
-                    <button type="button" class="btn defaul btn-xs"  
+                    <button type="button" class="btn defaul btn-xs opcion"  
                             data-toggle="modal" 
                             data-target="#opcion"
                             data-accion="editar_exp" 
-                            data-id="<?php echo $documentos2->CONSECUTIVO_CRA; ?>">
+                            data-id="<?php echo $documentos2->CONSECUTIVO_CRA; ?>"
+                            data-idcal="<?php echo $documentos2->IDCALIFICACION_RM_AA_CRA; ?>">
                         <i class="glyphicon glyphicon-pencil"></i>
                     </button>
+<!--                    <button type="button" class="btn defaul btn-xs opcion" 
+                            data-toggle="modal" 
+                            data-target="#opcion" 
+                            data-accion="editar" 
+                            data-id="4" 
+                            data-idcal="2182684">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </button>-->
                 </td>
             </tr>
             <?php

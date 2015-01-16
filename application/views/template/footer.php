@@ -97,8 +97,8 @@
         UIBlockUI.init();
         //TableAdvanced.init();
         ComponentsPickers.init();
-        QuickSidebar.init() // init quick sidebar
-        Index.init();
+        //QuickSidebar.init() // init quick sidebar
+        //Index.init();
         Index.initDashboardDaterange();
         //Index.initJQVMAP(); // init index page's custom scripts
         //Index.initCalendar(); // init index page's custom scripts
@@ -106,10 +106,10 @@
         //Index.initChat();
         //TableAdvanced.init();
         //Index.initMiniCharts();
-        Index.initIntro();
-        Tasks.initDashboardWidget();
+        //Index.initIntro();
+        //Tasks.initDashboardWidget();
         ComponentsDropdowns.init();
-        FormValidation.init();
+        //FormValidation.init();
     });
 </script>
 

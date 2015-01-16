@@ -51,6 +51,12 @@ $('.opcion').click(function() {
             $("#remover").removeClass('modal-lg modal-full').addClass('');
             $('#guardar').show();
             break;
+        case 'editar_exp':
+            titulo = '<h5><i class="glyphicon glyphicon-pencil"></i> INGRESO Y ACTUALIZACION DE EXPERIENCIA</h5>';
+            url = base_url_js + '/index.php/evaluacion/calificar_experiencia';
+            $("#remover").removeClass('modal-lg modal-full').addClass('');
+            $('#guardar').show();
+            break;
         case 'consultar_opec':
             titulo = '<h3><i class="icon-graduation" style=" font-size:30px"></i> OPEC - Convocatoria:  </h3>';
             url = base_url_js + '/index.php/evaluacion/consultar_opec';
@@ -63,7 +69,7 @@ $('.opcion').click(function() {
         id = $(this).attr('data-id')
         var idcal = $(this).attr('data-idcal')
 
-        $.post(url, {id: id,idcal: idcal})
+        $.post(url, {id: id, idcal: idcal})
                 .done(function(msg) {
                     $('#contenido').html(msg)
                 }).fail(function(msg) {
