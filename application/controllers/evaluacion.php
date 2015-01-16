@@ -47,6 +47,7 @@ class Evaluacion extends CI_Controller {
 
     public function calificar_modalidad() {
         $data['post'] = $this->input->post();
+        $data['datos'] = $this->evaluacion_model->obtener_titulo($data['post']['idcal']);
         $data['modalidad'] = get_dropdown_select($this->evaluacion_model->modalidad(), 'IDMODALIDAD_MOD', 'MODALIDAD_MOD', '-1');
         $this->load->view('evaluacion/calificar_modalidad', $data);
     }
