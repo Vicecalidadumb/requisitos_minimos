@@ -259,5 +259,41 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
 //                                echo $this->db->last_query();
         return $datos->result();
     }
+    
+    function guardar_experiencia($post) {
+        //**ACTUALIZACION INSC_CALIFICACION_RM_AA
+        $this->db->set('OBSERVACION', $post['OBSERVACION']);
+        if (isset($post['REQUISITOMINIMO'])) {
+            if ($post['REQUISITOMINIMO'] == 1)
+                $this->db->set('REQUISITOMINIMO', '1');
+        } else
+            $this->db->set('REQUISITOMINIMO', 'NULL', false);
+        $this->db->where('IDCALIFICACION_RM_AA_CRA', $post['idcal']);
+        $result = $this->db->update('INSC_CALIFICACION_RM_AA');
+        //**FIN ACTUALIZACION INSC_CALIFICACION_RM_AA
+        //**ACTUALIZACION INSC_EXPERIENCIA_LABORAL
+        if ($result) {
+            $this->db->set('ENTIDAD_EL', $post['ENTIDAD_EL']);
+            $this->db->set('CARGO_EL', $post['CARGO_EL']);
+            $this->db->set('FECHAINICIAL', $post['FECHAINICIAL'] . ' 00:00:00.000');
+            $this->db->set('FECHAFINAL', $post['FECHAFINAL'] . ' 00:00:00.000');
+            if (isset($post['EMPACTUAL_EL'])) {
+                if ($post['EMPACTUAL_EL'] == 1)
+                    $this->db->set('EMPACTUAL_EL', '1');
+            } else
+                $this->db->set('EMPACTUAL_EL', 'NULL', false);
+            if (isset($post['REQUISITOMINIMO'])) {
+                if ($post['REQUISITOMINIMO'] == 1)
+                    $this->db->set('REQUISITOMINIMO_EL', '1');
+            } else
+                $this->db->set('REQUISITOMINIMO_EL', 'NULL', false);
+            $this->db->where('IDCALIFICACION_EXL', $post['idcal']);
+            $result = $this->db->update('INSC_EXPERIENCIA_LABORAL');
+            return $result;
+        }else {
+            return false;
+        }
+        //**FIN ACTUALIZACION INSC_EXPERIENCIA_LABORAL
+    }    
 
 }

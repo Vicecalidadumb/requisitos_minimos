@@ -111,5 +111,10 @@ class Evaluacion extends CI_Controller {
         $data['experiencia'] = $this->evaluacion_model->experiencia_idcalificacion($data['post']['idcal']);
         $this->load->view('evaluacion/calificar_experiencia', $data);
     }
+    
+    function guardar_experiencia() {
+        $post = $this->input->post();
+        echo $modificar = $this->evaluacion_model->guardar_experiencia($post);
+    }    
 
 }

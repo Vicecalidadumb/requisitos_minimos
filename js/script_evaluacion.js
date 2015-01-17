@@ -44,8 +44,11 @@ $(document).ready(function () {
 //FIN PAGINACION
 
 
-    $('.opcion').click(function () {
+$('.opcion').click(function() {
 //$(".container").delegate(".activar", "click", function() {
+    Metronic.blockUI({
+        target: '.modal-dialog',
+    });
 
         var accion = $(this).attr('data-accion')
         var titulo = "";
@@ -79,6 +82,7 @@ $(document).ready(function () {
             var id_glo = $(this).attr('data-id_glo')
             $.post(url, {id: id, idcal: idcal, requisito: requisito, id_glo: id_glo})
                     .done(function (msg) {
+                        Metronic.unblockUI('.modal-dialog');
                         $('#contenido').html(msg)
                     }).fail(function (msg) {
                 alert('Error al traer la información');
