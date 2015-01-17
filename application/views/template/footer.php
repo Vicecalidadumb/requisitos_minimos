@@ -108,7 +108,7 @@
         //Index.initMiniCharts();
         //Index.initIntro();
         //Tasks.initDashboardWidget();
-        ComponentsDropdowns.init();
+        //ComponentsDropdowns.init();
         //FormValidation.init();
     });
 </script>

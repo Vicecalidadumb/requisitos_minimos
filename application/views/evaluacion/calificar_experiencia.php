@@ -2,13 +2,13 @@
 //echo print_y($experiencia);
 ?>
 
-<form method="post" id="form1" >
+<form method="post" id="form2" >
     <input type="hidden" value="<?php echo $post['id'] ?>" id="id" name="id">
-    <input type="hidden" value="<?php echo $post['idcal'] ?>" id="id" name="idcal">
+    <input type="hidden" value="<?php echo $post['idcal'] ?>" id="idcal" name="idcal">
 
     <div class="row">
         <div class="col-md-12 col-sm-12" >
-            <table class="table table-bordered table-striped">
+            <table id="form2" class="table table-bordered table-striped">
                 <tr>
                     <td>
                         <span class="label label-success">
@@ -57,7 +57,7 @@
                         Fecha Inicio
                     </td>
                     <td>
-                        <?php echo form_input("FECHAINICIAL", date("Y-m-d", strtotime($experiencia[0]->FECHAINICIAL)), $extra = 'class="form-control input-sm fecha"') ?>
+                        <?php echo form_input("FECHAINICIAL", date("Y-m-d", strtotime($experiencia[0]->FECHAINICIAL)), $extra = 'id="FECHAINICIAL" class="form-control input-sm fecha"') ?>
                     </td>
                 </tr>
                 <tr>
@@ -65,9 +65,9 @@
                         Fecha Terminación
                     </td>
                     <td>
-                        <?php echo form_input("FECHAFINAL", date("Y-m-d", strtotime($experiencia[0]->FECHAFINAL)), $extra = 'class="form-control input-sm fecha"') ?>
+                        <?php echo form_input("FECHAFINAL", date("Y-m-d", strtotime($experiencia[0]->FECHAFINAL)), $extra = 'id="FECHAFINAL" class="form-control input-sm fecha"') ?>
                     </td>
-                </tr> 
+                </tr>
                 <tr>
                     <td>
                         Empleo y/o contratista Actual
@@ -81,62 +81,54 @@
                         Observaciones
                     </td>
                     <td>
-                        <?php echo form_textarea('OBSERVACION', $experiencia[0]->OBSERVACION, $extra = 'style="width: 100%; height: 75px;" class="form-control input-sm "') ?>
+                        <?php echo form_textarea('OBSERVACION', $experiencia[0]->OBSERVACION, $extra = 'id="OBSERVACION" style="width: 100%; height: 75px;" class="form-control input-sm "') ?>
                     </td>
-                </tr>               
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="button" class="btn btn-success" id="guardar_exp">Guardar</button>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
 </form>
 <script>
-    $('#guardar').click(function() {
-
-        var titulo = $('#titulo option:selected').text();
-        if (titulo == 'OTRO') {
-            alert('Valor del Titulo no es Correcto');
-            return false
-        }
-        var titulo = $('#universidad option:selected').text();
-        if (titulo == 'OTRA') {
-            alert('Valor del Titulo no es Correcto');
-            return false
-        }
-
-        var modalidad = $('#modalidad').val();
-        var sem = $('#sem').val();
-        var universidad = $('#universidad').val();
-        var titulo = $('#titulo').val();
-        var fecha_terminacion = $('#fecha_terminacion').val();
-        var fecha_grado = $('#fecha_terminacion').val();
-//        var observaciones =$('#observaciones').val();
-
-        if (modalidad == "-1" || universidad == '-1' || titulo == '-1' || fecha_terminacion == "") {
+    $('#guardar_exp').click(function() {
+        Metronic.blockUI({
+            target: '.modal-dialog',
+        });
+        var ENTIDAD_EL = $('#ENTIDAD_EL').val();
+        var CARGO_EL = $('#CARGO_EL').val();
+        var FECHAINICIAL = $('#FECHAINICIAL').val();
+        var OBSERVACION = $('#OBSERVACION').val();
+        if (ENTIDAD_EL == "" || CARGO_EL == '' || FECHAINICIAL == '' || OBSERVACION == "") {
+            Metronic.unblockUI('.modal-dialog');
             alert('Datos Incompletos');
             return false;
         }
-
-        var chek = $('#graduado').is(':checked')
-        if (chek == false) {
-            if (sem == "0") {
-                alert('Datos Semestre Incompleto');
-                return false;
-            }
-        } else {
-            if (fecha_grado == "") {
-                alert('Datos Fecha Grado Incompleto');
-                return false;
-            }
-        }
-
-        var r = confirm('Desea Guardar Todos Los datos')
+        var r = confirm('Desea Guardar Todos Los datos');
         if (r == true) {
-            var url = '<?php echo base_url('index.php'); ?>/evaluacion/guardar_universidad';
-            $.post(url, $('#form1').serialize())
+            var url = base_url_js + 'index.php/evaluacion/guardar_experiencia';
+            $.post(url, $('#form2').serialize())
                     .done(function(msg) {
-                        alert(msg);
+                        Metronic.unblockUI('.modal-dialog');
+                        if (msg == 1) {
+                            alert("Datos Guardados con exito");
+                            $('#opcion').modal("hide");
+                        } else
+                            alert("Error al guardar");
                     }).fail(function() {
-
+                alert('Error al Guardar');
             });
+        } else {
+            Metronic.unblockUI('.modal-dialog');
         }
     })
+    $(".fecha").datepicker({
+        format: 'yyyy-mm-dd',
+        rtl: Metronic.isRTL(),
+        orientation: "left",
+        autoclose: true,
+    });
 </script>
