@@ -108,13 +108,18 @@
 
             <div id="formulario_1">
                 <?php echo $doc_espeficifos; ?>
-                <?php echo $doc_educacion; ?>
+                <div id="formulario_1_1">
+                    <?php echo $doc_educacion; ?>
+                </div>
             </div>
+
             <div id="formulario_2">
                 <?php echo $doc_experiencia; ?>
             </div>
-            <div id="formulario_3">
-                <?php echo $doc_espeficifos; ?>
+            <div id="formulario_3" style="display: none">
+                <div id="formulario_3_1">
+                    <?php echo $obtener_titulo; ?>
+                </div>
                 <?php echo $cumple; ?>
             </div>
 

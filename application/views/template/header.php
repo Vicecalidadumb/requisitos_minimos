@@ -65,7 +65,7 @@
                     <!-- BEGIN USER LOGIN DROPDOWN -->
                     <li class="dropdown dropdown-user">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <img alt="" class="img-circle" src="<?php echo base_url('images/vice/user-29_2.png') ?>"/>
+                            <img alt="" class="img-circle" src="<?php echo base_url('images/vice/user-29_2.jpg') ?>"/>
                             <span class="username">
                                 <?php echo $this->session->userdata('USUARIO_NOMBRES') . ' ' . $this->session->userdata('USUARIO_APELLIDOS'); ?> 
                             </span>
@@ -92,7 +92,7 @@
     <div class="clearfix">
     </div>
     <div class="page-container">
-        <div class="modal fade" id="opcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="opcion" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true" aria-labelledby="exampleModalLabel" aria-hidden="true" aria-modal="true">
             <div id="remover" class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -103,7 +103,7 @@
                         <div id="contenido"></div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button id="cerrar" type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                         <!--<button type="button" class="btn btn-primary">Send message</button>-->
                     </div>
                 </div>

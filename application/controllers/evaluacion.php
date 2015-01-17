@@ -23,14 +23,16 @@ class Evaluacion extends CI_Controller {
             if (empty($data['datos']))
                 redirect('index.php/login', 'location');
             //DATOS USUARIO
-            $datos['documentos'] = $this->evaluacion_model->documentos($data['get']['id']);
-            $datos['educacion_formal'] = $this->evaluacion_model->educacion_formal($data['get']['id']);
-            $datos['experiencia'] = $this->evaluacion_model->experiencia($data['get']['id']);
+            $data['documentos'] = $this->evaluacion_model->documentos($data['get']['id']);
+            $data['educacion_formal'] = $this->evaluacion_model->educacion_formal($data['get']['id']);
+            $data['experiencia'] = $this->evaluacion_model->experiencia($data['get']['id']);
+            $data['obtener_titulo'] = $this->evaluacion_model->requisitos_estudio($data['get']['id']);
             //VISTAS DOCUMENTOS
-            $data['doc_espeficifos'] = $this->load->view('evaluacion/documentos/especificos', $datos, true);
-            $data['doc_educacion'] = $this->load->view('evaluacion/documentos/educacion', $datos, true);
-            $data['doc_experiencia'] = $this->load->view('evaluacion/documentos/experiencia', $datos, true);
-            $data['cumple'] = $this->load->view('evaluacion/documentos/cumple', $datos, true);
+            $data['doc_espeficifos'] = $this->load->view('evaluacion/documentos/especificos', $data, true);
+            $data['doc_educacion'] = $this->load->view('evaluacion/documentos/educacion', $data, true);
+            $data['doc_experiencia'] = $this->load->view('evaluacion/documentos/experiencia', $data, true);
+            $data['cumple'] = $this->load->view('evaluacion/documentos/cumple', $data, true);
+            $data['obtener_titulo'] = $this->load->view('evaluacion/documentos/obtener_titulo', $data, true);
             //VISTA GENERAL
             $data['content'] = 'evaluacion/educacion_formal';
             $this->load->view('template/template', $data);
@@ -78,8 +80,12 @@ class Evaluacion extends CI_Controller {
         $data['post'] = $this->input->post();
 //        print_y($data['post']);
         $this->evaluacion_model->guardar_universidad($data['post']);
-        $datos['educacion_formal']=$this->evaluacion_model->educacion_formal($data['get']['id']);
-        echo $this->load->view('evaluacion/documentos/educacion', $datos);
+        $data['get']['id'] = $data['post']['id_glo'];
+        $data['educacion_formal'] = $this->evaluacion_model->educacion_formal($data['post']['id_glo']);
+        $data['obtener_titulo'] = $this->evaluacion_model->requisitos_estudio($data['post']['id_glo']);
+         $educacion= $this->load->view('evaluacion/documentos/educacion', $data, true);
+         $obtener_titulo = $this->load->view('evaluacion/documentos/obtener_titulo', $data, true);
+         echo json_encode($data=array('dato1'=>$educacion,'dato2'=>$obtener_titulo));
     }
 
     function nueva_universidad() {
