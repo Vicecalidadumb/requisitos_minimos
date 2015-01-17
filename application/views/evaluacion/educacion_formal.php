@@ -120,6 +120,9 @@
                 <div id="formulario_3_1">
                     <?php echo $obtener_titulo; ?>
                 </div>
+                <div id="formulario_3_2">
+                    <?php echo $obtener_experiencia; ?>
+                </div>                
                 <?php echo $cumple; ?>
             </div>
 

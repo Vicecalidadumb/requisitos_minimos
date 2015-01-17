@@ -129,7 +129,7 @@ if (count($datos)) {
     </div>
 </form>
 <script>
-    $('#guardar_uni').click(function () {
+    $('#guardar_uni').click(function() {
         Metronic.blockUI({
             target: '.modal-dialog',
         });
@@ -142,21 +142,21 @@ if (count($datos)) {
         var universidad = $('#modalidad').val()
         var url = '<?php echo base_url('index.php'); ?>/evaluacion/nueva_universidad';
         $.post(url, {universidad_otra: universidad_otra, modalidad: modalidad, universidad: universidad})
-                .done(function (msg) {
+                .done(function(msg) {
                     $('#universidad').html(msg);
                     $('#titulo').html('');
                     $('#universidad_otra').val('');
                     alert('Los datos fueron Guardados con Exito')
                     $('#universidad_otra2').hide();
                     Metronic.unblockUI('.modal-dialog');
-                }).fail(function (msg) {
+                }).fail(function(msg) {
             alert('Error en la Base de Datos');
             Metronic.unblockUI('.modal-dialog');
         })
 
         return false;
     });
-    $('#guardar_titulo').click(function () {
+    $('#guardar_titulo').click(function() {
         var titulo_otra = $('#titulo_otra').val()
         if (titulo_otra == "") {
             alert('Dato de Titulo Incompleto');
@@ -169,20 +169,20 @@ if (count($datos)) {
             target: '.modal-dialog',
         });
         $.post(url, {titulo_otra: titulo_otra, universidad: universidad, titulo: titulo})
-                .done(function (msg) {
+                .done(function(msg) {
                     $('#titulo').html(msg);
                     $('#titulo_otra').val('');
                     alert('Los datos fueron Guardados con Exito')
                     $('#titulo_otra2').hide();
                     Metronic.unblockUI('.modal-dialog');
-                }).fail(function (msg) {
+                }).fail(function(msg) {
             alert('Error en la Base de Datos');
             Metronic.unblockUI('.modal-dialog');
         })
 
         return false;
     });
-    $('#titulo').change(function () {
+    $('#titulo').change(function() {
         var titulo = $('#titulo option:selected').text();
         if (titulo == 'OTRO') {
             $('#titulo_otra2').show();
@@ -211,7 +211,7 @@ if (count($datos)) {
     $('#universidad_otra2').hide();
     $('#titulo_otra2').hide();
 
-    $('#modalidad').change(function () {
+    $('#modalidad').change(function() {
         var universidad = $(this).val();
         if (universidad == -1)
             return false;
@@ -220,16 +220,16 @@ if (count($datos)) {
             target: '.modal-dialog',
         });
         $.post(url, {universidad: universidad})
-                .done(function (msg) {
+                .done(function(msg) {
                     $('#universidad').html(msg);
                     $('#titulo').html('');
                     Metronic.unblockUI('.modal-dialog');
-                }).fail(function (msg) {
+                }).fail(function(msg) {
             alert('Error en la Base de Datos');
             Metronic.unblockUI('.modal-dialog');
         });
     });
-    $('#universidad').change(function () {
+    $('#universidad').change(function() {
         var titulo = $('#universidad option:selected').text();
         if (titulo == 'OTRA') {
             $('#universidad_otra2').show();
@@ -245,15 +245,15 @@ if (count($datos)) {
             target: '.modal-dialog',
         });
         $.post(url, {titulo: titulo})
-                .done(function (msg) {
+                .done(function(msg) {
                     $('#titulo').html(msg);
                     Metronic.unblockUI('.modal-dialog');
-                }).fail(function (msg) {
+                }).fail(function(msg) {
             alert('Error en la Base de Datos');
             Metronic.unblockUI('.modal-dialog');
         });
     });
-    $('#guardar').click(function () {
+    $('#guardar').click(function() {
         var i = 0;
         if (i == 0) {
             var titulo = $('#titulo option:selected').text();
@@ -298,10 +298,17 @@ if (count($datos)) {
                 var url = '<?php echo base_url('index.php'); ?>/evaluacion/guardar_universidad';
                 Metronic.blockUI({
                     target: '.modal-dialog',
+                    message: 'Cargando...'
                 });
                 $.post(url, $('#form1').serialize())
-                        .done(function (msg) {
-                            alert('Los Datos Fueron Guardados Con Exito');
+                        .done(function(msg) {
+                            UINotific8.init();
+                            $.notific8('Los Datos en Formacion Fueron Guardados.', {
+                                horizontalEdge: 'bottom',
+                                life: 5000,
+                                theme: 'amethyst',
+                                heading: 'EXITO'
+                            });
                             var datos = JSON.parse(msg);
                             console.log(datos.dato1);
                             Metronic.unblockUI('.modal-dialog');
@@ -310,7 +317,7 @@ if (count($datos)) {
                             $('#formulario_3_1').html('');
                             $('#formulario_3_1').html(datos.dato2);
                             $('#opcion').modal('hide');
-                        }).fail(function () {
+                        }).fail(function() {
                     alert('Error al Guardar');
                     Metronic.unblockUI('.modal-dialog');
                 });

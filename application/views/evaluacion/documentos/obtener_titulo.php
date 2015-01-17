@@ -46,7 +46,3 @@
     </div>
     <div class="col-md-2 col-sm-2"></div>
 </div>
-
-<div class="col-md-12 col-sm-12">
-    <h2 class="titulo3">EDUCACIÓN PARA EL TRABAJO Y EL DESARROLLO HUMANO </h2>
-</div>

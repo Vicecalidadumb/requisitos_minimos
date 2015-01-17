@@ -44,7 +44,8 @@
                     <button type="button" class="btn defaul btn-xs opcion"  
                             data-toggle="modal" 
                             data-target="#opcion"
-                            data-accion="editar_exp" 
+                            data-accion="editar_exp"
+                            data-id_glo="<?php echo $get['id']; ?>"
                             data-id="<?php echo $documentos2->CONSECUTIVO_CRA; ?>"
                             data-idcal="<?php echo $documentos2->IDCALIFICACION_RM_AA_CRA; ?>">
                         <i class="glyphicon glyphicon-pencil"></i>

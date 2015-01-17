@@ -48,6 +48,7 @@ $('.opcion').click(function() {
 //$(".container").delegate(".activar", "click", function() {
     Metronic.blockUI({
         target: '.modal-dialog',
+        message: 'Cargando...'
     });
 
         var accion = $(this).attr('data-accion')

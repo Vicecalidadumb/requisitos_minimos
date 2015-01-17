@@ -33,6 +33,7 @@ class Evaluacion extends CI_Controller {
             $data['doc_experiencia'] = $this->load->view('evaluacion/documentos/experiencia', $data, true);
             $data['cumple'] = $this->load->view('evaluacion/documentos/cumple', $data, true);
             $data['obtener_titulo'] = $this->load->view('evaluacion/documentos/obtener_titulo', $data, true);
+            $data['obtener_experiencia'] = $this->load->view('evaluacion/documentos/obtener_experiencia', $data, true);
             //VISTA GENERAL
             $data['content'] = 'evaluacion/educacion_formal';
             $this->load->view('template/template', $data);
@@ -83,9 +84,9 @@ class Evaluacion extends CI_Controller {
         $data['get']['id'] = $data['post']['id_glo'];
         $data['educacion_formal'] = $this->evaluacion_model->educacion_formal($data['post']['id_glo']);
         $data['obtener_titulo'] = $this->evaluacion_model->requisitos_estudio($data['post']['id_glo']);
-         $educacion= $this->load->view('evaluacion/documentos/educacion', $data, true);
-         $obtener_titulo = $this->load->view('evaluacion/documentos/obtener_titulo', $data, true);
-         echo json_encode($data=array('dato1'=>$educacion,'dato2'=>$obtener_titulo));
+        $educacion = $this->load->view('evaluacion/documentos/educacion', $data, true);
+        $obtener_titulo = $this->load->view('evaluacion/documentos/obtener_titulo', $data, true);
+        echo json_encode($data = array('dato1' => $educacion, 'dato2' => $obtener_titulo));
     }
 
     function nueva_universidad() {
@@ -107,14 +108,18 @@ class Evaluacion extends CI_Controller {
             'Certificación Experiencia Profesional' => 'Certificación Experiencia Profesional',
             'Certificación Experiencia Relacionada' => 'Certificación Experiencia Relacionada',
         );
-
         $data['experiencia'] = $this->evaluacion_model->experiencia_idcalificacion($data['post']['idcal']);
         $this->load->view('evaluacion/calificar_experiencia', $data);
     }
-    
+
     function guardar_experiencia() {
         $post = $this->input->post();
-        echo $modificar = $this->evaluacion_model->guardar_experiencia($post);
-    }    
+        $modificar = $this->evaluacion_model->guardar_experiencia($post);
+        $data['experiencia'] = $this->evaluacion_model->experiencia($post['id_glo']);
+        $data['get']['id'] = $post['id'];
+        $doc_experiencia = $this->load->view('evaluacion/documentos/experiencia', $data, true);
+        $obtener_experiencia = $this->load->view('evaluacion/documentos/obtener_experiencia', $data, true);
+        echo json_encode(array('result' => $modificar, 'doc_experiencia' => $doc_experiencia, 'obtener_experiencia' => $obtener_experiencia));
+    }
 
 }

@@ -1,19 +1,17 @@
 <?php
 //echo print_y($experiencia);
 ?>
-
 <form method="post" id="form2" >
     <input type="hidden" value="<?php echo $post['id'] ?>" id="id" name="id">
     <input type="hidden" value="<?php echo $post['idcal'] ?>" id="idcal" name="idcal">
+    <input type="hidden" value="<?php echo $post['id_glo'] ?>" id="id_glo" name="id_glo">
 
     <div class="row">
         <div class="col-md-12 col-sm-12" >
             <table id="form2" class="table table-bordered table-striped">
                 <tr>
                     <td>
-                        <span class="label label-success">
-                            La experiencia es Requisito Mínimo
-                        </span>
+                        La experiencia es Requisito Mínimo
                     </td>
                     <td>
                         <?php echo form_checkbox("REQUISITOMINIMO", '1', ($experiencia[0]->REQUISITOMINIMO) ? true : false, 'id="REQUISITOMINIMO"') ?>
@@ -97,6 +95,7 @@
     $('#guardar_exp').click(function() {
         Metronic.blockUI({
             target: '.modal-dialog',
+            message: 'Cargando...'
         });
         var ENTIDAD_EL = $('#ENTIDAD_EL').val();
         var CARGO_EL = $('#CARGO_EL').val();
@@ -113,9 +112,18 @@
             $.post(url, $('#form2').serialize())
                     .done(function(msg) {
                         Metronic.unblockUI('.modal-dialog');
-                        if (msg == 1) {
-                            alert("Datos Guardados con exito");
+                        var datos = JSON.parse(msg);
+                        if (datos.result == 1) {
+                            $('#formulario_2').html(datos.doc_experiencia);
+                            $('#formulario_3_2').html(datos.obtener_experiencia);
                             $('#opcion').modal("hide");
+                            UINotific8.init();
+                            $.notific8('Los Datos en Experiencia Fueron Guardados.', {
+                                horizontalEdge: 'bottom',
+                                life: 5000,
+                                theme: 'amethyst',
+                                heading: 'EXITO'
+                            });
                         } else
                             alert("Error al guardar");
                     }).fail(function() {
