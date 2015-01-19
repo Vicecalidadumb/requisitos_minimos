@@ -27,6 +27,7 @@ class Evaluacion extends CI_Controller {
             $data['educacion_formal'] = $this->evaluacion_model->educacion_formal($data['get']['id']);
             $data['experiencia'] = $this->evaluacion_model->experiencia($data['get']['id']);
             $data['obtener_titulo'] = $this->evaluacion_model->requisitos_estudio($data['get']['id']);
+            $data['RM'] = explode('||', $data['datos'][0]->REQUISITOS_MINIMOS);
             //VISTAS DOCUMENTOS
             $data['doc_espeficifos'] = $this->load->view('evaluacion/documentos/especificos', $data, true);
             $data['doc_educacion'] = $this->load->view('evaluacion/documentos/educacion', $data, true);
@@ -107,9 +108,9 @@ class Evaluacion extends CI_Controller {
     public function calificar_experiencia() {
         $data['post'] = $this->input->post();
         $data['tipoexperiencia'] = array(
-            'Certificacion Experiencia Laboral' => 'Certificacion Experiencia Laboral',
-            'Certificación Experiencia Profesional' => 'Certificación Experiencia Profesional',
-            'Certificación Experiencia Relacionada' => 'Certificación Experiencia Relacionada',
+            '8' => 'Certificacion Experiencia Laboral',
+            '17' => 'Certificación Experiencia Relacionada',
+            '19' => 'Certificación Experiencia Profesional',
         );
         $data['experiencia'] = $this->evaluacion_model->experiencia_idcalificacion($data['post']['idcal']);
         $this->load->view('evaluacion/calificar_experiencia', $data);
@@ -117,7 +118,7 @@ class Evaluacion extends CI_Controller {
 
     function guardar_experiencia() {
         $post = $this->input->post();
-        $modificar = $this->evaluacion_model->guardar_experiencia($post);
+        $modificar = ($post['id'] == '') ? $this->evaluacion_model->agregar_experiencia($post) : $this->evaluacion_model->guardar_experiencia($post);
         $data['experiencia'] = $this->evaluacion_model->experiencia($post['id_glo']);
         $data['get']['id'] = $post['id'];
         $doc_experiencia = $this->load->view('evaluacion/documentos/experiencia', $data, true);

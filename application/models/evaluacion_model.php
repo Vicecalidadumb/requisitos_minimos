@@ -116,10 +116,10 @@ class Evaluacion_model extends CI_Model {
         $this->db->join('INSC_CALIFICACION_RM_AA', 'INSC_CALIFICACION_RM_AA.IDTIPOADJUNTO_CRA=CNSC_PARAMETROS.CONSECUTIVOPARAMETRO_PAR');
         $this->db->join('INSC_INSCRIPCION', 'INSC_CALIFICACION_RM_AA.IDINSCRIPCION_CRA = INSC_INSCRIPCION.IDINSCRIPCION_INS ');
 //        $this->db->join('INSC_MODALIDAD', 'INSC_MODALIDAD.IDMODALIDAD_MOD=INSC_CALIFICACION_RM_AA.CONSECUTIVO_CRA');
-        $this->db->join('INSC_EDUCACIONFORMAL', 'INSC_EDUCACIONFORMAL.IDCALIFICACION_EDF=INSC_CALIFICACION_RM_AA.IDCALIFICACION_RM_AA_CRA','left');
-        $this->db->join("INSC_TITULO", 'INSC_TITULO.IDTITULO_TIT=INSC_EDUCACIONFORMAL.IDTITULO_EDF','left');
-        $this->db->join("INSC_UNIVERSIDAD", 'INSC_UNIVERSIDAD.IDUNIVERSIDAD_UNIV=INSC_TITULO.IDUNIVERSIDAD_TIT','left');
-        $this->db->join("INSC_MODALIDAD", 'INSC_MODALIDAD.IDMODALIDAD_MOD=INSC_UNIVERSIDAD.IDMODALIDAD_UNIV','left');
+        $this->db->join('INSC_EDUCACIONFORMAL', 'INSC_EDUCACIONFORMAL.IDCALIFICACION_EDF=INSC_CALIFICACION_RM_AA.IDCALIFICACION_RM_AA_CRA', 'left');
+        $this->db->join("INSC_TITULO", 'INSC_TITULO.IDTITULO_TIT=INSC_EDUCACIONFORMAL.IDTITULO_EDF', 'left');
+        $this->db->join("INSC_UNIVERSIDAD", 'INSC_UNIVERSIDAD.IDUNIVERSIDAD_UNIV=INSC_TITULO.IDUNIVERSIDAD_TIT', 'left');
+        $this->db->join("INSC_MODALIDAD", 'INSC_MODALIDAD.IDMODALIDAD_MOD=INSC_UNIVERSIDAD.IDMODALIDAD_UNIV', 'left');
         $this->db->where('NOMBREPARAMETRO_PAR', 'TIPO_ADJUNTO');
         $this->db->where('INSC_CALIFICACION_RM_AA.ESTADO', 1);
         $this->db->where('IDINSCRIPCION_INS', $id);
@@ -290,8 +290,8 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
         //**FIN ACTUALIZACION INSC_CALIFICACION_RM_AA
         //**ACTUALIZACION INSC_EXPERIENCIA_LABORAL
         if ($result) {
-            $this->db->set('ENTIDAD_EL', $post['ENTIDAD_EL']);
-            $this->db->set('CARGO_EL', $post['CARGO_EL']);
+            $this->db->set('ENTIDAD_EL', strtoupper($post['ENTIDAD_EL']));
+            $this->db->set('CARGO_EL', strtoupper($post['CARGO_EL']));
             $this->db->set('FECHAINICIAL', $post['FECHAINICIAL'] . ' 00:00:00.000');
             $this->db->set('FECHAFINAL', $post['FECHAFINAL'] . ' 00:00:00.000');
             if (isset($post['EMPACTUAL_EL'])) {
@@ -306,6 +306,46 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
                 $this->db->set('REQUISITOMINIMO_EL', 'NULL', false);
             $this->db->where('IDCALIFICACION_EXL', $post['idcal']);
             $result = $this->db->update('INSC_EXPERIENCIA_LABORAL');
+            return $result;
+        }else {
+            return false;
+        }
+        //**FIN ACTUALIZACION INSC_EXPERIENCIA_LABORAL
+    }
+
+    function agregar_experiencia($post) {
+        //**INGRESAR A  INSC_CALIFICACION_RM_AA
+        $this->db->set('IDINSCRIPCION_CRA', $post['id_glo']);
+        $this->db->set('CONSECUTIVO_CRA', '22');
+        $this->db->set('IDTIPOADJUNTO_CRA', $post['IDTIPOADJUNTO_CRA']);
+        $this->db->set('ESTADO', '1');
+        $this->db->set('FECHAACTUALIZACION', date("Y-m-d H:i:s") . '.' . rand(111, 999));
+        $this->db->set('OBSERVACION', $post['OBSERVACION']);
+        if (isset($post['REQUISITOMINIMO'])) {
+            if ($post['REQUISITOMINIMO'] == 1)
+                $this->db->set('REQUISITOMINIMO', '1');
+        } else
+            $this->db->set('REQUISITOMINIMO', 'NULL', false);
+        $result = $this->db->insert('INSC_CALIFICACION_RM_AA');
+        //**FIN ACTUALIZACION INSC_CALIFICACION_RM_AA
+        //**ACTUALIZACION INSC_EXPERIENCIA_LABORAL
+        if ($result) {
+            $this->db->set('IDCALIFICACION_EXL', $this->db->insert_id());
+            $this->db->set('ENTIDAD_EL', strtoupper($post['ENTIDAD_EL']));
+            $this->db->set('CARGO_EL', strtoupper($post['CARGO_EL']));
+            $this->db->set('FECHAINICIAL', $post['FECHAINICIAL'] . ' 00:00:00.000');
+            $this->db->set('FECHAFINAL', $post['FECHAFINAL'] . ' 00:00:00.000');
+            if (isset($post['EMPACTUAL_EL'])) {
+                if ($post['EMPACTUAL_EL'] == 1)
+                    $this->db->set('EMPACTUAL_EL', '1');
+            } else
+                $this->db->set('EMPACTUAL_EL', 'NULL', false);
+            if (isset($post['REQUISITOMINIMO'])) {
+                if ($post['REQUISITOMINIMO'] == 1)
+                    $this->db->set('REQUISITOMINIMO_EL', '1');
+            } else
+                $this->db->set('REQUISITOMINIMO_EL', 'NULL', false);
+            $result = $this->db->insert('INSC_EXPERIENCIA_LABORAL');
             return $result;
         }else {
             return false;
@@ -355,7 +395,7 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
             $this->db->set('REQUISITOMINIMO', 'NULL', false);
         }
         $this->db->insert('INSC_CALIFICACION_RM_AA');
-        $post['idcal']=$this->db->insert_id();
+        $post['idcal'] = $this->db->insert_id();
         $this->guardar_universidad($post);
     }
 
