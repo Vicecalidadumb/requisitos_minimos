@@ -65,7 +65,8 @@
                     <!-- BEGIN USER LOGIN DROPDOWN -->
                     <li class="dropdown dropdown-user">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <img alt="" class="img-circle" src="<?php echo base_url('images/vice/user-29_2.jpg') ?>"/>
+<!--                            <img alt="" class="img-circle" src="<?php echo base_url('images/vice/user-29_2.jpg') ?>"/>-->
+                            <i class="fa fa-user" style="font-size: 21px !important;color: rgb(102, 102, 195) !important;"></i>
                             <span class="username">
                                 <?php echo $this->session->userdata('USUARIO_NOMBRES') . ' ' . $this->session->userdata('USUARIO_APELLIDOS'); ?> 
                             </span>

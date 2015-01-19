@@ -370,14 +370,14 @@ $config['encryption_key'] = 'requisitos';
 $config['sess_driver'] = 'cookie';
 $config['sess_valid_drivers'] = array();
 $config['sess_cookie_name'] = 'umb_rm';
-$config['sess_expiration'] = 28800;
-$config['sess_expire_on_close'] = TRUE;
+$config['sess_expiration'] = 115200;
+$config['sess_expire_on_close'] = FALSE;
 $config['sess_encrypt_cookie'] = TRUE;
 $config['sess_use_database'] = FALSE;
 $config['sess_table_name'] = '';
 $config['sess_match_ip'] = TRUE;
 $config['sess_match_useragent'] = TRUE;
-$config['sess_time_to_update'] = 28800;
+$config['sess_time_to_update'] = 115200;
 
 /*
   |--------------------------------------------------------------------------

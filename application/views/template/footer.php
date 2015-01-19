@@ -84,7 +84,7 @@
 
 <script src="<?php echo base_url('/assets/admin/pages/scripts/ui-blockui.js'); ?>"></script>
 
-<script type="text/javascript" src="<?php echo base_url('/js/script_umb.js'); ?>"></script>
+<!--<script type="text/javascript" src="<?php echo base_url('/js/script_umb.js'); ?>"></script>-->
 
 <script src="<?php echo base_url('/assets/global/plugins/jquery-notific8/jquery.notific8.min.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/admin/pages/scripts/ui-notific8.js'); ?>"></script>
