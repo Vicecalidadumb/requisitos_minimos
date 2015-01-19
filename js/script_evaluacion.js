@@ -96,4 +96,23 @@ $('.opcion').click(function() {
             //return false;
         }
     });
+   
+   $('#guardar_rm').click(function(){
+      var r = confirm('Desea Guardar Todos Los datos')
+            if (r == true) {
+                var url = base_url_js+"index.php/evaluacion/guardar_form_final";
+                Metronic.blockUI({
+                    target: '.modal-dialog',
+                    message: 'Cargando...'
+                });
+                $.post(url, $('#form_final').serialize())
+                        .done(function(msg){
+                            Metronic.unblockUI('.modal-dialog');
+                            alert(msg)
+                        }).fail(function(){
+                            
+                        })
+            }
+   });
+    
 });

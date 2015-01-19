@@ -121,5 +121,10 @@ class Evaluacion extends CI_Controller {
         $obtener_experiencia = $this->load->view('evaluacion/documentos/obtener_experiencia', $data, true);
         echo json_encode(array('result' => $modificar, 'doc_experiencia' => $doc_experiencia, 'obtener_experiencia' => $obtener_experiencia));
     }
+    function guardar_form_final(){
+        $post = $this->input->post();
+        $this->evaluacion_model->guardar_rm($post);
+        print_y($post);
+    }
 
 }

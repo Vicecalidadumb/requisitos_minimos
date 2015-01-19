@@ -118,6 +118,7 @@
             </div>
             <div id="formulario_3" style="display: none">
                 <form id="form_final" method="post">
+                    <input type="hidden" id="id_inscripcion" name="id_inscripcion" value="<?php echo $get['id'] ?>">
                     <div >
                         <?php echo $obtener_titulo; ?>
                         <!--aka va la el formulario de Requisitos Minimos de Estudio-->
@@ -126,10 +127,10 @@
                                 <div class="col-md-2 col-sm-2"></div>
                                 <div class="col-md-2 col-sm-2"></div>
                                 <div class="col-md-2 col-sm-2">
-                                    SI&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "1", false, 'class="requisitos_minimo "') ?>
+                                    SI&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "Admitido", false, 'class="requisitos_minimo "') ?>
                                 </div>
                                 <div class="col-md-2 col-sm-2">
-                                    NO&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "0", false, 'class="requisitos_minimo "') ?>
+                                    NO&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "No Admitido", true, 'class="requisitos_minimo "') ?>
                                 </div>
                             </div>
                             <div class="col-md-12 col-sm-12">
@@ -151,10 +152,10 @@
                             <div class="col-md-2 col-sm-2"></div>
                             <div class="col-md-2 col-sm-2"></div>
                             <div class="col-md-2 col-sm-2">
-                                SI&nbsp;&nbsp;<?php echo form_radio('requisitos_experiencia', "1", false, 'class="requisitos_experiencia "') ?>
+                                SI&nbsp;&nbsp;<?php echo form_radio('requisitos_experiencia', "Admitido", false, 'class="requisitos_experiencia "') ?>
                             </div>
                             <div class="col-md-2 col-sm-2">
-                                NO&nbsp;&nbsp;<?php echo form_radio('requisitos_experiencia', "0", false, 'class="requisitos_experiencia "') ?>
+                                NO&nbsp;&nbsp;<?php echo form_radio('requisitos_experiencia', "No Admitido", true, 'class="requisitos_experiencia "') ?>
                             </div>
                         </div>
                         <div class="col-md-12 col-sm-12">
@@ -166,8 +167,8 @@
                             <div class="col-md-2 col-sm-2"></div>
                         </div>
                     </div>
-                    <?php echo $cumple; ?>
                 </form>
+                <button id="guardar_rm" class="btn green" align="center">Guardar RM</button>
             </div>
 
             <div class="col-md-12 col-sm-12">
