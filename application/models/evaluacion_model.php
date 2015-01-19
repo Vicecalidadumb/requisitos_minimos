@@ -8,7 +8,7 @@ class Evaluacion_model extends CI_Model {
     function datos_personales($id) {
         //$this->db->select('PRIMERNOMBRE_PER,SEGUNDONOMBRE_PER,PRIMERAPELLIDO_PER,SEGUNDOAPELLIDO_PER,DOCUMENTO_PER as cedula');
         //$this->db->select('PIN,IDGENERO_PER,FECHANACIMIENTO_PER,TELEFONOFIJO_PER,TELEFONOCEL_PER,CORREO_PER,DIRECCION_PER');
-        $this->db->select('INSC_PIN.*,OPEC_CONVOCATORIA.*,OPEC_PERFIL.*,INSC_REGISTRO.*,OPEC_CODIGO_EMPLEO.*,REQ_MINIMOS.*');
+        $this->db->select('INSC_PIN.*,OPEC_CONVOCATORIA.*,OPEC_PERFIL.*,INSC_REGISTRO.*,OPEC_CODIGO_EMPLEO.*');
         $this->db->select('OPEC_NIVEL.*,OPEC_EMPLEO.*,INSC_INSCRIPCION.*,CNSC_PERSONA.*,OPEC_REQ_EQUIV.*,OPEC_ENTIDAD.*,OPEC_DEPENDENCIA.*');
         $this->db->select("(
                             SELECT DETALLEPARAMETRO_PAR
@@ -16,6 +16,18 @@ class Evaluacion_model extends CI_Model {
                             WHERE p2.NOMBREPARAMETRO_PAR='TIPO_DOCUMENTO'
                             AND p2.CONSECUTIVOPARAMETRO_PAR = CNSC_PERSONA.IDTIPODOCUMENTO_PER
                             ) AS TIPO_DOCUMENTO", false);
+        $this->db->select("(
+                            SELECT (
+                                    ISNULL(estadoReqEstudio_Req,'') + '||' + 
+                                    ISNULL(estadoReqExperiencia_Req,'')  + '||' +      
+                                    ISNULL(obsReqEstudio_Req,'')  + '||' + 
+                                    ISNULL(obsReqExperiencia_Req,'')  + '||' + 
+                                    ISNULL(cumpleRequisitos,'')  + '||' +
+                                    ISNULL(obssuperv_req,'')
+                                    )
+                            FROM REQ_MINIMOS RM
+                            WHERE INSC_REGISTRO.IDINSCRIPCION_REG = RM.idInscripcion_Req
+                            ) AS REQUISITOS_MINIMOS", false);        
         $this->db->select('
                             (
                             SELECT nombre_dep
@@ -53,7 +65,6 @@ class Evaluacion_model extends CI_Model {
         $this->db->join('OPEC_REQ_EQUIV', 'OPEC_EMPLEO.idperfil_emp = OPEC_REQ_EQUIV.idperfil_req ');
         $this->db->join('OPEC_ENTIDAD', 'OPEC_PERFIL.identidad_per = OPEC_ENTIDAD.identidad_ent ');
         $this->db->join('OPEC_DEPENDENCIA', 'OPEC_EMPLEO.dependencia_emp = OPEC_DEPENDENCIA.iddependencia_dep ');
-        $this->db->join('REQ_MINIMOS', 'INSC_REGISTRO.IDINSCRIPCION_REG = REQ_MINIMOS.idInscripcion_Req ');
 //        $this->db->where('PIN',$id);
         $this->db->where('IDINSCRIPCION_INS', $id);
         $datos = $this->db->get('CNSC_PERSONA');
