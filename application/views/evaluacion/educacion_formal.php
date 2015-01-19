@@ -117,13 +117,57 @@
                 <?php echo $doc_experiencia; ?>
             </div>
             <div id="formulario_3" style="display: none">
-                <div id="formulario_3_1">
-                    <?php echo $obtener_titulo; ?>
-                </div>
-                <div id="formulario_3_2">
-                    <?php echo $obtener_experiencia; ?>
-                </div>                
-                <?php echo $cumple; ?>
+                <form id="form_final" method="post">
+                    <div >
+                        <?php echo $obtener_titulo; ?>
+                        <!--aka va la el formulario de Requisitos Minimos de Estudio-->
+                        <div>
+                            <div class="col-md-12 col-sm-12">
+                                <div class="col-md-2 col-sm-2"></div>
+                                <div class="col-md-2 col-sm-2"></div>
+                                <div class="col-md-2 col-sm-2">
+                                    SI&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "1", false, 'class="requisitos_minimo "') ?>
+                                </div>
+                                <div class="col-md-2 col-sm-2">
+                                    NO&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "0", false, 'class="requisitos_minimo "') ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <div class="col-md-2 col-sm-2"></div>
+                                <div class="col-md-8 col-sm-8">
+                                    Observación:<br>
+                                    <textarea id="tex_requisitos_minimo" class="form-control input-sm " name="tex_requisitos_minimo" style="width: 100%"></textarea>
+                                </div>
+                                <div class="col-md-2 col-sm-2"></div>
+                            </div>
+                        </div>
+                        <!--fin del formulario Cumple Requisitos Minimos de Estudio--> 
+                    </div>
+                    <div >
+                        <?php echo $obtener_experiencia; ?>
+                    </div>
+                    <div>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="col-md-2 col-sm-2"></div>
+                            <div class="col-md-2 col-sm-2"></div>
+                            <div class="col-md-2 col-sm-2">
+                                SI&nbsp;&nbsp;<?php echo form_radio('requisitos_experiencia', "1", false, 'class="requisitos_experiencia "') ?>
+                            </div>
+                            <div class="col-md-2 col-sm-2">
+                                NO&nbsp;&nbsp;<?php echo form_radio('requisitos_experiencia', "0", false, 'class="requisitos_experiencia "') ?>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="col-md-2 col-sm-2"></div>
+                            <div class="col-md-8 col-sm-8">
+                                Observación:<br>
+                                <textarea id="tex_requisitos_minimo" class="form-control input-sm " name="tex_requisitos_minimo" style="width: 100%"></textarea>
+                            </div>
+                            <div class="col-md-2 col-sm-2"></div>
+                        </div>
+                    </div>
+                    <?php echo $cumple; ?>
+                </form>
             </div>
 
             <div class="col-md-12 col-sm-12">
