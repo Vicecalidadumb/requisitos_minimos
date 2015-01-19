@@ -50,14 +50,6 @@
                             data-idcal="<?php echo $documentos2->IDCALIFICACION_RM_AA_CRA; ?>">
                         <i class="glyphicon glyphicon-pencil"></i>
                     </button>
-<!--                    <button type="button" class="btn defaul btn-xs opcion" 
-                            data-toggle="modal" 
-                            data-target="#opcion" 
-                            data-accion="editar" 
-                            data-id="4" 
-                            data-idcal="2182684">
-                        <i class="glyphicon glyphicon-pencil"></i>
-                    </button>-->
                 </td>
             </tr>
             <?php
@@ -65,7 +57,14 @@
         ?>
     </table>
 </div>
-
-<div class="col-md-12 col-sm-12">
-    <button>Nuevo Folio</button>
+<div class="col-md-12 col-sm-12" style="text-align: center">
+    <button type="button" class="btn defaul blue opcion"
+            data-toggle="modal" 
+            data-target="#opcion"
+            data-accion="editar_exp"
+            data-id_glo="<?php echo $get['id']; ?>"
+            data-id=""
+            data-idcal="">
+        Nuevo Folio
+    </button>
 </div>

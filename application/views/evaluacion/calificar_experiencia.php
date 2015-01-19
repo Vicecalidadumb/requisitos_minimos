@@ -2,9 +2,9 @@
 //echo print_y($experiencia);
 ?>
 <form method="post" id="form2" >
-    <input type="hidden" value="<?php echo $post['id'] ?>" id="id" name="id">
-    <input type="hidden" value="<?php echo $post['idcal'] ?>" id="idcal" name="idcal">
-    <input type="hidden" value="<?php echo $post['id_glo'] ?>" id="id_glo" name="id_glo">
+    <input type="hidden" value="<?php echo (isset($post['id']) && $post['id'] != '') ? $post['id'] : ''; ?>" id="id" name="id">
+    <input type="hidden" value="<?php echo (isset($post['idcal']) && $post['idcal'] != '') ? $post['idcal'] : ''; ?>" id="idcal" name="idcal">
+    <input type="hidden" value="<?php echo $post['id_glo']; ?>" id="id_glo" name="id_glo">
 
     <div class="row">
         <div class="col-md-12 col-sm-12" >
@@ -14,24 +14,31 @@
                         La experiencia es Requisito Mínimo
                     </td>
                     <td>
-                        <?php echo form_checkbox("REQUISITOMINIMO", '1', ($experiencia[0]->REQUISITOMINIMO) ? true : false, 'id="REQUISITOMINIMO"') ?>
+                        <?php echo form_checkbox("REQUISITOMINIMO", '1', (isset($experiencia[0]->REQUISITOMINIMO)) ? true : false, 'id="REQUISITOMINIMO"') ?>
                         </div>                        
                     </td>
-                </tr>                
-                <tr>
-                    <td>
-                        No. Folio
-                    </td>
-                    <td>
-                        <?php echo $experiencia[0]->CONSECUTIVO_CRA ?>
-                    </td>
-                </tr>
+                </tr> 
+                <?php if (isset($post['id']) && $post['id'] != '') { ?>
+                    <tr>
+                        <td>
+                            No. Folio
+                        </td>
+                        <td>
+                            <?php echo $experiencia[0]->CONSECUTIVO_CRA ?>
+                        </td>
+                    </tr>
+                <?php } ?>
                 <tr>
                     <td>
                         Tipo de Experiencia
                     </td>
                     <td>
-                        <?php echo $experiencia[0]->DETALLEPARAMETRO_PAR ?>
+                        <?php
+                        if (isset($post['id']) && $post['id'] != '')
+                            echo $experiencia[0]->DETALLEPARAMETRO_PAR;
+                        else
+                            echo form_dropdown('IDTIPOADJUNTO_CRA', $tipoexperiencia, '', 'form-control');
+                        ?>
                     </td>
                 </tr>
                 <tr>
@@ -39,7 +46,7 @@
                         Entidad
                     </td>
                     <td>
-                        <?php echo form_input("ENTIDAD_EL", $experiencia[0]->ENTIDAD_EL, $extra = 'class="form-control input-sm" id="ENTIDAD_EL"') ?>
+                        <?php echo form_input("ENTIDAD_EL", (isset($experiencia[0]->ENTIDAD_EL)) ? $experiencia[0]->ENTIDAD_EL : '', $extra = 'class="form-control input-sm" id="ENTIDAD_EL"') ?>
                     </td>
                 </tr>
                 <tr>
@@ -47,7 +54,7 @@
                         Empleo y/o contratista Actual
                     </td>
                     <td>
-                        <?php echo form_input("CARGO_EL", $experiencia[0]->CARGO_EL, $extra = 'class="form-control input-sm" id="CARGO_EL"') ?>
+                        <?php echo form_input("CARGO_EL", (isset($experiencia[0]->CARGO_EL)) ? $experiencia[0]->CARGO_EL : '', $extra = 'class="form-control input-sm" id="CARGO_EL"') ?>
                     </td>
                 </tr>
                 <tr>
@@ -55,7 +62,7 @@
                         Fecha Inicio
                     </td>
                     <td>
-                        <?php echo form_input("FECHAINICIAL", date("Y-m-d", strtotime($experiencia[0]->FECHAINICIAL)), $extra = 'id="FECHAINICIAL" class="form-control input-sm fecha"') ?>
+                        <?php echo form_input("FECHAINICIAL", (isset($experiencia[0]->FECHAINICIAL)) ? date("Y-m-d", strtotime($experiencia[0]->FECHAINICIAL)) : '', $extra = 'id="FECHAINICIAL" class="form-control input-sm fecha"') ?>
                     </td>
                 </tr>
                 <tr>
@@ -63,7 +70,7 @@
                         Fecha Terminación
                     </td>
                     <td>
-                        <?php echo form_input("FECHAFINAL", date("Y-m-d", strtotime($experiencia[0]->FECHAFINAL)), $extra = 'id="FECHAFINAL" class="form-control input-sm fecha"') ?>
+                        <?php echo form_input("FECHAFINAL", (isset($experiencia[0]->FECHAFINAL)) ? date("Y-m-d", strtotime($experiencia[0]->FECHAFINAL)) : '', $extra = 'id="FECHAFINAL" class="form-control input-sm fecha"') ?>
                     </td>
                 </tr>
                 <tr>
@@ -71,7 +78,7 @@
                         Empleo y/o contratista Actual
                     </td>
                     <td>
-                        <?php echo form_checkbox("EMPACTUAL_EL", '1', ($experiencia[0]->EMPACTUAL_EL) ? true : false, 'id="EMPACTUAL_EL"') ?>
+                        <?php echo form_checkbox("EMPACTUAL_EL", '1', (isset($experiencia[0]->EMPACTUAL_EL)) ? true : false, 'id="EMPACTUAL_EL"') ?>
                     </td>
                 </tr>
                 <tr>
@@ -79,7 +86,7 @@
                         Observaciones
                     </td>
                     <td>
-                        <?php echo form_textarea('OBSERVACION', $experiencia[0]->OBSERVACION, $extra = 'id="OBSERVACION" style="width: 100%; height: 75px;" class="form-control input-sm "') ?>
+                        <?php echo form_textarea('OBSERVACION', (isset($experiencia[0]->OBSERVACION)) ? $experiencia[0]->OBSERVACION : '', $extra = 'id="OBSERVACION" style="width: 100%; height: 75px;" class="form-control input-sm "') ?>
                     </td>
                 </tr>
                 <tr>
@@ -91,6 +98,8 @@
         </div>
     </div>
 </form>
+
+
 <script>
     $('#guardar_exp').click(function() {
         Metronic.blockUI({
