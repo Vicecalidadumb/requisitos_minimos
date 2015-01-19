@@ -27,7 +27,7 @@ class Evaluacion_model extends CI_Model {
                                     )
                             FROM REQ_MINIMOS RM
                             WHERE INSC_REGISTRO.IDINSCRIPCION_REG = RM.idInscripcion_Req
-                            ) AS REQUISITOS_MINIMOS", false);        
+                            ) AS REQUISITOS_MINIMOS", false);
         $this->db->select('
                             (
                             SELECT nombre_dep
@@ -111,13 +111,17 @@ class Evaluacion_model extends CI_Model {
     }
 
     function educacion_formal($id) {
-        $this->db->select('INSC_CALIFICACION_RM_AA.IDCALIFICACION_RM_AA_CRA,INSC_CALIFICACION_RM_AA.CONSECUTIVO_CRA,MODALIDAD_MOD,RUTAADJUNTO_CRA,REQUISITOMINIMO,IDINSCRIPCION_INS', false);
+        $this->db->select('INSC_CALIFICACION_RM_AA.IDTIPOADJUNTO_CRA,INSC_CALIFICACION_RM_AA.IDCALIFICACION_RM_AA_CRA,INSC_CALIFICACION_RM_AA.CONSECUTIVO_CRA,MODALIDAD_MOD,RUTAADJUNTO_CRA,REQUISITOMINIMO,IDINSCRIPCION_INS', false);
 
         $this->db->join('INSC_CALIFICACION_RM_AA', 'INSC_CALIFICACION_RM_AA.IDTIPOADJUNTO_CRA=CNSC_PARAMETROS.CONSECUTIVOPARAMETRO_PAR');
         $this->db->join('INSC_INSCRIPCION', 'INSC_CALIFICACION_RM_AA.IDINSCRIPCION_CRA = INSC_INSCRIPCION.IDINSCRIPCION_INS ');
-        $this->db->join('INSC_MODALIDAD', 'INSC_MODALIDAD.IDMODALIDAD_MOD=INSC_CALIFICACION_RM_AA.CONSECUTIVO_CRA');
+//        $this->db->join('INSC_MODALIDAD', 'INSC_MODALIDAD.IDMODALIDAD_MOD=INSC_CALIFICACION_RM_AA.CONSECUTIVO_CRA');
+        $this->db->join('INSC_EDUCACIONFORMAL', 'INSC_EDUCACIONFORMAL.IDCALIFICACION_EDF=INSC_CALIFICACION_RM_AA.IDCALIFICACION_RM_AA_CRA','left');
+        $this->db->join("INSC_TITULO", 'INSC_TITULO.IDTITULO_TIT=INSC_EDUCACIONFORMAL.IDTITULO_EDF','left');
+        $this->db->join("INSC_UNIVERSIDAD", 'INSC_UNIVERSIDAD.IDUNIVERSIDAD_UNIV=INSC_TITULO.IDUNIVERSIDAD_TIT','left');
+        $this->db->join("INSC_MODALIDAD", 'INSC_MODALIDAD.IDMODALIDAD_MOD=INSC_UNIVERSIDAD.IDMODALIDAD_UNIV','left');
         $this->db->where('NOMBREPARAMETRO_PAR', 'TIPO_ADJUNTO');
-        $this->db->where('ESTADO', 1);
+        $this->db->where('INSC_CALIFICACION_RM_AA.ESTADO', 1);
         $this->db->where('IDINSCRIPCION_INS', $id);
         $this->db->where('CONSECUTIVOPARAMETRO_PAR', 3);
         $datos = $this->db->get('CNSC_PARAMETROS');
@@ -258,10 +262,11 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
         $this->db->from("CNSC_PARAMETROS");
         $this->db->join("INSC_CALIFICACION_RM_AA", "INSC_CALIFICACION_RM_AA.IDTIPOADJUNTO_CRA=CNSC_PARAMETROS.CONSECUTIVOPARAMETRO_PAR");
         $this->db->join("INSC_INSCRIPCION", 'INSC_CALIFICACION_RM_AA.IDINSCRIPCION_CRA = INSC_INSCRIPCION.IDINSCRIPCION_INS ');
-        $this->db->join("INSC_MODALIDAD", "INSC_MODALIDAD.IDMODALIDAD_MOD=INSC_CALIFICACION_RM_AA.CONSECUTIVO_CRA ");
+//        $this->db->join("INSC_MODALIDAD", "INSC_MODALIDAD.IDMODALIDAD_MOD=INSC_CALIFICACION_RM_AA.CONSECUTIVO_CRA ");
         $this->db->join("INSC_EDUCACIONFORMAL", 'INSC_CALIFICACION_RM_AA.IDCALIFICACION_RM_AA_CRA=INSC_EDUCACIONFORMAL.IDCALIFICACION_EDF');
         $this->db->join("INSC_TITULO", "INSC_TITULO.IDTITULO_TIT=INSC_EDUCACIONFORMAL.IDTITULO_EDF");
         $this->db->join("INSC_UNIVERSIDAD", 'INSC_UNIVERSIDAD.IDUNIVERSIDAD_UNIV=INSC_TITULO.IDUNIVERSIDAD_TIT');
+        $this->db->join("INSC_MODALIDAD", 'INSC_MODALIDAD.IDMODALIDAD_MOD=INSC_UNIVERSIDAD.IDMODALIDAD_UNIV');
         $this->db->where("NOMBREPARAMETRO_PAR", 'TIPO_ADJUNTO');
         $this->db->where("INSC_CALIFICACION_RM_AA.ESTADO", 1);
         $this->db->where("IDINSCRIPCION_INS", $id);
@@ -271,7 +276,7 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
 //                                echo $this->db->last_query();
         return $datos->result();
     }
-    
+
     function guardar_experiencia($post) {
         //**ACTUALIZACION INSC_CALIFICACION_RM_AA
         $this->db->set('OBSERVACION', $post['OBSERVACION']);
@@ -306,6 +311,52 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
             return false;
         }
         //**FIN ACTUALIZACION INSC_EXPERIENCIA_LABORAL
-    }    
+    }
+
+    function guardar_rm($post) {
+        $this->db->select('idInscripcion_Req');
+        $this->db->where('idInscripcion_Req', $post['id_inscripcion']);
+        $datos = $this->db->get('REQ_MINIMOS');
+        $datos = $datos->result();
+
+        $this->db->set('idInscripcion_Req', $post['id_inscripcion']);
+        $this->db->set('estadoReqEstudio_Req', $post['requisitos_minimo']);
+        $this->db->set('estadoReqExperiencia_Req', $post['requisitos_experiencia']);
+        $this->db->set('obsReqEstudio_Req', $post['tex_requisitos_minimo']);
+        $this->db->set('obsReqExperiencia_Req', $post['tex_requisitos_experiencia']);
+
+        if ($post['requisitos_minimo'] == 'Admitido' && $post['requisitos_experiencia'] == 'Admitido')
+            $this->db->set('cumpleRequisitos', 'Admitido');
+        else
+            $this->db->set('cumpleRequisitos', 'No Admitido');
+//        $this->db->set();
+
+        if (count($datos) > 0) {
+            $this->db->where('idInscripcion_Req', $post['id_inscripcion']);
+            $this->db->update('REQ_MINIMOS');
+        } else {
+            $this->db->inset('REQ_MINIMOS');
+        }
+    }
+
+    function guardar_universidad_new_folio($post) {
+        $this->db->set('IDINSCRIPCION_CRA', $post['id_glo']);
+        $this->db->set('CONSECUTIVO_CRA', max_folio($post['id_glo']));
+        $this->db->set('IDTIPOADJUNTO_CRA', $post['tipoadj']);
+        $this->db->set('ESTADO', 1);
+        $this->db->set('FECHAACTUALIZACION', date('Y-m-d'));
+        $this->db->set('OBSERVACION', $post['observaciones']);
+//        $this->db->set('OBSERVACION',$post['observaciones']);
+        if (isset($post['r_minimo'])) {
+            if ($post['r_minimo'] == 1)
+                $this->db->set('REQUISITOMINIMO', '1');
+        }
+        else {
+            $this->db->set('REQUISITOMINIMO', 'NULL', false);
+        }
+        $this->db->insert('INSC_CALIFICACION_RM_AA');
+        $post['idcal']=$this->db->insert_id();
+        $this->guardar_universidad($post);
+    }
 
 }

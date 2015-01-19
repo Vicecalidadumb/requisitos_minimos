@@ -44,7 +44,8 @@ $(document).ready(function () {
 //FIN PAGINACION
 
 
-$('.opcion').click(function() {
+$('.page-container').delegate('.opcion','click', function() {
+//$('.opcion').click(function() {
 //$(".container").delegate(".activar", "click", function() {
     Metronic.blockUI({
         target: '.modal-dialog',
@@ -55,12 +56,15 @@ $('.opcion').click(function() {
         var titulo = "";
         var url = "";
         var id = "";
+        var tipoadj=""
+//        alert()
         switch (accion) {
             case 'editar':
                 titulo = '<h5><i class="glyphicon glyphicon-pencil"></i> EDUCACIÓN FORMAL</h5>';
                 url = base_url_js + '/index.php/evaluacion/calificar_modalidad';
                 $("#remover").removeClass('modal-lg modal-full').addClass('');
                 $('#guardar').show();
+                tipoadj = $(this).attr('data-tipoadj')
                 break;
             case 'editar_exp':
                 titulo = '<h5><i class="glyphicon glyphicon-pencil"></i> INGRESO Y ACTUALIZACION DE EXPERIENCIA</h5>';
@@ -81,7 +85,7 @@ $('.opcion').click(function() {
             var idcal = $(this).attr('data-idcal')
             var requisito = $(this).attr('data-requisito')
             var id_glo = $(this).attr('data-id_glo')
-            $.post(url, {id: id, idcal: idcal, requisito: requisito, id_glo: id_glo})
+            $.post(url, {id: id, idcal: idcal, requisito: requisito, id_glo: id_glo,tipoadj:tipoadj})
                     .done(function (msg) {
                         Metronic.unblockUI('.modal-dialog');
                         $('#contenido').html(msg)
@@ -108,7 +112,13 @@ $('.opcion').click(function() {
                 $.post(url, $('#form_final').serialize())
                         .done(function(msg){
                             Metronic.unblockUI('.modal-dialog');
-                            alert(msg)
+                            UINotific8.init();
+                            $.notific8('Los Datos en Formacion Fueron Guardados.', {
+                                horizontalEdge: 'bottom',
+                                life: 5000,
+                                theme: 'amethyst',
+                                heading: 'EXITO'
+                            });
                         }).fail(function(){
                             
                         })

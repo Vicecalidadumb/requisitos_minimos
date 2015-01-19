@@ -79,14 +79,17 @@ class Evaluacion extends CI_Controller {
 
     function guardar_universidad() {
         $data['post'] = $this->input->post();
-//        print_y($data['post']);
-        $this->evaluacion_model->guardar_universidad($data['post']);
+        if ($data['post']['idcal'] == "") {
+            $this->evaluacion_model->guardar_universidad_new_folio($data['post']);
+        } else {
+            $this->evaluacion_model->guardar_universidad($data['post']);
+        }
         $data['get']['id'] = $data['post']['id_glo'];
         $data['educacion_formal'] = $this->evaluacion_model->educacion_formal($data['post']['id_glo']);
         $data['obtener_titulo'] = $this->evaluacion_model->requisitos_estudio($data['post']['id_glo']);
         $educacion = $this->load->view('evaluacion/documentos/educacion', $data, true);
         $obtener_titulo = $this->load->view('evaluacion/documentos/obtener_titulo', $data, true);
-        echo json_encode($data = array('dato1' => $educacion, 'dato2' => $obtener_titulo));
+         echo json_encode($data = array('dato1' => $educacion, 'dato2' => $obtener_titulo));
     }
 
     function nueva_universidad() {
@@ -121,10 +124,11 @@ class Evaluacion extends CI_Controller {
         $obtener_experiencia = $this->load->view('evaluacion/documentos/obtener_experiencia', $data, true);
         echo json_encode(array('result' => $modificar, 'doc_experiencia' => $doc_experiencia, 'obtener_experiencia' => $obtener_experiencia));
     }
-    function guardar_form_final(){
+
+    function guardar_form_final() {
         $post = $this->input->post();
         $this->evaluacion_model->guardar_rm($post);
-        print_y($post);
+//        print_y($post);
     }
 
 }

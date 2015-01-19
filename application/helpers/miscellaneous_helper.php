@@ -134,3 +134,12 @@ function state_folder() {
         '10' => 'Recalificar Analista',
     );
 }
+function max_folio($id){
+    $CI = & get_instance();
+    $SQL="select (MAX(CONSECUTIVO_CRA)+1)consecutivo 
+  from INSC_CALIFICACION_RM_AA
+  where IDINSCRIPCION_CRA=".$id;
+    $datos=$CI->db->query($SQL);
+    $datos=$datos->result();
+    return $datos[0]->consecutivo;
+}

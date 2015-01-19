@@ -127,17 +127,17 @@
                                 <div class="col-md-2 col-sm-2"></div>
                                 <div class="col-md-2 col-sm-2"></div>
                                 <div class="col-md-2 col-sm-2">
-                                    SI&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "Admitido", false, 'class="requisitos_minimo "') ?>
+                                    SI&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "Admitido", (isset($RM[0]) && $RM[0] == 'Admitido') ? true : false, 'class="requisitos_minimo "') ?>
                                 </div>
                                 <div class="col-md-2 col-sm-2">
-                                    NO&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "No Admitido", true, 'class="requisitos_minimo "') ?>
+                                    NO&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "No Admitido", (isset($RM[0]) && $RM[0] == 'No Admitido') ? true : false, 'class="requisitos_minimo "') ?>
                                 </div>
                             </div>
                             <div class="col-md-12 col-sm-12">
                                 <div class="col-md-2 col-sm-2"></div>
                                 <div class="col-md-8 col-sm-8">
                                     Observación:<br>
-                                    <textarea id="tex_requisitos_minimo" class="form-control input-sm " name="tex_requisitos_minimo" style="width: 100%"></textarea>
+                                    <textarea id="tex_requisitos_minimo" class="form-control input-sm " name="tex_requisitos_minimo" style="width: 100%"><?php echo isset($RM[2]) ? $RM[2] : ''; ?></textarea>
                                 </div>
                                 <div class="col-md-2 col-sm-2"></div>
                             </div>
@@ -152,23 +152,28 @@
                             <div class="col-md-2 col-sm-2"></div>
                             <div class="col-md-2 col-sm-2"></div>
                             <div class="col-md-2 col-sm-2">
-                                SI&nbsp;&nbsp;<?php echo form_radio('requisitos_experiencia', "Admitido", false, 'class="requisitos_experiencia "') ?>
+                                SI &nbsp;&nbsp;<?php echo form_radio('requisitos_experiencia', "Admitido", (isset($RM[1]) && $RM[1] == 'Admitido') ? true : false, 'class="requisitos_experiencia "') ?>
                             </div>
                             <div class="col-md-2 col-sm-2">
-                                NO&nbsp;&nbsp;<?php echo form_radio('requisitos_experiencia', "No Admitido", true, 'class="requisitos_experiencia "') ?>
+                                NO &nbsp;&nbsp;<?php echo form_radio('requisitos_experiencia', "No Admitido", (isset($RM[1]) && $RM[1] == 'Admitido') ? false : true , 'class="requisitos_experiencia "') ?>
                             </div>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <div class="col-md-2 col-sm-2"></div>
                             <div class="col-md-8 col-sm-8">
                                 Observación:<br>
-                                <textarea id="tex_requisitos_minimo" class="form-control input-sm " name="tex_requisitos_minimo" style="width: 100%"></textarea>
+                                <textarea id="tex_requisitos_experiencia" class="form-control input-sm " name="tex_requisitos_experiencia" style="width: 100%"><?php echo isset($RM[3]) ? $RM[3] : '';?></textarea>
+                                <p><br>
                             </div>
                             <div class="col-md-2 col-sm-2"></div>
                         </div>
                     </div>
                 </form>
-                <button id="guardar_rm" class="btn green" align="center">Guardar RM</button>
+                <p><br>
+                <hr>
+                <div>
+                    <center><button id="guardar_rm" class="btn green" align="center">Guardar RM</button></center>
+                </div>
             </div>
 
             <div class="col-md-12 col-sm-12">

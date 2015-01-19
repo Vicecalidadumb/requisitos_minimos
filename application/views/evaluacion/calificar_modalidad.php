@@ -33,6 +33,7 @@ if (count($datos)) {
     <input type="hidden" value="<?php echo $post['id'] ?>" id="id" name="id">
     <input type="hidden" value="<?php echo $post['idcal'] ?>" id="idcal" name="idcal">
     <input type="hidden" value="<?php echo $post['id_glo'] ?>" id="id_glo" name="id_glo">
+    <input type="hidden" value="<?php echo $post['tipoadj'] ?>" id="tipoadj" name="tipoadj">
 
     <div class="row">
         <div class="col-md-12 col-sm-12" >
@@ -296,10 +297,10 @@ if (count($datos)) {
             var r = confirm('Desea Guardar Todos Los datos')
             if (r == true) {
                 var url = '<?php echo base_url('index.php'); ?>/evaluacion/guardar_universidad';
-                Metronic.blockUI({
-                    target: '.modal-dialog',
-                    message: 'Cargando...'
-                });
+//                Metronic.blockUI({
+//                    target: '.modal-dialog',
+//                    message: 'Cargando...'
+//                });
                 $.post(url, $('#form1').serialize())
                         .done(function(msg) {
                             UINotific8.init();
@@ -310,7 +311,6 @@ if (count($datos)) {
                                 heading: 'EXITO'
                             });
                             var datos = JSON.parse(msg);
-                            console.log(datos.dato1);
                             Metronic.unblockUI('.modal-dialog');
                             $('#formulario_1_1').html('');
                             $('#formulario_1_1').html(datos.dato1);
