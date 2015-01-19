@@ -37,12 +37,19 @@
 
 <div class="col-md-12 col-sm-12">
     <div class="col-md-2 col-sm-2"></div>
+    <div class="col-md-2 col-sm-2"></div>
+    <div class="col-md-2 col-sm-2">
+        SI&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "1", false, 'class="requisitos_minimo "') ?>
+    </div>
+    <div class="col-md-2 col-sm-2">
+        NO&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "0", false, 'class="requisitos_minimo "') ?>
+    </div>
+</div>
+<div class="col-md-12 col-sm-12">
+    <div class="col-md-2 col-sm-2"></div>
     <div class="col-md-8 col-sm-8">
-        <div>SI<?php echo form_radio('requisitos_minimo', "1", false, 'class="requisitos_minimo"') ?></div>
-        <div>NO<?php echo form_radio('requisitos_minimo', "0", false, 'class="requisitos_minimo"') ?></div>
-        <br>
         Observación:<br>
-        <textarea id="tex_requisitos_minimo" name="tex_requisitos_minimo" style="width: 100%"></textarea>
+        <textarea id="tex_requisitos_minimo" class="form-control input-sm " name="tex_requisitos_minimo" style="width: 100%"></textarea>
     </div>
     <div class="col-md-2 col-sm-2"></div>
 </div>
