@@ -15,19 +15,19 @@
                 </li>
                 <li>
                     <i class="fa fa-angle-right"></i>
-                    <a onclick="cambio_pagina(3, 1)" style="cursor: pointer">
+                    <a class="link_1" onclick="cambio_pagina(3, 1)" style="cursor: pointer">
                         Evaluar Educaci&oacute;n
                     </a>
                 </li>
                 <li>
                     <i class="fa fa-angle-right"></i>
-                    <a onclick="cambio_pagina(3, 2)" style="cursor: pointer">
+                    <a onclick="cambio_pagina(3, 2)" style="cursor: pointer" class="link_2">
                         Evaluar Experiencia
                     </a>
                 </li>
                 <li>
                     <i class="fa fa-angle-right"></i>
-                    <a onclick="cambio_pagina(3, 3)" style="cursor: pointer">
+                    <a class="link_3" onclick="cambio_pagina(3, 3)" style="cursor: pointer">
                         Evaluar Requisitos Minimos
                     </a>
                 </li>                
@@ -101,7 +101,7 @@
                 </table>
             </div>
             <div class="col-md-12 col-sm-12" align='center'>
-                <button type="button" class="btn btn-success opcion" data-toggle="modal" data-target="#opcion" data-accion="consultar_opec" data-id="<?php echo $get['id'] ?>">
+                <button type="button" class="btn defaul blue opcion" data-toggle="modal" data-target="#opcion" data-accion="consultar_opec" data-id="<?php echo $get['id'] ?>">
                     Consultar Opec
                 </button>
             </div>
@@ -155,14 +155,14 @@
                                 SI &nbsp;&nbsp;<?php echo form_radio('requisitos_experiencia', "Admitido", (isset($RM[1]) && $RM[1] == 'Admitido') ? true : false, 'class="requisitos_experiencia "') ?>
                             </div>
                             <div class="col-md-2 col-sm-2">
-                                NO &nbsp;&nbsp;<?php echo form_radio('requisitos_experiencia', "No Admitido", (isset($RM[1]) && $RM[1] == 'Admitido') ? false : true , 'class="requisitos_experiencia "') ?>
+                                NO &nbsp;&nbsp;<?php echo form_radio('requisitos_experiencia', "No Admitido", (isset($RM[1]) && $RM[1] == 'Admitido') ? false : true, 'class="requisitos_experiencia "') ?>
                             </div>
                         </div>
                         <div class="col-md-12 col-sm-12">
                             <div class="col-md-2 col-sm-2"></div>
                             <div class="col-md-8 col-sm-8">
                                 Observación:<br>
-                                <textarea id="tex_requisitos_experiencia" class="form-control input-sm " name="tex_requisitos_experiencia" style="width: 100%"><?php echo isset($RM[3]) ? $RM[3] : '';?></textarea>
+                                <textarea id="tex_requisitos_experiencia" class="form-control input-sm " name="tex_requisitos_experiencia" style="width: 100%"><?php echo isset($RM[3]) ? $RM[3] : ''; ?></textarea>
                                 <p><br>
                             </div>
                             <div class="col-md-2 col-sm-2"></div>

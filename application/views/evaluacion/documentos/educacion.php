@@ -16,11 +16,15 @@
             $i = 0;
             foreach ($educacion_formal as $documentos2) {
                 $archivo = str_replace('~/', 'http://172.16.210.37/rmdps/', $documentos2->RUTAADJUNTO_CRA);
+                if(!empty($documentos2->RUTAADJUNTO_CRA))
+                $archivo='<td><a target="_blank" href="' . $archivo . '">Ver Folio..</a></td>';
+                else
+                    $archivo="<td>Ver Folio..</td>";
                 echo "<tr>"
                 . "<td>" . $documentos2->CONSECUTIVO_CRA . "</td>"
                 . "<td>" . $documentos2->MODALIDAD_MOD . '</td>'
                 . '<td>' . (($documentos2->REQUISITOMINIMO == 1) ? 'SI' : 'NO') . '</td>'
-                . '<td><a target="_blank" href="' . $archivo . '">Ver Folio..</a></td>'
+                . $archivo
                 . '<td align="center"><button type="button" class="btn defaul btn-xs opcion"  data-toggle="modal" data-target="#opcion" data-accion="editar" data-tipoadj="'.$documentos2->IDTIPOADJUNTO_CRA.'" data-id_glo="' . $get['id'] . '" data-id="' . $documentos2->CONSECUTIVO_CRA . '" data-idcal="' . $documentos2->IDCALIFICACION_RM_AA_CRA . '" data-requisito="' . $documentos2->REQUISITOMINIMO . '"><i class="glyphicon glyphicon-pencil"></i></button></td>'
                 . '</tr>';
                 $tipo_adj=$documentos2->IDTIPOADJUNTO_CRA;
