@@ -58,7 +58,7 @@
     </table>
 </div>
 <div class="col-md-12 col-sm-12" style="text-align: center">
-    <button type="button" class="btn defaul blue opcion"
+    <button type="button" class="btn defaul green opcion"
             data-toggle="modal" 
             data-target="#opcion"
             data-accion="editar_exp"

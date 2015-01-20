@@ -316,7 +316,7 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
     function agregar_experiencia($post) {
         //**INGRESAR A  INSC_CALIFICACION_RM_AA
         $this->db->set('IDINSCRIPCION_CRA', $post['id_glo']);
-        $this->db->set('CONSECUTIVO_CRA', '22');
+        $this->db->set('CONSECUTIVO_CRA', max_folio($post['id_glo']));
         $this->db->set('IDTIPOADJUNTO_CRA', $post['IDTIPOADJUNTO_CRA']);
         $this->db->set('ESTADO', '1');
         $this->db->set('FECHAACTUALIZACION', date("Y-m-d H:i:s") . '.' . rand(111, 999));
