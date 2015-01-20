@@ -14,14 +14,24 @@ class Evaluacion extends CI_Controller {
     }
 
     public function index() {
+        $data['userdata']=$this->session->userdata();
+//        $infor['ID_TIPO_USU'];
         //FUNCION PRINCIPAL PARA EL LOGIN - CARGA LA VISTA LOGIN/INDEX.PHP           
         $data['title'] = 'Evaluación de Requisitos Minimos';
         $data['get'] = $this->input->get();
         if ($data['get']['id']) {
             $data['get']['id'] = deencrypt_id($data['get']['id']);
+
+            if (!is_numeric($data['get']['id'])) {
+                $this->session->set_flashdata(array('message' => 'Error al Consultar el Documento ', 'message_type' => 'error'));
+                redirect('index.php/aspirantes', 'location');
+            }
+
             $data['datos'] = $this->evaluacion_model->datos_personales($data['get']['id']);
-            if (empty($data['datos']))
-                redirect('index.php/login', 'location');
+            if (empty($data['datos'])) {
+                $this->session->set_flashdata(array('message' => 'Error al Consultar el Documento ', 'message_type' => 'error'));
+                redirect('index.php/aspirantes', 'location');
+            }
             //DATOS USUARIO
             $data['documentos'] = $this->evaluacion_model->documentos($data['get']['id']);
             $data['educacion_formal'] = $this->evaluacion_model->educacion_formal($data['get']['id']);
@@ -39,6 +49,7 @@ class Evaluacion extends CI_Controller {
             $data['content'] = 'evaluacion/educacion_formal';
             $this->load->view('template/template', $data);
         } else {
+            $this->session->set_flashdata(array('message' => 'Error al Consultar el Documento', 'message_type' => 'error'));
             redirect('index.php/login', 'location');
         }
     }
@@ -90,7 +101,7 @@ class Evaluacion extends CI_Controller {
         $data['obtener_titulo'] = $this->evaluacion_model->requisitos_estudio($data['post']['id_glo']);
         $educacion = $this->load->view('evaluacion/documentos/educacion', $data, true);
         $obtener_titulo = $this->load->view('evaluacion/documentos/obtener_titulo', $data, true);
-         echo json_encode($data = array('dato1' => $educacion, 'dato2' => $obtener_titulo));
+        echo json_encode($data = array('dato1' => $educacion, 'dato2' => $obtener_titulo));
     }
 
     function nueva_universidad() {

@@ -174,6 +174,24 @@
                 <div>
                     <center><button id="guardar_rm" class="btn green" align="center">Guardar RM</button></center>
                 </div>
+
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="col-md-2 col-sm-2"></div>
+                    Observación del supervisor<br>
+                    <?php if ($userdata['ID_TIPO_USU'] == 6) {
+                        ?>
+                    las observaciones van aka
+                        <?php
+                    } else if ($userdata['ID_TIPO_USU'] == 9) {
+                        ?>
+                    <textarea id="tex_obs_super" class="form-control input-sm " name="tex_obs_super" style="width: 100%"></textarea>
+                        <?php
+                    }
+                    ?>
+                    <div class="col-md-2 col-sm-2"></div>
+                </div>
+
             </div>
 
             <div class="col-md-12 col-sm-12">
