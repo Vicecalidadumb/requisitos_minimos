@@ -134,10 +134,35 @@ $(document).ready(function () {
                             theme: 'amethyst',
                             heading: 'EXITO'
                         });
+                        $('#guardar_calificacion').show();
                     }).fail(function () {
 
             })
         }
     });
+    $('#guardar_calificacion').click(function () {
+        var r = confirm('Desea Guardar Todos Los datos')
+        if (r == true) {
+            var url = base_url_js + "index.php/evaluacion/guardar_calificacion";
+            var id_glo=$(this).attr('id_glo')
+            Metronic.blockUI({
+                target: '.modal-dialog',
+                message: 'Cargando...'
+            });
+            $.post(url, {id_glo:id_glo})
+                    .done(function (msg) {
+                        Metronic.unblockUI('.modal-dialog');
+                        UINotific8.init();
+                        $.notific8('Los Datos en Formacion Fueron Guardados.', {
+                            horizontalEdge: 'bottom',
+                            life: 5000,
+                            theme: 'amethyst',
+                            heading: 'EXITO'
+                        });
+                        $('#guardar_calificacion').show();
+                    }).fail(function () {
 
+            })
+        }
+    })
 });

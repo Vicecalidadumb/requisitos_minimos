@@ -91,7 +91,9 @@
                 </tr>
                 <tr>
                     <td colspan="2">
+                        <?php if ($userdata['ID_TIPO_USU'] == 6) { ?>
                         <button type="button" class="btn btn-success" id="guardar_exp">Guardar</button>
+                        <?php } ?>
                     </td>
                 </tr>
             </table>

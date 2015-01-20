@@ -192,7 +192,7 @@
                     ?>
                     <div class="col-md-2 col-sm-2"></div>
                 </div>
-
+                <center><button id="guardar_calificacion" style="display: none" id_glo="<?php echo $get['id'] ?>" class="btn green" align="center">Finalizar calificación</button></center>
             </div>
 
             <div class="col-md-12 col-sm-12">

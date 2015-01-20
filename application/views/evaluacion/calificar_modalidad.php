@@ -122,7 +122,10 @@ if (count($datos)) {
                 </tr>
                 <tr>
                     <td colspan="2">
+                        <?php if ($userdata['ID_TIPO_USU'] == 6) { ?>
                         <button type="button" class="btn btn-success" id="guardar">Guardar</button>
+                        <?php } ?>
+                        
                     </td>
                 </tr>
             </table>

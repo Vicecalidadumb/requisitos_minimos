@@ -28,7 +28,7 @@
                 . "<td>" . $documentos2->INSTITUCION_EDNF . '</td>'
                 . "<td>" . $documentos2->TITULO_EDNF . '</td>'
                 . "<td>" . $documentos2->HORAS_EDNF . '</td>'
-                . "<td>" . $documentos2->FECHA_EDNF . '</td>'
+                . "<td>" . date('Y-m-d',strtotime($documentos2->FECHA_EDNF)). '</td>'
                 . $archivo
                 . '</tr>';
             }

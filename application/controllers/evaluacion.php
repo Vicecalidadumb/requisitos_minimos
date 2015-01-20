@@ -14,7 +14,7 @@ class Evaluacion extends CI_Controller {
     }
 
     public function index() {
-        $data['userdata']=$this->session->userdata();
+        $data['userdata'] = $this->session->userdata();
 //        $infor['ID_TIPO_USU'];
         //FUNCION PRINCIPAL PARA EL LOGIN - CARGA LA VISTA LOGIN/INDEX.PHP           
         $data['title'] = 'Evaluación de Requisitos Minimos';
@@ -143,6 +143,22 @@ class Evaluacion extends CI_Controller {
         $post = $this->input->post();
         $this->evaluacion_model->guardar_rm($post);
 //        print_y($post);
+    }
+
+    function guardar_calificacion() {
+        $id_glo = $this->input->post('id_glo');
+        //en caso de que solo traiga uno
+        $cantidad = $this->evaluacion_model->contar_calificaciones($id_glo);
+        $userdata = $this->session->userdata();
+        if ($cantidad == 1) {
+            //
+            $consultor = $this->evaluacion_model->buscar_consultor($id_glo);
+            //crear
+            $this->evaluacion_model->insert_calificaciones($id_glo,$consultor);
+        } else {
+            //actualizar
+            $this->evaluacion_model->update_calificaciones($id_glo,$userdata);
+        }
     }
 
 }

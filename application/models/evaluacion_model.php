@@ -398,14 +398,72 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
         $post['idcal'] = $this->db->insert_id();
         $this->guardar_universidad($post);
     }
-    function educacion_para_el_trabajo($id){
+
+    function educacion_para_el_trabajo($id) {
         $this->db->select('CONSECUTIVO_CRA,INSTITUCION_EDNF,TITULO_EDNF,HORAS_EDNF,FECHA_EDNF,RUTAADJUNTO_CRA');
         $this->db->from('INSC_EDUCACIONNOFORMAL');
-        $this->db->join('INSC_CALIFICACION_RM_AA','INSC_EDUCACIONNOFORMAL.IDCALIFICACION_EDNF=INSC_CALIFICACION_RM_AA.IDCALIFICACION_RM_AA_CRA');
-        $this->db->where('IDINSCRIPCION_CRA',$id);
-        $this->db->where('ESTADO',1);
+        $this->db->join('INSC_CALIFICACION_RM_AA', 'INSC_EDUCACIONNOFORMAL.IDCALIFICACION_EDNF=INSC_CALIFICACION_RM_AA.IDCALIFICACION_RM_AA_CRA');
+        $this->db->where('IDINSCRIPCION_CRA', $id);
+        $this->db->where('ESTADO', 1);
         $datos = $this->db->get();
         return $datos->result();
+    }
+
+    function contar_calificaciones($id) {
+        $datos = $this->db->query('SELECT count(*) contar
+  FROM RMAA_ASIGNACION
+  where idinscripcion_asg=' . $id);
+        $datos = $datos->result();
+        return $datos[0]->contar;
+    }
+
+    function insert_calificaciones($id, $consultor) {
+        $this->db->set('idestadocar_asg', 5);
+        $this->db->where('idinscripcion_asg', $id);
+        $this->db->update('RMAA_ASIGNACION');
+
+        $this->db->set('idinscripcion_asg', $id);
+        $this->db->set('idestadocar_asg', 6);
+        $this->db->set('idusuario_asg', $consultor[0]->idusuario_asg);
+        $this->db->set('fecasigna_asg', date('Y-m-d'));
+        $this->db->set('feccalific_asg', date('Y-m-d'));
+        $this->db->set('vigente_asg', 1);
+        $this->db->set('idrol_asg', 9);
+        $this->db->insert('RMAA_ASIGNACION');
+    }
+
+    function update_calificaciones($id, $userdata) {
+        if ($userdata['ID_TIPO_USU'] == 6) {
+            $this->db->set('idestadocar_asg', 5);
+            $this->db->where('idestadocar_asg', 8);
+            $this->db->where('idinscripcion_asg', $id);
+            $this->db->update('RMAA_ASIGNACION');
+            
+            $this->db->set('idestadocar_asg', 6);
+            $this->db->where('idestadocar_asg', 10);
+            $this->db->where('idinscripcion_asg', $id);
+            $this->db->update('RMAA_ASIGNACION');
+            
+        }else if ($userdata['ID_TIPO_USU'] == 9) {
+            $this->db->set('idestadocar_asg', 8);
+            $this->db->where('idestadocar_asg', 5);
+            $this->db->where('idinscripcion_asg', $id);
+            $this->db->update('RMAA_ASIGNACION');
+            
+            $this->db->set('idestadocar_asg', 10);
+            $this->db->where('idestadocar_asg', 6);
+            $this->db->where('idinscripcion_asg', $id);
+            $this->db->update('RMAA_ASIGNACION');
+        }
+    }
+
+    function buscar_consultor() {
+        $datos = $this->db->query('SELECT idusuario_asg,count(*) TOTAL_MENOR
+  FROM [BD_CNSCDPS_dev].[dbo].[RMAA_ASIGNACION]
+  where idrol_asg=9
+  GROUP BY idusuario_asg
+  order by TOTAL_MENOR asc');
+        return $datos = $datos->result();
     }
 
 }
