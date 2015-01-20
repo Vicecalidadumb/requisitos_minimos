@@ -11,6 +11,7 @@ class Evaluacion extends CI_Controller {
         $this->load->helper('security');
         $this->load->helper('miscellaneous');
         validate_login($this->session->userdata('logged_in'));
+        $data['userdata'] = $this->session->userdata();
     }
 
     public function index() {
@@ -64,6 +65,7 @@ class Evaluacion extends CI_Controller {
 
     public function calificar_modalidad() {
         $data['post'] = $this->input->post();
+        $data['userdata'] = $this->session->userdata();
         $data['datos'] = $this->evaluacion_model->obtener_titulo($data['post']['idcal']);
         $data['modalidad'] = get_dropdown_select($this->evaluacion_model->modalidad(), 'IDMODALIDAD_MOD', 'MODALIDAD_MOD', '-1');
         $this->load->view('evaluacion/calificar_modalidad', $data);
@@ -120,6 +122,7 @@ class Evaluacion extends CI_Controller {
 
     public function calificar_experiencia() {
         $data['post'] = $this->input->post();
+        $data['userdata'] = $this->session->userdata();
         $data['tipoexperiencia'] = array(
             '8' => 'Certificacion Experiencia Laboral',
             '17' => 'Certificación Experiencia Relacionada',
