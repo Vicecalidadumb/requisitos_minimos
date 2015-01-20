@@ -110,6 +110,7 @@
                 <?php echo $doc_espeficifos; ?>
                 <div id="formulario_1_1">
                     <?php echo $doc_educacion; ?>
+                    <?php echo $educacion_no_formal; ?>
                 </div>
             </div>
 

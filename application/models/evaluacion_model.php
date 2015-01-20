@@ -398,5 +398,14 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
         $post['idcal'] = $this->db->insert_id();
         $this->guardar_universidad($post);
     }
+    function educacion_para_el_trabajo($id){
+        $this->db->select('CONSECUTIVO_CRA,INSTITUCION_EDNF,TITULO_EDNF,HORAS_EDNF,FECHA_EDNF,RUTAADJUNTO_CRA');
+        $this->db->from('INSC_EDUCACIONNOFORMAL');
+        $this->db->join('INSC_CALIFICACION_RM_AA','INSC_EDUCACIONNOFORMAL.IDCALIFICACION_EDNF=INSC_CALIFICACION_RM_AA.IDCALIFICACION_RM_AA_CRA');
+        $this->db->where('IDINSCRIPCION_CRA',$id);
+        $this->db->where('ESTADO',1);
+        $datos = $this->db->get();
+        return $datos->result();
+    }
 
 }

@@ -38,7 +38,3 @@
 <div class="col-md-12 col-sm-12">
     <center><button type="button" class="btn green opcion"  data-toggle="modal" data-target="#opcion" data-accion="editar" data-id_glo="<?php echo  $get['id']?>" data-id="" data-tipoadj="<?php echo $tipo_adj; ?>" data-idcal="" data-requisito="">Nuevo Folio</button></center>
 </div>
-
-<div class="col-md-12 col-sm-12">
-    <h2 class="titulo3">EDUCACIÓN PARA EL TRABAJO Y EL DESARROLLO HUMANO </h2>
-</div>

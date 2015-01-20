@@ -37,10 +37,12 @@ class Evaluacion extends CI_Controller {
             $data['educacion_formal'] = $this->evaluacion_model->educacion_formal($data['get']['id']);
             $data['experiencia'] = $this->evaluacion_model->experiencia($data['get']['id']);
             $data['obtener_titulo'] = $this->evaluacion_model->requisitos_estudio($data['get']['id']);
+            $data['educacion_no_formal'] = $this->evaluacion_model->educacion_para_el_trabajo($data['get']['id']);
             $data['RM'] = explode('||', $data['datos'][0]->REQUISITOS_MINIMOS);
             //VISTAS DOCUMENTOS
             $data['doc_espeficifos'] = $this->load->view('evaluacion/documentos/especificos', $data, true);
             $data['doc_educacion'] = $this->load->view('evaluacion/documentos/educacion', $data, true);
+            $data['educacion_no_formal'] = $this->load->view('evaluacion/documentos/educacion_no_formal', $data, true);
             $data['doc_experiencia'] = $this->load->view('evaluacion/documentos/experiencia', $data, true);
             $data['cumple'] = $this->load->view('evaluacion/documentos/cumple', $data, true);
             $data['obtener_titulo'] = $this->load->view('evaluacion/documentos/obtener_titulo', $data, true);
