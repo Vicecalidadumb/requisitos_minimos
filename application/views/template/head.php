@@ -25,7 +25,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <meta content="" name="author"/>
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
         <script src="<?php echo base_url('/assets/global/plugins/jquery-1.11.0.min.js'); ?>" type="text/javascript"></script>
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+<!--        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>-->
         
         <link rel="shortcut icon" href="<?php echo base_url('images/vice/favicon.png'); ?>">
 
@@ -69,6 +69,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <!-- BEGIN THEME STYLES UMB!! -->
         <link href="<?php echo base_url('/css/style_umb.css'); ?>" rel="stylesheet" type="text/css"/>
+        <link href="<?php echo base_url('/css/font_google.css'); ?>" rel="stylesheet" type="text/css"/>
         <!-- END THEME STYLES UMB!! -->
 
 
