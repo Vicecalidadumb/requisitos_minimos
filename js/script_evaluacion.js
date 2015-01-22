@@ -14,17 +14,18 @@ function cambio_pagina(tipo, num) {
             pagina = num;
             break;
     }
-
-    if (pagina == 0)
+    if (pagina == 0) {
         pagina = 1;
-    else if (pagina == 4)
+    } else if (pagina == 4)
         pagina = 3;
-
+    
     switch (pagina) {
         case 0:
             window.location = base_url_js + "index.php/aspirantes"
             break;
         case 1:
+
+            $('#anterior').hide();
             $(".link_1").css('color', '#35aa47');
             $(".link_2").css('color', '#000');
             $(".link_3").css('color', '#000');
@@ -34,6 +35,7 @@ function cambio_pagina(tipo, num) {
             $("#formulario_3").hide();
             break;
         case 2:
+            $('#anterior').show();
             $(".link_2").css('color', '#35aa47');
             $(".link_3").css('color', '#000');
             $(".link_1").css('color', '#000');
@@ -42,6 +44,7 @@ function cambio_pagina(tipo, num) {
             $("#formulario_3").hide();
             break;
         case 3:
+            $('#anterior').show();
             $(".link_3").css('color', '#35aa47');
             $(".link_2").css('color', '#000');
             $(".link_1").css('color', '#000');
@@ -144,13 +147,13 @@ $(document).ready(function () {
         var r = confirm('Desea Guardar Todos Los datos')
         if (r == true) {
             var url = base_url_js + "index.php/evaluacion/guardar_calificacion";
-            var id_glo=$(this).attr('id_glo')
-            var tex_obs_super=$('#tex_obs_super').val();
+            var id_glo = $(this).attr('id_glo')
+            var tex_obs_super = $('#tex_obs_super').val();
             Metronic.blockUI({
                 target: '.no-js',
                 message: 'Cargando...'
             });
-            $.post(url, {id_glo:id_glo,tex_obs_super:tex_obs_super})
+            $.post(url, {id_glo: id_glo, tex_obs_super: tex_obs_super})
                     .done(function (msg) {
                         Metronic.unblockUI('.no-js');
                         UINotific8.init();

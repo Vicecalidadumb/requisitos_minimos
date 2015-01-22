@@ -11,7 +11,15 @@
             $i = 0;
             foreach ($documentos as $documentos2) {
                 $archivo = str_replace('~/', 'http://172.16.210.37/rmdps/', $documentos2->RUTAADJUNTO_DOC);
-                echo "<tr><td>" . ++$i . "</td><td>" . $documentos2->DETALLEPARAMETRO_PAR . '</td><td><a target="_blank" href="' . $archivo . '">Ver Folio..</a></td></tr>';
+                if (!empty($documentos2->RUTAADJUNTO_DOC))
+                    $archivo = '<td><a target="_blank" href="' . $archivo . '">Ver Folio..</a></td>';
+                else
+                    $archivo = "<td>Ver Folio..</td>";
+                
+                echo "<tr><td>" . ++$i . "</td>"
+                        . "<td>" . $documentos2->DETALLEPARAMETRO_PAR . '</td>'
+                        .  $archivo
+                        . '</tr>';
             }
             ?>
         </table>
