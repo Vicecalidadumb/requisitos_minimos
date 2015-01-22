@@ -465,7 +465,7 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
 
     function buscar_consultor() {
         $datos = $this->db->query('SELECT idusuario_asg,count(*) TOTAL_MENOR
-  FROM [BD_CNSCDPS_dev].[dbo].[RMAA_ASIGNACION]
+  FROM RMAA_ASIGNACION
   where idrol_asg=9
   GROUP BY idusuario_asg
   order by TOTAL_MENOR asc');
