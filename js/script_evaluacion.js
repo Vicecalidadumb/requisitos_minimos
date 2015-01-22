@@ -26,6 +26,7 @@ function cambio_pagina(tipo, num) {
         case 1:
 
             $('#anterior').hide();
+            $('#siguiente').show();
             $(".link_1").css('color', '#35aa47');
             $(".link_2").css('color', '#000');
             $(".link_3").css('color', '#000');
@@ -35,6 +36,7 @@ function cambio_pagina(tipo, num) {
             $("#formulario_3").hide();
             break;
         case 2:
+            $('#siguiente').show();
             $('#anterior').show();
             $(".link_2").css('color', '#35aa47');
             $(".link_3").css('color', '#000');
@@ -44,6 +46,7 @@ function cambio_pagina(tipo, num) {
             $("#formulario_3").hide();
             break;
         case 3:
+            $('#siguiente').hide();
             $('#anterior').show();
             $(".link_3").css('color', '#35aa47');
             $(".link_2").css('color', '#000');
@@ -169,4 +172,5 @@ $(document).ready(function () {
             })
         }
     })
+    $('#anterior').hide();
 });

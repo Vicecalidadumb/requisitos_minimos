@@ -139,6 +139,7 @@
                             alert("Error al guardar");
                     }).fail(function() {
                 alert('Error al Guardar');
+                Metronic.unblockUI('.modal-dialog');
             });
         } else {
             Metronic.unblockUI('.modal-dialog');

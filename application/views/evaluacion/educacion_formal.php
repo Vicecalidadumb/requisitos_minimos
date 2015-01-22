@@ -220,7 +220,7 @@
                         </a>
                     </li>
                     <li class="next">
-                        <a class="btn green" onclick="cambio_pagina(1)">
+                        <a class="btn green" id="siguiente" onclick="cambio_pagina(1)">
                             Siguiente <i class="fa fa-angle-right"></i>
                         </a>
                     </li>
