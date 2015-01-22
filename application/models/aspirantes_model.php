@@ -15,16 +15,25 @@ class Aspirantes_model extends CI_Model {
         return json_encode('okokokko');
     }
 
-    public function get_aspirantes($GET) {
+    public function get_aspirantes($GET, $userdata) {
         /* Campo Indice */
         $sIndexColumn = "IDINSCRIPCION_INS";
 
+
+
         /* DB tabla */
-        $sTable = "VW_CARPETA_ANALISTA";
+        if ($userdata['ID_TIPO_USU'] == 6) {
+            $sTable = "VW_CARPETA_ANALISTA ";
+            $join = "join RMAA_ASIGNACION on RMAA_ASIGNACION.idinscripcion_asg=VW_CARPETA_ANALISTA.IDINSCRIPCION_INS AND RMAA_ASIGNACION.idestadocar_asg IN (3,8)";
+        } else if ($userdata['ID_TIPO_USU'] == 9) {
+            $sTable = "VW_CARPETA_SUPERVISOR_RM ";
+            $join = "join RMAA_ASIGNACION on RMAA_ASIGNACION.idinscripcion_asg=VW_CARPETA_SUPERVISOR_RM.IDINSCRIPCION_INS AND RMAA_ASIGNACION.idestadocar_asg IN (6)";
+        }
+        $sTable = $sTable . $join;
         /*
          * Columnas
          */
-        $aColumns = array('IDINSCRIPCION_INS', 'idestadocar_asg', 'DOCUMENTO_PER', 'PIN', 'NOMBRE_INS', 'APELLIDO_INS');
+        $aColumns = array('IDINSCRIPCION_INS', 'RMAA_ASIGNACION.idestadocar_asg', 'DOCUMENTO_PER', 'PIN', 'NOMBRE_INS', 'APELLIDO_INS');
         /*         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
          * If you just want to use the basic configuration for DataTables with PHP server-side, there is
          * no need to edit below this line
@@ -53,6 +62,16 @@ class Aspirantes_model extends CI_Model {
             if ($sOrder == "ORDER BY") {
                 $sOrder = "";
             }
+        }
+
+        $uno = (str_replace(" ", "", $sOrder));
+        $uno = (str_replace("\r", "", $uno));
+        $uno = (str_replace("\n", "", $uno));
+
+        if ($uno == 'ORDERBYIDINSCRIPCION_INSasc') {
+            $uno = 'ORDER BY idestadocar_asg desc ,IDINSCRIPCION_INS  asc';
+        } else {
+            $uno = $sOrder;
         }
 
         /* INICIO Filtrar */
@@ -85,14 +104,17 @@ class Aspirantes_model extends CI_Model {
         /* FIN Individual column filtering */
 
         /* AGREGAR ID DEL USUARIO ACTUAL */
-        $sWhere .= ($sWhere == "") ? 'WHERE idusuario_usu = ' . $this->session->userdata('USUARIO_ID') : 'AND idusuario_usu = ' . $this->session->userdata('USUARIO_ID');
+        if ($userdata['ID_TIPO_USU'] == 6)
+            $sWhere .= ($sWhere == "") ? 'WHERE idusuario_usu = ' . $this->session->userdata('USUARIO_ID') : 'AND idusuario_usu = ' . $this->session->userdata('USUARIO_ID');
 
 
         /* VARIABLES PARA PAGINAR */
         $top = (isset($GET['iDisplayStart'])) ? ((int) $GET['iDisplayStart']) : 0;
         $limit = (isset($GET['iDisplayLength'])) ? ((int) $GET['iDisplayLength'] ) : 10;
 
-
+        //xxx
+//        print_y($userdata);
+//        $join=" "; 
         /* Campo extra para estado de RM */
         $campo_e = ",(SELECT DISTINCT 
                     RM.estadoReqEstudio_Req + ', ' + 
@@ -115,11 +137,12 @@ class Aspirantes_model extends CI_Model {
             )
             as [virtTable]
         )
-        $sOrder";
+        $uno";
 
         ////****CONSULTA DE REGISTROS
         //$rResult = sqlsrv_query($gaSql['link'], $sQuery) or die("$sQuery: " . sqlsrv_errors());
         //echo $sQuery;exit();
+//        echo $sQuery;
         $rResult = $this->db->query($sQuery);
 
 
@@ -153,6 +176,7 @@ class Aspirantes_model extends CI_Model {
         foreach ($rResult->result_array() as $aRow) {
             $row = array();
             for ($i = 0; $i < count($aColumns) - 1; $i++) {
+                $aColumns[$i] = str_replace('RMAA_ASIGNACION.', "", $aColumns[$i]);
                 switch ($aColumns[$i]) {
                     case 'idestadocar_asg':
                         $v = $aRow[$aColumns[$i]];

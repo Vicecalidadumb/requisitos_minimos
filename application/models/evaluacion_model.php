@@ -375,8 +375,9 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
             $this->db->where('idInscripcion_Req', $post['id_inscripcion']);
             $this->db->update('REQ_MINIMOS');
         } else {
-            $this->db->inset('REQ_MINIMOS');
+            $this->db->insert('REQ_MINIMOS');
         }
+//        sleep(5);
     }
 
     function guardar_universidad_new_folio($post) {
@@ -425,35 +426,40 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
         $this->db->set('idinscripcion_asg', $id);
         $this->db->set('idestadocar_asg', 6);
         $this->db->set('idusuario_asg', $consultor[0]->idusuario_asg);
-        $this->db->set('fecasigna_asg', date('Y-m-d'));
-        $this->db->set('feccalific_asg', date('Y-m-d'));
+        $this->db->set('fecasigna_asg', date("Y-m-d H:i:s") . '.' . rand(111, 999));
+        $this->db->set('feccalific_asg', date("Y-m-d H:i:s") . '.' . rand(111, 999));
         $this->db->set('vigente_asg', 1);
         $this->db->set('idrol_asg', 9);
         $this->db->insert('RMAA_ASIGNACION');
     }
 
-    function update_calificaciones($id, $userdata) {
+    function update_calificaciones($id, $userdata,$post) {
         if ($userdata['ID_TIPO_USU'] == 6) {
             $this->db->set('idestadocar_asg', 5);
             $this->db->where('idestadocar_asg', 8);
             $this->db->where('idinscripcion_asg', $id);
             $this->db->update('RMAA_ASIGNACION');
-            
+
             $this->db->set('idestadocar_asg', 6);
             $this->db->where('idestadocar_asg', 10);
             $this->db->where('idinscripcion_asg', $id);
             $this->db->update('RMAA_ASIGNACION');
-            
-        }else if ($userdata['ID_TIPO_USU'] == 9) {
+        } else if ($userdata['ID_TIPO_USU'] == 9) {
             $this->db->set('idestadocar_asg', 8);
             $this->db->where('idestadocar_asg', 5);
             $this->db->where('idinscripcion_asg', $id);
             $this->db->update('RMAA_ASIGNACION');
-            
+
             $this->db->set('idestadocar_asg', 10);
             $this->db->where('idestadocar_asg', 6);
             $this->db->where('idinscripcion_asg', $id);
             $this->db->update('RMAA_ASIGNACION');
+        }
+        //[obssuperv_req]
+        if($userdata['ID_TIPO_USU']==9){
+        $this->db->set('obssuperv_req', $post['tex_obs_super']);
+        $this->db->where('idInscripcion_Req', $id);
+        $this->db->update('REQ_MINIMOS');
         }
     }
 

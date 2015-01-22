@@ -58,7 +58,7 @@
                                             <input placeholder="Buscar por No. Carpeta" type="text" class="form-control form-filter input-sm" id="bSearchable2_0">
                                         </td>
                                         <td rowspan="1" colspan="1">
-                                            <?php echo form_dropdown('bSearchable2_1', state_folder(), '3', 'id="bSearchable2_1" class="form-control form-filter input-sm"') ?>
+                                            <?php echo form_dropdown('bSearchable2_1', state_folder(), '', 'id="bSearchable2_1" class="form-control form-filter input-sm"') ?>
                                         </td>
                                         <td rowspan="1" colspan="1">
                                             <input placeholder="Buscar por No. Documento" type="text" class="form-control form-filter input-sm" id="bSearchable2_2">

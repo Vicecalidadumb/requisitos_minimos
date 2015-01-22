@@ -121,12 +121,12 @@ $(document).ready(function () {
         if (r == true) {
             var url = base_url_js + "index.php/evaluacion/guardar_form_final";
             Metronic.blockUI({
-                target: '.modal-dialog',
+                target: '.no-js',
                 message: 'Cargando...'
             });
             $.post(url, $('#form_final').serialize())
                     .done(function (msg) {
-                        Metronic.unblockUI('.modal-dialog');
+                        Metronic.unblockUI('.no-js');
                         UINotific8.init();
                         $.notific8('Los Datos en Formacion Fueron Guardados.', {
                             horizontalEdge: 'bottom',
@@ -145,13 +145,14 @@ $(document).ready(function () {
         if (r == true) {
             var url = base_url_js + "index.php/evaluacion/guardar_calificacion";
             var id_glo=$(this).attr('id_glo')
+            var tex_obs_super=$('#tex_obs_super').val();
             Metronic.blockUI({
-                target: '.modal-dialog',
+                target: '.no-js',
                 message: 'Cargando...'
             });
-            $.post(url, {id_glo:id_glo})
+            $.post(url, {id_glo:id_glo,tex_obs_super:tex_obs_super})
                     .done(function (msg) {
-                        Metronic.unblockUI('.modal-dialog');
+                        Metronic.unblockUI('.no-js');
                         UINotific8.init();
                         $.notific8('Los Datos en Formacion Fueron Guardados.', {
                             horizontalEdge: 'bottom',

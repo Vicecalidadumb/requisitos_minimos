@@ -131,7 +131,7 @@
                                     SI&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "Admitido", (isset($RM[0]) && $RM[0] == 'Admitido') ? true : false, 'class="requisitos_minimo "') ?>
                                 </div>
                                 <div class="col-md-2 col-sm-2">
-                                    NO&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "No Admitido", (isset($RM[0]) && $RM[0] == 'No Admitido') ? true : false, 'class="requisitos_minimo "') ?>
+                                    NO&nbsp;&nbsp;<?php echo form_radio('requisitos_minimo', "No Admitido", (isset($RM[0]) && $RM[0] == 'Admitido') ? false : true, 'class="requisitos_minimo "') ?>
                                 </div>
                             </div>
                             <div class="col-md-12 col-sm-12">
@@ -173,26 +173,43 @@
                 <p><br>
                 <hr>
                 <div>
-                    <center><button id="guardar_rm" class="btn green" align="center">Guardar RM</button></center>
+                    <?php if ($userdata['ID_TIPO_USU'] == 6) { ?>
+                        <center><button id="guardar_rm" class="btn green" align="center">Guardar RM</button></center>
+                        <?php
+                        $si = "display:none";
+                    } else {
+                        $si = "";
+                    }
+                    ?>
                 </div>
 
 
                 <div class="col-md-12 col-sm-12">
                     <div class="col-md-2 col-sm-2"></div>
+                    <div class="col-md-8 col-sm-8">
                     Observación del supervisor<br>
-                    <?php if ($userdata['ID_TIPO_USU'] == 6) {
-                        ?>
-                    las observaciones van aka
-                        <?php
-                    } else if ($userdata['ID_TIPO_USU'] == 9) {
-                        ?>
-                    <textarea id="tex_obs_super" class="form-control input-sm " name="tex_obs_super" style="width: 100%"></textarea>
-                        <?php
-                    }
-                    ?>
+                    
+                        <?php if ($userdata['ID_TIPO_USU'] == 6) {
+                            ?>
+                            <textarea disabled="true" id="tex_obs_super" class="form-control input-sm " name="tex_obs_super" style="width: 100%"><?php echo $RM[5]; ?></textarea>
+                            <p><br>
+                            <center><button id="guardar_calificacion" style="<?php echo $si; ?>" id_glo="<?php echo $get['id'] ?>" class="btn green" align="center">Finalizar calificación</button></center>
+                            <?php
+                        } else if ($userdata['ID_TIPO_USU'] == 9) {
+                            ?>
+                            <textarea id="tex_obs_super" class="form-control input-sm " name="tex_obs_super" style="width: 100%"><?php echo $RM[5]; ?></textarea>
+                            <p><br>
+                            <center><button id="guardar_calificacion" style="<?php echo $si; ?>" id_glo="<?php echo $get['id'] ?>" class="btn green" align="center">Devolución</button></center>
+
+                            <?php
+                        }
+                        ?></div>
                     <div class="col-md-2 col-sm-2"></div>
                 </div>
-                <center><button id="guardar_calificacion" style="display: none" id_glo="<?php echo $get['id'] ?>" class="btn green" align="center">Finalizar calificación</button></center>
+
+
+
+
             </div>
 
             <div class="col-md-12 col-sm-12">

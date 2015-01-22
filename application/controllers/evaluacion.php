@@ -149,6 +149,7 @@ class Evaluacion extends CI_Controller {
     }
 
     function guardar_calificacion() {
+        $post = $this->input->post();
         $id_glo = $this->input->post('id_glo');
         //en caso de que solo traiga uno
         $cantidad = $this->evaluacion_model->contar_calificaciones($id_glo);
@@ -160,7 +161,7 @@ class Evaluacion extends CI_Controller {
             $this->evaluacion_model->insert_calificaciones($id_glo,$consultor);
         } else {
             //actualizar
-            $this->evaluacion_model->update_calificaciones($id_glo,$userdata);
+            $this->evaluacion_model->update_calificaciones($id_glo,$userdata,$post);
         }
     }
 

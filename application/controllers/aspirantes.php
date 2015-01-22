@@ -11,6 +11,7 @@ class Aspirantes extends CI_Controller {
         $this->load->helper('security');
         $this->load->model('aspirantes_model');
         validate_login($this->session->userdata('logged_in'));
+        $data['userdata'] = $this->session->userdata();
     }
 
     public function index() {
@@ -20,8 +21,9 @@ class Aspirantes extends CI_Controller {
     }
 
     public function get_datatable() {
+        $data['userdata'] = $this->session->userdata();
         if ($this->input->is_ajax_request()) {
-            $data = $this->aspirantes_model->get_aspirantes($this->input->get());
+            $data = $this->aspirantes_model->get_aspirantes($this->input->get(),$data['userdata']);
             echo $data;
         } else {
             echo 'Acceso no utorizado';

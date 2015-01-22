@@ -330,7 +330,7 @@ if (count($datos)) {
         }
     })
 
-    if ($('#fecha_grado').val() != "") {
+    if ($('#fecha_grado').val() != ""  || ($('#graduado').is(':checked'))==true ) {
         $('#fecha_grado').show();
     }
 </script>
