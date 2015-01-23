@@ -61,6 +61,7 @@ class Evaluacion extends CI_Controller {
     public function consultar_opec() {
         $data['post'] = $this->input->post();
         $data['datos'] = $this->evaluacion_model->datos_personales($data['post']['id']);
+        $data['funciones'] = $this->evaluacion_model->datos_funciones($data['post']['idperfil']);
         $this->load->view('evaluacion/consultar_opec', $data);
     }
 

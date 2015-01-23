@@ -104,9 +104,10 @@ $(document).ready(function () {
         if (titulo != '') {
             id = $(this).attr('data-id')
             var idcal = $(this).attr('data-idcal')
+            var idperfil = $(this).attr('data-idperfil')
             var requisito = $(this).attr('data-requisito')
             var id_glo = $(this).attr('data-id_glo')
-            $.post(url, {id: id, idcal: idcal, requisito: requisito, id_glo: id_glo, tipoadj: tipoadj})
+            $.post(url, {id: id,idperfil:idperfil, idcal: idcal, requisito: requisito, id_glo: id_glo, tipoadj: tipoadj})
                     .done(function (msg) {
                         Metronic.unblockUI('.modal-dialog');
                         $('#contenido').html(msg)

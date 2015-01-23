@@ -8,7 +8,7 @@
         <p class="Nota" align='center'>
             <strong >A continuación se presenta la información básica del aspirante, de la entidad y del empleo seleccionado al momento de realizar la inscripción.</strong>
         </p>
-        
+
         <h4 align='center'> Datos personales del aspirante</h4>
 
         <table class="table table-bordered table-striped">
@@ -67,88 +67,97 @@
                 </td>
             </tr>
         </table>
-        
+
         <h4 align='center'> Datos del Empleo</h4>
-        
+
         <table class="table table-bordered table-striped">
             <tr>
                 <td>Entidad:</td>
                 <td>
-                    <?php echo $datos[0]->nombre_ent ; ?>
+                    <?php echo $datos[0]->nombre_ent; ?>
                 </td>
             </tr>
             <tr>
                 <td>Número de empleo CNSC:</td>
                 <td>
-                    <?php echo $datos[0]->IDPERFIL_REG ; ?>
+                    <?php echo $datos[0]->IDPERFIL_REG; ?>
                 </td>
             </tr>
             <tr>
                 <td>Denominación:</td>
                 <td>
-                    <?php echo $datos[0]->denominacion_coe ; ?>
+                    <?php echo $datos[0]->denominacion_coe; ?>
                 </td>
             </tr>
             <tr>
                 <td>Asignación Salarial:</td>
                 <td>
-                    $<?php echo number_format($datos[0]->asignac_salarial_per,3,'.',',') ; ?>
+                    $<?php echo number_format($datos[0]->asignac_salarial_per, 3, '.', ','); ?>
                 </td>
             </tr>
             <tr>
                 <td>Código:</td>
                 <td>
-                    <?php echo $datos[0]->codigo_coe ; ?>
+                    <?php echo $datos[0]->codigo_coe; ?>
                 </td>
             </tr>
             <tr>
                 <td>Grado:</td>
                 <td>
-                    <?php echo $datos[0]->grado_per ; ?>
+                    <?php echo $datos[0]->grado_per; ?>
                 </td>
             </tr>
             <tr>
                 <td>Nivel jerárquico:</td>
                 <td>
-                    <?php echo $datos[0]->nombre_nivel ; ?>
+                    <?php echo $datos[0]->nombre_nivel; ?>
                 </td>
             </tr>
         </table>
-        
+
         <h4 align='center'> Dependencia</h4>
-        
+
         <table class="table table-bordered table-striped">
             <tr>
                 <td>Dependencia:</td>
                 <td>
-                    <?php echo $datos[0]->nomdepen_dep ; ?>
+                    <?php echo $datos[0]->nomdepen_dep; ?>
                 </td>
             </tr>
             <tr>
                 <td>Propósito principal del empleo:</td>
                 <td>
-                    <?php echo $datos[0]->proposito_per ; ?>
+                    <?php echo $datos[0]->proposito_per; ?>
                 </td>
             </tr>
             <tr>
                 <td>Requisitos de Estudio:</td>
                 <td>
-                    <?php echo str_replace('.', '.<br>', $datos[0]->contextualizacion_0_req) ; ?>
+                    <?php echo str_replace('.', '.<br>', $datos[0]->contextualizacion_0_req); ?>
                 </td>
             </tr>
             <tr>
                 <td>Requisitos de Experiencia:</td>
                 <td>
-                    <?php echo $datos[0]->experiencia_req ; ?>
+                    <?php echo $datos[0]->experiencia_req; ?>
                 </td>
             </tr>
             <tr>
                 <td>Equivalencia:</td>
                 <td>
-                    <?php echo str_replace('.', '.<br>', $datos[0]->contextualizacion_1_req) ; ?>
+                    <?php echo str_replace('.', '.<br>', $datos[0]->contextualizacion_1_req); ?>
                 </td>
             </tr>
-            
+
+        </table>
+
+        <table class="table table-bordered table-striped">
+            <thead><th>Funciones del Empleo</th></thead>    
+            <?php
+            foreach ($funciones as $funciones2) {
+                echo "<tr><td>" . $funciones2->texto_fun . "</td></tr>";
+            }
+            ?>
         </table>
     </div>
 </div>

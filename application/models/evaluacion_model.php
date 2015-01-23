@@ -8,7 +8,7 @@ class Evaluacion_model extends CI_Model {
     function optener_id($pin) {
         $this->db->select('INSC_INSCRIPCION.IDINSCRIPCION_INS');
         $this->db->where('INSC_PIN.PIN', $pin);
-        $this->db->where('INSC_INSCRIPCION.IDPERSONA_INS', 'INSC_PIN.IDPERSONA_PIN',false);
+        $this->db->where('INSC_INSCRIPCION.IDPERSONA_INS', 'INSC_PIN.IDPERSONA_PIN', false);
         $datos = $this->db->get('INSC_PIN,INSC_INSCRIPCION');
         $datos = $datos->result();
         return $datos[0]->IDINSCRIPCION_INS;
@@ -478,6 +478,13 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
   where idrol_asg=9
   GROUP BY idusuario_asg
   order by TOTAL_MENOR asc');
+        return $datos = $datos->result();
+    }
+
+    function datos_funciones($perfil) {
+        $datos = $this->db->query('SELECT texto_fun
+            FROM [OPEC_FUNCION]
+            where [idperfil_fun]=' . $perfil);
         return $datos = $datos->result();
     }
 

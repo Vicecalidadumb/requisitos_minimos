@@ -101,7 +101,7 @@
                 </table>
             </div>
             <div class="col-md-12 col-sm-12" align='center'>
-                <button type="button" class="btn defaul blue opcion" data-toggle="modal" data-target="#opcion" data-accion="consultar_opec" data-id="<?php echo $get['id'] ?>">
+                <button type="button" class="btn defaul blue opcion" data-toggle="modal" data-target="#opcion" data-accion="consultar_opec" data-idperfil="<?php echo $datos[0]->idperfil_per ?>" data-id="<?php echo $get['id'] ?>">
                     Consultar Opec
                 </button>
             </div>
