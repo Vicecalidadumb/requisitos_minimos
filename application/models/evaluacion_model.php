@@ -5,6 +5,15 @@ if (!defined('BASEPATH'))
 
 class Evaluacion_model extends CI_Model {
 
+    function optener_id($pin) {
+        $this->db->select('INSC_INSCRIPCION.IDINSCRIPCION_INS');
+        $this->db->where('INSC_PIN.PIN', $pin);
+        $this->db->where('INSC_INSCRIPCION.IDPERSONA_INS', 'INSC_PIN.IDPERSONA_PIN',false);
+        $datos = $this->db->get('INSC_PIN,INSC_INSCRIPCION');
+        $datos = $datos->result();
+        return $datos[0]->IDINSCRIPCION_INS;
+    }
+
     function datos_personales($id) {
         //$this->db->select('PRIMERNOMBRE_PER,SEGUNDONOMBRE_PER,PRIMERAPELLIDO_PER,SEGUNDOAPELLIDO_PER,DOCUMENTO_PER as cedula');
         //$this->db->select('PIN,IDGENERO_PER,FECHANACIMIENTO_PER,TELEFONOFIJO_PER,TELEFONOCEL_PER,CORREO_PER,DIRECCION_PER');
@@ -433,7 +442,7 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
         $this->db->insert('RMAA_ASIGNACION');
     }
 
-    function update_calificaciones($id, $userdata,$post) {
+    function update_calificaciones($id, $userdata, $post) {
         if ($userdata['ID_TIPO_USU'] == 6) {
             $this->db->set('idestadocar_asg', 5);
             $this->db->where('idestadocar_asg', 8);
@@ -456,10 +465,10 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
             $this->db->update('RMAA_ASIGNACION');
         }
         //[obssuperv_req]
-        if($userdata['ID_TIPO_USU']==9){
-        $this->db->set('obssuperv_req', $post['tex_obs_super']);
-        $this->db->where('idInscripcion_Req', $id);
-        $this->db->update('REQ_MINIMOS');
+        if ($userdata['ID_TIPO_USU'] == 9) {
+            $this->db->set('obssuperv_req', $post['tex_obs_super']);
+            $this->db->where('idInscripcion_Req', $id);
+            $this->db->update('REQ_MINIMOS');
         }
     }
 

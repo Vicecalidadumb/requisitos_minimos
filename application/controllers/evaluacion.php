@@ -20,11 +20,12 @@ class Evaluacion extends CI_Controller {
         //FUNCION PRINCIPAL PARA EL LOGIN - CARGA LA VISTA LOGIN/INDEX.PHP           
         $data['title'] = 'Evaluación de Requisitos Minimos';
         $data['get'] = $this->input->get();
-        if ($data['get']['id']) {
-            $data['get']['id'] = deencrypt_id($data['get']['id']);
+        if (isset($data['get']['id'])) {
+            //$data['get']['id'] = deencrypt_id($data['get']['id']);
+            $data['get']['id'] = $this->evaluacion_model->optener_id($data['get']['id']);
 
             if (!is_numeric($data['get']['id'])) {
-                $this->session->set_flashdata(array('message' => 'Error al Consultar el Documento ', 'message_type' => 'error'));
+                $this->session->set_flashdata(array('message' => 'Error al Consultar el Documento... ', 'message_type' => 'error'));
                 redirect('index.php/aspirantes', 'location');
             }
 
@@ -52,7 +53,7 @@ class Evaluacion extends CI_Controller {
             $data['content'] = 'evaluacion/educacion_formal';
             $this->load->view('template/template', $data);
         } else {
-            $this->session->set_flashdata(array('message' => 'Error al Consultar el Documento', 'message_type' => 'error'));
+            $this->session->set_flashdata(array('message' => 'Error al Consultar el Documento!', 'message_type' => 'error'));
             redirect('index.php/login', 'location');
         }
     }
@@ -158,10 +159,10 @@ class Evaluacion extends CI_Controller {
             //
             $consultor = $this->evaluacion_model->buscar_consultor($id_glo);
             //crear
-            $this->evaluacion_model->insert_calificaciones($id_glo,$consultor);
+            $this->evaluacion_model->insert_calificaciones($id_glo, $consultor);
         } else {
             //actualizar
-            $this->evaluacion_model->update_calificaciones($id_glo,$userdata,$post);
+            $this->evaluacion_model->update_calificaciones($id_glo, $userdata, $post);
         }
     }
 

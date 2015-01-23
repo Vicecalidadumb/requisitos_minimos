@@ -101,7 +101,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sqlsrv:server=172.16.210.39;Database=BD_CNSCDPS_dev',
+	'hostname' => 'sqlsrv:server=172.16.210.39;Database=BD_CNSCDPS',
 	'username' => 'sergio.baron',
 	'password' => 'S3rg10B4r0N',
 	'database' => '',
