@@ -19,7 +19,7 @@
                 <?php
                 $i = 0;
                 foreach ($obtener_titulo as $documentos2) {
-                    $archivo = str_replace('~/', 'http://172.16.210.37/rmdps/', $documentos2->RUTAADJUNTO_CRA);
+                    $archivo = str_replace('~/', 'http://172.16.79.8/rmdps/', $documentos2->RUTAADJUNTO_CRA);
                     if (!empty($documentos2->RUTAADJUNTO_CRA))
                         $archivo = '<td><a target="_blank" href="' . $archivo . '">Ver Folio..</a></td>';
                     else

@@ -38,7 +38,7 @@
                             </td>                
                             <td><?php echo (($documentos2->REQUISITOMINIMO == 1) ? 'SI' : 'NO'); ?></td>
                             <td>
-                                <a target="_blank" href="<?php echo str_replace('~/', 'http://172.16.210.37/rmdps/', $documentos2->RUTAADJUNTO_CRA); ?>">Ver Folio..</a>
+                                <a target="_blank" href="<?php echo str_replace('~/', 'http://172.16.79.8/rmdps/', $documentos2->RUTAADJUNTO_CRA); ?>">Ver Folio..</a>
                             </td>
                         </tr>
                         <?php
