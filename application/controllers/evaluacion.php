@@ -138,7 +138,7 @@ class Evaluacion extends CI_Controller {
         $post = $this->input->post();
         $modificar = ($post['id'] == '') ? $this->evaluacion_model->agregar_experiencia($post) : $this->evaluacion_model->guardar_experiencia($post);
         $data['experiencia'] = $this->evaluacion_model->experiencia($post['id_glo']);
-        $data['get']['id'] = $post['id'];
+        $data['get']['id'] = $post['id_glo'];
         $doc_experiencia = $this->load->view('evaluacion/documentos/experiencia', $data, true);
         $obtener_experiencia = $this->load->view('evaluacion/documentos/obtener_experiencia', $data, true);
         echo json_encode(array('result' => $modificar, 'doc_experiencia' => $doc_experiencia, 'obtener_experiencia' => $obtener_experiencia));

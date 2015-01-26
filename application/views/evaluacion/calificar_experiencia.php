@@ -92,7 +92,7 @@
                 <tr>
                     <td colspan="2">
                         <?php if ($userdata['ID_TIPO_USU'] == 6) { ?>
-                        <button type="button" class="btn btn-success" id="guardar_exp">Guardar</button>
+                            <button type="button" class="btn btn-success" id="guardar_exp">Guardar</button>
                         <?php } ?>
                     </td>
                 </tr>
@@ -114,7 +114,12 @@
         var OBSERVACION = $('#OBSERVACION').val();
         if (ENTIDAD_EL == "" || CARGO_EL == '' || FECHAINICIAL == '' || OBSERVACION == "") {
             Metronic.unblockUI('.modal-dialog');
-            alert('Datos Incompletos');
+            $.notific8('Datos Incompletos', {
+                horizontalEdge: 'bottom',
+                theme: 'ruby',
+                heading: 'ERROR',
+                sticky: false
+            });
             return false;
         }
         var r = confirm('Desea Guardar Todos Los datos');
@@ -135,10 +140,21 @@
                                 theme: 'amethyst',
                                 heading: 'EXITO'
                             });
-                        } else
-                            alert("Error al guardar");
+                        } else {
+                            $.notific8('Error al guardar', {
+                                horizontalEdge: 'bottom',
+                                theme: 'ruby',
+                                heading: 'ERROR',
+                                sticky: true
+                            });
+                        }
                     }).fail(function() {
-                alert('Error al Guardar');
+                $.notific8('Error al guardar', {
+                    horizontalEdge: 'bottom',
+                    theme: 'ruby',
+                    heading: 'ERROR',
+                    sticky: true
+                });
                 Metronic.unblockUI('.modal-dialog');
             });
         } else {

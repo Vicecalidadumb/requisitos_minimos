@@ -229,4 +229,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo base_url('/js/script_evaluacion.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/js/script_evaluacion.js?v='.date("d-H")); ?>"></script>

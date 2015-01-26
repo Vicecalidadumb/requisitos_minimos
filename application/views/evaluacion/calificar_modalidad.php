@@ -123,9 +123,9 @@ if (count($datos)) {
                 <tr>
                     <td colspan="2">
                         <?php if ($userdata['ID_TIPO_USU'] == 6) { ?>
-                        <button type="button" class="btn btn-success" id="guardar">Guardar</button>
+                            <button type="button" class="btn btn-success" id="guardar">Guardar</button>
                         <?php } ?>
-                        
+
                     </td>
                 </tr>
             </table>
@@ -139,7 +139,12 @@ if (count($datos)) {
         });
         var universidad_otra = $('#universidad_otra').val()
         if (universidad_otra == "") {
-            alert('Dato de Universidad Incompleto');
+            $.notific8('Dato de Universidad Incompleto', {
+                horizontalEdge: 'bottom',
+                theme: 'ruby',
+                heading: 'ERROR',
+                sticky: false
+            });
             return false;
         }
         var modalidad = $('#modalidad').val()
@@ -150,11 +155,21 @@ if (count($datos)) {
                     $('#universidad').html(msg);
                     $('#titulo').html('');
                     $('#universidad_otra').val('');
-                    alert('Los datos fueron Guardados con Exito')
+                    $.notific8('Los Datos en Formacion Fueron Guardados.', {
+                        horizontalEdge: 'bottom',
+                        life: 5000,
+                        theme: 'amethyst',
+                        heading: 'EXITO'
+                    });
                     $('#universidad_otra2').hide();
                     Metronic.unblockUI('.modal-dialog');
                 }).fail(function(msg) {
-            alert('Error en la Base de Datos');
+            $.notific8('Error en la Base de Datos', {
+                horizontalEdge: 'bottom',
+                theme: 'ruby',
+                heading: 'ERROR',
+                sticky: false
+            });
             Metronic.unblockUI('.modal-dialog');
         })
 
@@ -163,7 +178,12 @@ if (count($datos)) {
     $('#guardar_titulo').click(function() {
         var titulo_otra = $('#titulo_otra').val()
         if (titulo_otra == "") {
-            alert('Dato de Titulo Incompleto');
+            $.notific8('Dato de Titulo Incompleto', {
+                horizontalEdge: 'bottom',
+                theme: 'ruby',
+                heading: 'ERROR',
+                sticky: false
+            });
             return false;
         }
         var universidad = $('#universidad').val();
@@ -176,11 +196,21 @@ if (count($datos)) {
                 .done(function(msg) {
                     $('#titulo').html(msg);
                     $('#titulo_otra').val('');
-                    alert('Los datos fueron Guardados con Exito')
+                    $.notific8('Los datos fueron Guardados con Exito.', {
+                        horizontalEdge: 'bottom',
+                        life: 5000,
+                        theme: 'amethyst',
+                        heading: 'EXITO'
+                    });
                     $('#titulo_otra2').hide();
                     Metronic.unblockUI('.modal-dialog');
                 }).fail(function(msg) {
-            alert('Error en la Base de Datos');
+            $.notific8('Error en la Base de Datos', {
+                horizontalEdge: 'bottom',
+                theme: 'ruby',
+                heading: 'ERROR',
+                sticky: false
+            });
             Metronic.unblockUI('.modal-dialog');
         })
 
@@ -229,7 +259,12 @@ if (count($datos)) {
                     $('#titulo').html('');
                     Metronic.unblockUI('.modal-dialog');
                 }).fail(function(msg) {
-            alert('Error en la Base de Datos');
+            $.notific8('Error en la Base de Datos', {
+                horizontalEdge: 'bottom',
+                theme: 'ruby',
+                heading: 'ERROR',
+                sticky: false
+            });
             Metronic.unblockUI('.modal-dialog');
         });
     });
@@ -253,7 +288,12 @@ if (count($datos)) {
                     $('#titulo').html(msg);
                     Metronic.unblockUI('.modal-dialog');
                 }).fail(function(msg) {
-            alert('Error en la Base de Datos');
+            $.notific8('Error en la Base de Datos', {
+                horizontalEdge: 'bottom',
+                theme: 'ruby',
+                heading: 'ERROR',
+                sticky: false
+            });
             Metronic.unblockUI('.modal-dialog');
         });
     });
@@ -262,12 +302,22 @@ if (count($datos)) {
         if (i == 0) {
             var titulo = $('#titulo option:selected').text();
             if (titulo == 'OTRO') {
-                alert('Valor del Titulo no es Correcto');
+                $.notific8('Valor del Titulo no es Correcto', {
+                    horizontalEdge: 'bottom',
+                    theme: 'ruby',
+                    heading: 'ERROR',
+                    sticky: false
+                });
                 return false
             }
             var titulo = $('#universidad option:selected').text();
             if (titulo == 'OTRA') {
-                alert('Valor del Titulo no es Correcto');
+                $.notific8('Valor del Titulo no es Correcto', {
+                    horizontalEdge: 'bottom',
+                    theme: 'ruby',
+                    heading: 'ERROR',
+                    sticky: false
+                });
                 return false
             }
 
@@ -280,19 +330,34 @@ if (count($datos)) {
 //        var observaciones =$('#observaciones').val();
 
             if (modalidad == "-1" || universidad == '-1' || titulo == '-1' || fecha_terminacion == "") {
-                alert('Datos Incompletos');
+                $.notific8('Datos Incompletos', {
+                    horizontalEdge: 'bottom',
+                    theme: 'ruby',
+                    heading: 'ERROR',
+                    sticky: false
+                });
                 return false;
             }
 
             var chek = $('#graduado').is(':checked')
             if (chek == false) {
                 if (sem == "0") {
-                    alert('Datos Semestre Incompleto');
+                    $.notific8('Datos Semestre Incompleto', {
+                        horizontalEdge: 'bottom',
+                        theme: 'ruby',
+                        heading: 'ERROR',
+                        sticky: false
+                    });
                     return false;
                 }
             } else {
                 if (fecha_grado == "") {
-                    alert('Datos Fecha Grado Incompleto');
+                    $.notific8('Datos Fecha Grado Incompleto', {
+                        horizontalEdge: 'bottom',
+                        theme: 'ruby',
+                        heading: 'ERROR',
+                        sticky: false
+                    });
                     return false;
                 }
             }
@@ -321,7 +386,12 @@ if (count($datos)) {
                             $('#formulario_3_1').html(datos.dato2);
                             $('#opcion').modal('hide');
                         }).fail(function() {
-                    alert('Error al Guardar');
+                    $.notific8('Error al Guardar', {
+                        horizontalEdge: 'bottom',
+                        theme: 'ruby',
+                        heading: 'ERROR',
+                        sticky: false
+                    });
                     Metronic.unblockUI('.modal-dialog');
                 });
             }
@@ -330,7 +400,7 @@ if (count($datos)) {
         }
     })
 
-    if ($('#fecha_grado').val() != ""  || ($('#graduado').is(':checked'))==true ) {
+    if ($('#fecha_grado').val() != "" || ($('#graduado').is(':checked')) == true) {
         $('#fecha_grado').show();
     }
 </script>

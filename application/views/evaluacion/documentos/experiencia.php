@@ -38,7 +38,15 @@
                 </td>                
                 <td><?php echo (($documentos2->REQUISITOMINIMO == 1) ? 'SI' : 'NO'); ?></td>
                 <td>
-                    <a target="_blank" href="<?php echo str_replace('~/', 'http://172.16.79.8/rmdps/', $documentos2->RUTAADJUNTO_CRA); ?>">Ver Folio..</a>
+                    <?php
+                    if (!empty($documentos2->RUTAADJUNTO_CRA)) {
+                        $url = str_replace('~/', 'http://172.16.79.8/rmdps/', $documentos2->RUTAADJUNTO_CRA);
+                        ?>
+                        <a target="_blank" href="<?php echo (!empty($documentos2->RUTAADJUNTO_CRA)) ? $url : ''; ?>">Ver Folio..</a>
+                        <?php
+                    } else
+                        echo 'Ver Folio..';
+                    ?>
                 </td>
                 <td align="center">
                     <button type="button" class="btn defaul btn-xs opcion"  

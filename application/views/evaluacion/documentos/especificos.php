@@ -16,7 +16,7 @@
                 else
                     $archivo = "<td>Ver Folio..</td>";
                 
-                echo "<tr><td>" . ++$i . "</td>"
+                echo "<tr><td>" . $documentos2->FOLIO_DOC . "</td>"
                         . "<td>" . $documentos2->DETALLEPARAMETRO_PAR . '</td>'
                         .  $archivo
                         . '</tr>';

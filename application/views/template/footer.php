@@ -89,6 +89,11 @@
 <script src="<?php echo base_url('/assets/global/plugins/jquery-notific8/jquery.notific8.min.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/admin/pages/scripts/ui-notific8.js'); ?>"></script>
 
+<script src="<?php echo base_url('/assets/admin/pages/scripts/ui-alert-dialog-api.js'); ?>"></script>
+<script src="<?php echo base_url('/assets/global/plugins/bootbox/bootbox.min.js'); ?>"></script>
+
+
+
 
 
 
@@ -114,6 +119,7 @@
         //Tasks.initDashboardWidget();
         //ComponentsDropdowns.init();
         //FormValidation.init();
+        UIAlertDialogApi.init();
     });
 </script>
 
