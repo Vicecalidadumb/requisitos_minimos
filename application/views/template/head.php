@@ -78,10 +78,10 @@ License: You must have a valid license purchased only from themeforest(the above
         </script>
 
         <?php if ($this->session->userdata('ID_TIPO_USU') != 3) { ?>
-            <style>/*
-                a:visited{
+            <style>
+                .page-content a:visited{
                     color:red !important;
-                }*/
+                }
             </style>
         <?php } ?>
     </head>

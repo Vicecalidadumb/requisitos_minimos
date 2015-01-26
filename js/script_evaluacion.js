@@ -113,6 +113,7 @@ $(document).ready(function () {
                         $('#contenido').html(msg)
                     }).fail(function (msg) {
                 alert('Error al traer la información');
+                Metronic.unblockUI('.modal-dialog');
             })
 
 //        var recipient = button.data('id') 
@@ -143,7 +144,8 @@ $(document).ready(function () {
                         });
                         $('#guardar_calificacion').show();
                     }).fail(function () {
-
+                        Metronic.unblockUI('.modal-dialog');
+                        alert('Error en la Base de datos');
             })
         }
     });
@@ -167,9 +169,12 @@ $(document).ready(function () {
                             theme: 'amethyst',
                             heading: 'EXITO'
                         });
+                        var url = base_url_js + "index.php/aspirantes";
+                        window.location=url;
                         $('#guardar_calificacion').show();
                     }).fail(function () {
-
+                        Metronic.unblockUI('.modal-dialog');
+                        alert('Error en la Base de datos');
             })
         }
     })
