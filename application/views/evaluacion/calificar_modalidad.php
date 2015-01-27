@@ -145,6 +145,7 @@ if (count($datos)) {
                 heading: 'ERROR',
                 sticky: false
             });
+            Metronic.unblockUI('.modal-dialog');
             return false;
         }
         var modalidad = $('#modalidad').val()
