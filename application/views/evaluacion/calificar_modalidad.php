@@ -72,7 +72,7 @@ if (count($datos)) {
                         Universidad o Institución
                     </td>
                     <td>
-                        <?php echo form_dropdown($data = "universidad", array($IDUNIVERSIDAD_UNIV => $UNIVERSIDAD_UNIV), '', $extra = 'id="universidad" class="form-control input-sm "') ?>
+                        <?php echo form_dropdown($data = "universidad", array($IDUNIVERSIDAD_UNIV => $UNIVERSIDAD_UNIV,"-1"=>"Seleccione"), '', $extra = 'id="universidad" class="form-control input-sm "') ?>
                         <table width="100%" id="universidad_otra2">
                             <tr>
                                 <td><?php echo form_input("universidad_otra", '', $extra = 'class="form-control input-sm" id="universidad_otra"') ?></td>
@@ -87,7 +87,7 @@ if (count($datos)) {
                         Título
                     </td>
                     <td>
-                        <?php echo form_dropdown($data = "titulo", array($IDTITULO_TIT => $TITULO_TIT), '', $extra = 'class="form-control input-sm" id="titulo"') ?>
+                        <?php echo form_dropdown($data = "titulo", array($IDTITULO_TIT => $TITULO_TIT,"-1"=>"Seleccione"), '', $extra = 'class="form-control input-sm" id="titulo"') ?>
                         <table width="100%" id="titulo_otra2">
                             <tr>
                                 <td><?php echo form_input("titulo_otra", '', $extra = 'class="form-control input-sm" id="titulo_otra"') ?></td>

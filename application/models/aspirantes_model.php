@@ -15,25 +15,23 @@ class Aspirantes_model extends CI_Model {
         return json_encode('okokokko');
     }
 
-    public function get_aspirantes($GET, $userdata) {
+    public function get_aspirantes($GET,$userdata) {
         /* Campo Indice */
         $sIndexColumn = "IDINSCRIPCION_INS";
 
-
-
         /* DB tabla */
         if ($userdata['ID_TIPO_USU'] == 6) {
-            $sTable = "VW_CARPETA_ANALISTA ";
+            $sTable2 = "VW_CARPETA_ANALISTA ";
             $join = "join RMAA_ASIGNACION on RMAA_ASIGNACION.idinscripcion_asg=VW_CARPETA_ANALISTA.IDINSCRIPCION_INS AND RMAA_ASIGNACION.idestadocar_asg IN (3,8)";
         } else if ($userdata['ID_TIPO_USU'] == 9) {
-            $sTable = "VW_CARPETA_SUPERVISOR_RM ";
+            $sTable2 = "VW_CARPETA_SUPERVISOR_RM ";
             $join = "join RMAA_ASIGNACION on RMAA_ASIGNACION.idinscripcion_asg=VW_CARPETA_SUPERVISOR_RM.IDINSCRIPCION_INS AND RMAA_ASIGNACION.idestadocar_asg IN (6)";
         }
-        $sTable = $sTable . $join;
+        $sTable = $sTable2;//. $join;
         /*
          * Columnas
          */
-        $aColumns = array('IDINSCRIPCION_INS', 'RMAA_ASIGNACION.idestadocar_asg', 'DOCUMENTO_PER', 'PIN', 'NOMBRE_INS', 'APELLIDO_INS');
+        $aColumns = array('IDINSCRIPCION_INS', $sTable2.'.idestadocar_asg', 'DOCUMENTO_PER', 'PIN', 'NOMBRE_INS', 'APELLIDO_INS');
         /*         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
          * If you just want to use the basic configuration for DataTables with PHP server-side, there is
          * no need to edit below this line
@@ -63,15 +61,6 @@ class Aspirantes_model extends CI_Model {
                 $sOrder = "";
             }
         }
-//        $uno = (str_replace(" ", "", $sOrder));
-//        $uno = (str_replace("\r", "", $uno));
-//        $uno = (str_replace("\n", "", $uno));
-
-//        if ($uno == 'ORDERBYIDINSCRIPCION_INSasc') {
-//            $uno = 'ORDER BY idestadocar_asg desc ,IDINSCRIPCION_INS  asc';
-//        } else {
-            $uno = $sOrder;
-//        }
 
         /* INICIO Filtrar */
         $sWhere = "";
@@ -104,16 +93,14 @@ class Aspirantes_model extends CI_Model {
 
         /* AGREGAR ID DEL USUARIO ACTUAL */
         if ($userdata['ID_TIPO_USU'] == 6)
-            $sWhere .= ($sWhere == "") ? 'WHERE idusuario_usu = ' . $this->session->userdata('USUARIO_ID') : 'AND idusuario_usu = ' . $this->session->userdata('USUARIO_ID');
+        $sWhere .= ($sWhere == "") ? 'WHERE  VW_CARPETA_ANALISTA.idestadocar_asg<> 5 AND idusuario_usu = ' . $this->session->userdata('USUARIO_ID') : ' AND  idusuario_usu = ' . $this->session->userdata('USUARIO_ID');
 
 
         /* VARIABLES PARA PAGINAR */
         $top = (isset($GET['iDisplayStart'])) ? ((int) $GET['iDisplayStart']) : 0;
         $limit = (isset($GET['iDisplayLength'])) ? ((int) $GET['iDisplayLength'] ) : 10;
 
-        //xxx
-//        print_y($userdata);
-//        $join=" "; 
+
         /* Campo extra para estado de RM */
         $campo_e = ",(SELECT DISTINCT 
                     RM.estadoReqEstudio_Req + ', ' + 
@@ -122,6 +109,16 @@ class Aspirantes_model extends CI_Model {
                     WHERE IDINSCRIPCION_INS = RM.idInscripcion_Req
                     ) EVALUA ";
 
+
+        $uno = (str_replace(" ", "", $sOrder));
+        $uno = (str_replace("\r", "", $uno));
+        $uno = (str_replace("\n", "", $uno));
+
+        if ($uno == 'ORDERBYIDINSCRIPCION_INSasc') {
+            $uno = 'ORDER BY VW_CARPETA_ANALISTA.idasignacion_asg';
+        } else {
+            $uno = $sOrder;
+        }
 
         $sQuery = "SELECT TOP $limit " . implode(",", $aColumns) . $campo_e . "
         FROM $sTable
@@ -132,7 +129,7 @@ class Aspirantes_model extends CI_Model {
                 SELECT TOP $top " . implode(",", $aColumns) . "
                 FROM $sTable
                 $sWhere
-                $sOrder
+                $uno
             )
             as [virtTable]
         )
@@ -140,7 +137,6 @@ class Aspirantes_model extends CI_Model {
 
         ////****CONSULTA DE REGISTROS
         //$rResult = sqlsrv_query($gaSql['link'], $sQuery) or die("$sQuery: " . sqlsrv_errors());
-        //echo $sQuery;exit();
 //        echo $sQuery;
         $rResult = $this->db->query($sQuery);
 
@@ -175,7 +171,7 @@ class Aspirantes_model extends CI_Model {
         foreach ($rResult->result_array() as $aRow) {
             $row = array();
             for ($i = 0; $i < count($aColumns) - 1; $i++) {
-                $aColumns[$i] = str_replace('RMAA_ASIGNACION.', "", $aColumns[$i]);
+                $aColumns[$i] = str_replace($sTable2.'.', "", $aColumns[$i]);
                 switch ($aColumns[$i]) {
                     case 'idestadocar_asg':
                         $v = $aRow[$aColumns[$i]];
