@@ -18,7 +18,6 @@ function cambio_pagina(tipo, num) {
         pagina = 1;
     } else if (pagina == 4)
         pagina = 3;
-
     switch (pagina) {
         case 0:
             window.location = base_url_js + "index.php/aspirantes"
@@ -59,20 +58,19 @@ function cambio_pagina(tipo, num) {
     }
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     $("#formulario_2").hide();
 //FIN PAGINACION
 
 
-    $('.page-container').delegate('.opcion', 'click', function() {
+    $('.page-container').delegate('.opcion', 'click', function () {
 //$('.opcion').click(function() {
 //$(".container").delegate(".activar", "click", function() {
         Metronic.blockUI({
             target: '.modal-dialog',
             message: 'Cargando...'
         });
-
         var accion = $(this).attr('data-accion')
         var titulo = "";
         var url = "";
@@ -108,16 +106,16 @@ $(document).ready(function() {
             var requisito = $(this).attr('data-requisito')
             var id_glo = $(this).attr('data-id_glo')
             $.post(url, {id: id, idperfil: idperfil, idcal: idcal, requisito: requisito, id_glo: id_glo, tipoadj: tipoadj})
-                    .done(function(msg) {
+                    .done(function (msg) {
                         Metronic.unblockUI('.modal-dialog');
                         $('#contenido').html(msg)
-                    }).fail(function(msg) {
+                    }).fail(function (msg) {
                 $.notific8('Error al traer la información', {
                     horizontalEdge: 'bottom',
                     theme: 'ruby',
                     heading: 'ERROR',
                     sticky: false
-                });                 
+                });
                 Metronic.unblockUI('.modal-dialog');
             })
 
@@ -125,11 +123,10 @@ $(document).ready(function() {
             var modal = $(this)
             $('.modal-title').html(titulo)
         } else {
-            //return false;
+//return false;
         }
     });
-
-    $('#guardar_rm').click(function() {
+    $('#guardar_rm').click(function () {
         var r = confirm('Desea Guardar Todos Los datos')
         if (r == true) {
             var url = base_url_js + "index.php/evaluacion/guardar_form_final";
@@ -138,7 +135,7 @@ $(document).ready(function() {
                 message: 'Cargando...'
             });
             $.post(url, $('#form_final').serialize())
-                    .done(function(msg) {
+                    .done(function (msg) {
                         Metronic.unblockUI('.no-js');
                         UINotific8.init();
                         $.notific8('Los Datos en Formacion Fueron Guardados.', {
@@ -147,8 +144,16 @@ $(document).ready(function() {
                             theme: 'amethyst',
                             heading: 'EXITO'
                         });
+                        if (msg == "No Admitido") {
+                            $("#noo").show();
+                            $("#sii").hide();
+                        } else if (msg == "Admitido") {
+                            $("#sii").show();
+                            $("#noo").hide();
+                        }
+
                         $('#guardar_calificacion').show();
-                    }).fail(function() {
+                    }).fail(function () {
                 Metronic.unblockUI('.modal-dialog');
                 $.notific8('Error en la Base de datos', {
                     horizontalEdge: 'bottom',
@@ -159,7 +164,7 @@ $(document).ready(function() {
             })
         }
     });
-    $('#guardar_calificacion').click(function() {
+    $('#guardar_calificacion').click(function () {
         var r = confirm('Desea Guardar Todos Los datos')
         if (r == true) {
             var url = base_url_js + "index.php/evaluacion/guardar_calificacion";
@@ -170,7 +175,7 @@ $(document).ready(function() {
                 message: 'Cargando...'
             });
             $.post(url, {id_glo: id_glo, tex_obs_super: tex_obs_super})
-                    .done(function(msg) {
+                    .done(function (msg) {
                         Metronic.unblockUI('.no-js');
                         UINotific8.init();
                         $.notific8('Los Datos en Formacion Fueron Guardados.', {
@@ -182,7 +187,7 @@ $(document).ready(function() {
                         var url = base_url_js + "index.php/aspirantes";
                         window.location = url;
                         $('#guardar_calificacion').show();
-                    }).fail(function() {
+                    }).fail(function () {
                 Metronic.unblockUI('.modal-dialog');
                 $.notific8('Error en la Base de datos', {
                     horizontalEdge: 'bottom',

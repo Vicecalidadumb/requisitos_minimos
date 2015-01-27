@@ -106,6 +106,7 @@ class Evaluacion_model extends CI_Model {
     function universidad($universidad) {
         $this->db->select('IDUNIVERSIDAD_UNIV,UNIVERSIDAD_UNIV', false);
         $this->db->where('IDMODALIDAD_UNIV', $universidad);
+        $this->db->order_by('UNIVERSIDAD_UNIV');
         $datos = $this->db->get('INSC_UNIVERSIDAD');
 //                        echo $this->db->last_query();
         return $datos->result();
@@ -375,17 +376,20 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
         $this->db->set('obsReqExperiencia_Req', $post['tex_requisitos_experiencia']);
 
         if ($post['requisitos_minimo'] == 'Admitido' && $post['requisitos_experiencia'] == 'Admitido')
-            $this->db->set('cumpleRequisitos', 'Admitido');
+            $paso="Admitido";
         else
-            $this->db->set('cumpleRequisitos', 'No Admitido');
+            $paso="No Admitido";
 //        $this->db->set();
 
+        $this->db->set('cumpleRequisitos', $paso);
+        
         if (count($datos) > 0) {
             $this->db->where('idInscripcion_Req', $post['id_inscripcion']);
             $this->db->update('REQ_MINIMOS');
         } else {
             $this->db->insert('REQ_MINIMOS');
         }
+        return $paso;
 //        sleep(5);
     }
 

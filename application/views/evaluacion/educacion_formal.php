@@ -175,6 +175,15 @@
                 <div>
                     <?php if ($userdata['ID_TIPO_USU'] == 6) { ?>
                         <center><button id="guardar_rm" class="btn green" align="center">Guardar RM</button></center>
+                        <p>
+                        <center>
+                            <div id="sii" style="display: none">
+                                <span class="badge badge-success">Admitido</span>
+                            </div> 
+                            <div id="noo" style="display: none">
+                                <span class="badge badge-danger">No Admitido</span>
+                            </div> 
+                        </center>
                         <?php
                         $si = "display:none";
                     } else {
@@ -187,17 +196,17 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="col-md-2 col-sm-2"></div>
                     <div class="col-md-8 col-sm-8">
-                    Observación del supervisor<br>
-                    
+                        Observación del supervisor<br>
+
                         <?php if ($userdata['ID_TIPO_USU'] == 6) {
                             ?>
-                            <textarea disabled="true" id="tex_obs_super" class="form-control input-sm " name="tex_obs_super" style="width: 100%"><?php echo (isset($RM[5]))?$RM[5]:''; ?></textarea>
+                            <textarea disabled="true" id="tex_obs_super" class="form-control input-sm " name="tex_obs_super" style="width: 100%"><?php echo (isset($RM[5])) ? $RM[5] : ''; ?></textarea>
                             <p><br>
                             <center><button id="guardar_calificacion" style="<?php echo $si; ?>" id_glo="<?php echo $get['id'] ?>" class="btn green" align="center">Finalizar calificación</button></center>
                             <?php
                         } else if ($userdata['ID_TIPO_USU'] == 9) {
                             ?>
-                            <textarea id="tex_obs_super" class="form-control input-sm " name="tex_obs_super" style="width: 100%"><?php echo (isset($RM[5]))?$RM[5]:''; ?></textarea>
+                            <textarea id="tex_obs_super" class="form-control input-sm " name="tex_obs_super" style="width: 100%"><?php echo (isset($RM[5])) ? $RM[5] : ''; ?></textarea>
                             <p><br>
                             <center><button id="guardar_calificacion" style="<?php echo $si; ?>" id_glo="<?php echo $get['id'] ?>" class="btn green" align="center">Devolución</button></center>
 
@@ -229,4 +238,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo base_url('/js/script_evaluacion.js?v='.date("d-H")); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/js/script_evaluacion.js?v=' . date("d-H")); ?>"></script>

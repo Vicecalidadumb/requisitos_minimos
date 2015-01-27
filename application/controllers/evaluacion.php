@@ -91,6 +91,7 @@ class Evaluacion extends CI_Controller {
         foreach ($dat as $value) {
             $valu.="<option value='" . $value->IDTITULO_TIT . "'>" . $value->TITULO_TIT . "</option>";
         }
+        $valu.= "<option value=''>OTRO</option>";
         echo $valu;
 //        echo $data['universidad']= $this->evaluacion_model->universidad($data['post']);
     }
@@ -146,7 +147,8 @@ class Evaluacion extends CI_Controller {
 
     function guardar_form_final() {
         $post = $this->input->post();
-        $this->evaluacion_model->guardar_rm($post);
+        $paso=$this->evaluacion_model->guardar_rm($post);
+        echo $paso;
 //        print_y($post);
     }
 

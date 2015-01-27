@@ -63,10 +63,9 @@ class Aspirantes_model extends CI_Model {
                 $sOrder = "";
             }
         }
-
-        $uno = (str_replace(" ", "", $sOrder));
-        $uno = (str_replace("\r", "", $uno));
-        $uno = (str_replace("\n", "", $uno));
+//        $uno = (str_replace(" ", "", $sOrder));
+//        $uno = (str_replace("\r", "", $uno));
+//        $uno = (str_replace("\n", "", $uno));
 
 //        if ($uno == 'ORDERBYIDINSCRIPCION_INSasc') {
 //            $uno = 'ORDER BY idestadocar_asg desc ,IDINSCRIPCION_INS  asc';
