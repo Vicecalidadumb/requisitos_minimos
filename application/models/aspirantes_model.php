@@ -115,7 +115,7 @@ class Aspirantes_model extends CI_Model {
         $uno = (str_replace("\n", "", $uno));
 
         if ($uno == 'ORDERBYIDINSCRIPCION_INSasc') {
-            $uno = 'ORDER BY VW_CARPETA_ANALISTA.idasignacion_asg';
+            $uno = 'ORDER BY '.$sTable2.'.idasignacion_asg';
         } else {
             $uno = $sOrder;
         }
