@@ -31,6 +31,9 @@ class Login extends CI_Controller {
         //RECOLECTAMOS LOS DATOS DE LOS CAMPOS DE USUARIO Y CONTRASE�A
         $username = $this->input->post('username');
         $pass = $this->input->post('password');
+        $username = intval($username);
+        //$pass = intval($pass);
+        
 
         //CONSULTAMOS EL USUARIO CON BASE EN EL NUMERO DE DOCUMENTO
         $user = $this->user_model->get_user($username, $pass);
@@ -60,7 +63,7 @@ class Login extends CI_Controller {
 
             redirect('index.php/aspirantes', 'location');
         } else {
-            $this->session->set_flashdata(array('message' => 'Su n&uacute;mero de documento no se encuentra registrado en el sistema.', 'message_type' => 'warning'));
+            $this->session->set_flashdata(array('message' => '(28/01/2015: INGRESO SOLO PARA SUPERVISORES EN LA MAÑANA) <br> Su n&uacute;mero de documento no se encuentra registrado en el sistema.', 'message_type' => 'warning'));
             redirect('', 'refresh');
         }
     }
