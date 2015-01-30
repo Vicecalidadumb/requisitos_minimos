@@ -190,7 +190,7 @@ class Evaluacion_model extends CI_Model {
 
     function guardar_universidad($post) {
 
-
+//        guarda doda la informacion de deducacion
         $this->db->select('IDCALIFICACION_EDF');
         $this->db->where('IDCALIFICACION_EDF', $post['idcal']);
         $this->db->from('INSC_EDUCACIONFORMAL', false);
@@ -226,6 +226,7 @@ class Evaluacion_model extends CI_Model {
         $this->db->set('FECHATERMINACION_EDF', $post['fecha_terminacion']);
 
         $this->db->set('IDTITULO_EDF', $post['titulo']);
+        // en caso que tenga registros se actualiza de lo contrario se crea
         if (count($datos) != 0) {
             $this->db->where('IDCALIFICACION_EDF', $post['idcal']);
             $info = $this->db->update('INSC_EDUCACIONFORMAL');
@@ -249,7 +250,7 @@ class Evaluacion_model extends CI_Model {
 //                        echo $this->db->last_query();
     }
 
-    function obtener_titulo($id) {
+    function obtener_titulo($id) { // obtiene el titulo de acuerdo a la universidad solicitada
         $this->db->select("INSC_MODALIDAD.IDMODALIDAD_MOD,INSC_MODALIDAD.MODALIDAD_MOD,SEMESTRES_EDF,TITULOEXTRANJERO_EDF,
 INSC_UNIVERSIDAD.IDUNIVERSIDAD_UNIV,INSC_UNIVERSIDAD.UNIVERSIDAD_UNIV,
 INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT,FECHATERMINACION_EDF,TITULOEXTRANJERO_EDF,
@@ -288,6 +289,7 @@ INSC_TITULO.IDTITULO_TIT,INSC_TITULO.TITULO_TIT");
     }
 
     function guardar_experiencia($post) {
+        $this->db->set('IDTIPOADJUNTO_CRA', $post['IDTIPOADJUNTO_CRA']);
         //**ACTUALIZACION INSC_CALIFICACION_RM_AA
         $this->db->set('OBSERVACION', $post['OBSERVACION']);
         if (isset($post['REQUISITOMINIMO'])) {

@@ -35,18 +35,19 @@
                     <td>
                         <?php
                         if (isset($post['id']) && $post['id'] != '')
-                            echo $experiencia[0]->DETALLEPARAMETRO_PAR;
+                            $select = $experiencia[0]->IDTIPOADJUNTO_CRA;
                         else
-                            echo form_dropdown('IDTIPOADJUNTO_CRA', $tipoexperiencia, '', 'form-control');
+                            $select = "";
+                        echo form_dropdown('IDTIPOADJUNTO_CRA', $tipoexperiencia, $select, 'form-control');
                         ?>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        Entidad
+                        Entidad (Max 200 caracteres)
                     </td>
                     <td>
-                        <?php echo form_input("ENTIDAD_EL", (isset($experiencia[0]->ENTIDAD_EL)) ? $experiencia[0]->ENTIDAD_EL : '', $extra = 'class="form-control input-sm" id="ENTIDAD_EL"') ?>
+                        <?php echo form_input("ENTIDAD_EL", (isset($experiencia[0]->ENTIDAD_EL)) ? $experiencia[0]->ENTIDAD_EL : '', $extra = 'maxlength="190" class="form-control input-sm" id="ENTIDAD_EL"') ?>
                     </td>
                 </tr>
                 <tr>
@@ -103,7 +104,7 @@
 
 
 <script>
-    $('#guardar_exp').click(function() {
+    $('#guardar_exp').click(function () {
         Metronic.blockUI({
             target: '.modal-dialog',
             message: 'Cargando...'
@@ -126,7 +127,7 @@
         if (r == true) {
             var url = base_url_js + 'index.php/evaluacion/guardar_experiencia';
             $.post(url, $('#form2').serialize())
-                    .done(function(msg) {
+                    .done(function (msg) {
                         Metronic.unblockUI('.modal-dialog');
                         var datos = JSON.parse(msg);
                         if (datos.result == 1) {
@@ -148,7 +149,7 @@
                                 sticky: true
                             });
                         }
-                    }).fail(function() {
+                    }).fail(function () {
                 $.notific8('Error al guardar', {
                     horizontalEdge: 'bottom',
                     theme: 'ruby',
