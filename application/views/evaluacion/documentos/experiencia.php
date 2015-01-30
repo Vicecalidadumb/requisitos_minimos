@@ -32,15 +32,17 @@
                 </td>
                 <td>
                     <?php
-                    $date = new DateTime($documentos2->FECHAFINAL);
-                    echo $date->format('M d Y');
+                    if (!empty($documentos2->FECHAFINAL)) {
+                        $date = new DateTime($documentos2->FECHAFINAL);
+                        echo $date->format('M d Y');
+                    }
                     ?>
                 </td>                
                 <td><?php echo (($documentos2->REQUISITOMINIMO == 1) ? 'SI' : 'NO'); ?></td>
                 <td>
                     <?php
                     if (!empty($documentos2->RUTAADJUNTO_CRA)) {
-                        $url = str_replace('~/', 'http://172.16.79.8/rmdps/', $documentos2->RUTAADJUNTO_CRA);
+                        $url = str_replace('~/', 'http://convocatoriadps.umb.edu.co/dps_rm/', $documentos2->RUTAADJUNTO_CRA);
                         ?>
                         <a target="_blank" href="<?php echo (!empty($documentos2->RUTAADJUNTO_CRA)) ? $url : ''; ?>">Ver Folio..</a>
                         <?php

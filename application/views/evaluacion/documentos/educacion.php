@@ -14,9 +14,9 @@
             <thead><th>N. Folio</th><th>Modalidad</th><th>Requisito Mínimo</th><th>Folio</th><th>Modificar</th></thead>
             <?php
             $i = 0;
-            $tipo_adj="";
+            $tipo_adj="3";
             foreach ($educacion_formal as $documentos2) {
-                $archivo = str_replace('~/', 'http://172.16.79.8/rmdps/', $documentos2->RUTAADJUNTO_CRA);
+                $archivo = str_replace('~/', 'http://convocatoriadps.umb.edu.co/dps_rm/', $documentos2->RUTAADJUNTO_CRA);
                 if(!empty($documentos2->RUTAADJUNTO_CRA))
                 $archivo='<td><a target="_blank" href="' . $archivo . '">Ver Folio..</a></td>';
                 else
