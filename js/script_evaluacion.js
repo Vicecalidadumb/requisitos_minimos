@@ -154,7 +154,7 @@ $(document).ready(function () {
 
                         $('#guardar_calificacion').show();
                     }).fail(function () {
-                Metronic.unblockUI('.modal-dialog');
+                Metronic.unblockUI('.no-js');
                 $.notific8('Error en la Base de datos', {
                     horizontalEdge: 'bottom',
                     theme: 'ruby',
@@ -188,7 +188,7 @@ $(document).ready(function () {
                         window.location = url;
                         $('#guardar_calificacion').show();
                     }).fail(function () {
-                Metronic.unblockUI('.modal-dialog');
+                Metronic.unblockUI('.no-js');
                 $.notific8('Error en la Base de datos', {
                     horizontalEdge: 'bottom',
                     theme: 'ruby',

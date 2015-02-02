@@ -200,13 +200,13 @@
 
                         <?php if ($userdata['ID_TIPO_USU'] == 6) {
                             ?>
-                            <textarea disabled="true" id="tex_obs_super" class="form-control input-sm " name="tex_obs_super" style="width: 100%"><?php echo (isset($RM[5])) ? $RM[5] : ''; ?></textarea>
+                            <textarea disabled="true" id="tex_obs_super" maxlength="1900" class="form-control input-sm " name="tex_obs_super" style="width: 100%"><?php echo (isset($RM[5])) ? $RM[5] : ''; ?></textarea>
                             <p><br>
                             <center><button id="guardar_calificacion" style="<?php echo $si; ?>" id_glo="<?php echo $get['id'] ?>" class="btn green" align="center">Finalizar calificación</button></center>
                             <?php
                         } else if ($userdata['ID_TIPO_USU'] == 9) {
                             ?>
-                            <textarea id="tex_obs_super" class="form-control input-sm " name="tex_obs_super" style="width: 100%"><?php echo (isset($RM[5])) ? $RM[5] : ''; ?></textarea>
+                            <textarea id="tex_obs_super" maxlength="490" class="form-control input-sm " name="tex_obs_super" style="width: 100%"><?php echo (isset($RM[5])) ? $RM[5] : ''; ?></textarea>
                             <p><br>
                             <center><button id="guardar_calificacion" style="<?php echo $si; ?>" id_glo="<?php echo $get['id'] ?>" class="btn green" align="center">Devolución</button></center>
 
