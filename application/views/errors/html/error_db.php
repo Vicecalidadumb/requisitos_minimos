@@ -95,7 +95,7 @@ p {
 <body>
 	<div id="container">
 		<h1><?php echo $heading; ?></h1>
-		<?php echo 'ERROR EN LA BASE DE DATOS, POR FAVOR INTENTE DE NUEVO, SI PERSISTE EL ERROR CONTACTE AL ADMINISTRADOR...';//$message; ?>
+		<?php echo 'ERROR EN LA BASE DE DATOS, POR FAVOR INTENTE DE NUEVO, SI PERSISTE EL ERROR CONTACTE AL ADMINISTRADOR...'.$message; ?>
 	</div>
 </body>
 </html>
